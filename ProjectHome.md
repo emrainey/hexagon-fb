@@ -1,0 +1,1 @@
+Uses OpenGL GLUT library to spider and display a directory system.
