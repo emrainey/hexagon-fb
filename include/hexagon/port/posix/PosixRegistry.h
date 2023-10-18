@@ -14,6 +14,8 @@
 
 #include <string>
 
+#include "hexagon/PersistentStorage.h"
+
 /**
  * This object represents the basic attributes that a persistent database of
  * information about the project has. If a particular port wants to use a
@@ -25,7 +27,7 @@ public:
     // class constructor
     PosixRegistry();
     // class destructor
-    ~PosixRegistry();
+    ~PosixRegistry() = default;
     /**
      * Adds the supplied parameter to PersistentStorage. If there is
      * a collision then the existing Key is overwritten. No return code

@@ -16,7 +16,7 @@ Light::Light(Vector p, Light_Type_e t, int total_num_lights) {
     number = total_num_lights;
     if (total_num_lights > GL_MAX_LIGHTS) return;
 
-    debug->info(Debug::Subsystem::Trace, "Light(%u of %u)\n", number, GL_MAX_LIGHTS);
+    debug.info(Debug::Subsystem::Trace, "Light(%u of %u)\n", number, GL_MAX_LIGHTS);
 
     memset(ambient, 0, sizeof(ambient));
     memset(diffuse, 0, sizeof(diffuse));
@@ -28,7 +28,7 @@ Light::Light(Vector p, Light_Type_e t, int total_num_lights) {
 }
 
 // class destructor
-Light::~Light() { debug->info(Debug::Subsystem::Trace, "~Light(%u)\n", number); }
+Light::~Light() { debug.info(Debug::Subsystem::Trace, "~Light(%u)\n", number); }
 
 /*
  * If the parameter is true then the light shines if false it's turned off.

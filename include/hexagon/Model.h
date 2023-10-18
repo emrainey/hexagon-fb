@@ -12,9 +12,10 @@
 #ifndef MODEL_H
 #define MODEL_H
 
-#include <lib3ds.h>
+// #include <lib3ds.h>
+#include "hexagon/glut/Wrapper.h"
 
-typedef enum { NORMAL, SELECTED, NUM_SELECT_TYPES } Select_Type_e;
+typedef enum { NORMAL, SELECTED, NUM_SELECT_TYPES } SelectionState;
 
 // This is the wrapper class around loading 3ds models from the FileSystem.
 class Model {
@@ -49,7 +50,7 @@ public:
     void info();
 
     // Renders the model based on it's mode
-    void render(bool selection, Select_Type_e mode);
+    void render(bool selection, SelectionState mode);
 
     // we only need one copy of the following stuff...
     static GLuint buildHexagon(double radius, double height);
@@ -76,7 +77,7 @@ protected:
      * Loads the mesh into a Call List (returning the call name)
      * with the parameterized color.
      */
-    GLuint buildMesh(L3DS &loader, GLfloat r, GLfloat g, GLfloat b, GLfloat a);
+    // GLuint buildMesh(L3DS &loader, GLfloat r, GLfloat g, GLfloat b, GLfloat a);
 };
 
 #endif  // MODEL_H

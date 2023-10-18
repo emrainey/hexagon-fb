@@ -53,7 +53,7 @@ void Choreographer::move(void) {
         node->rotation.z = Rad2Deg(s.getAngleZ()) + 90;
 
         /*
-        debug->info("dt=%lf  <x=%lf,<y=%lf,<z=%lf\n",dt,node->rotation.x,
+        debug.info("dt=%lf  <x=%lf,<y=%lf,<z=%lf\n",dt,node->rotation.x,
                                                         node->rotation.y,
                                                         node->rotation.z);
         */

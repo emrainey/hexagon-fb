@@ -56,7 +56,7 @@ public:
     Model_Type_e getModelType(std::string path, std::string name);
 
     // Sets the current directory...
-    char *setCurrentDirectory(std::string directory);
+    char const *setCurrentDirectory(std::string directory);
 };
 
 #endif  // WIN32FS_H

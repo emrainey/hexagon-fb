@@ -25,7 +25,7 @@ class FileSystem {
 public:
     /**
      * This function translates the path to the system representation
-     * from the internal represenation.
+     * from the internal representation.
      * @param path The platform neutral path to convert.
      * @return Returns the
      */
@@ -47,7 +47,7 @@ public:
      * @param path The absolute path to the object in system neutral format.
      * @param name The name of the object to retriever information about.
      */
-    virtual std::string *getMetaData(std::string path, std::string name) = 0;
+    virtual std::string getMetaData(std::string path, std::string name) = 0;
 
     /**
      * This function takes all the files and directories or whatever
@@ -56,14 +56,14 @@ public:
      */
     virtual void populateNodeList(Layer *layer, std::string path) = 0;
 
-    // Gets the Node Type of the Node.
+    /// Gets the Node Type of the Node.
     virtual Node_Type_e getNodeType(std::string path, std::string name) = 0;
 
-    // Gets the Model Type of the Node
+    /// Gets the Model Type of the Node
     virtual Model_Type_e getModelType(std::string path, std::string name) = 0;
 
-    // Sets the current directory...
-    virtual char *setCurrentDirectory(std::string directory) = 0;
+    /// Sets the current directory...
+    virtual char const *setCurrentDirectory(std::string directory) = 0;
 };
 
 #endif  // FILESYSTEM_H

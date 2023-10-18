@@ -90,7 +90,7 @@ Node::~Node() {
 }
 
 // Renders the node via either it's selected or unselected model.
-void Node::render(bool selection, Select_Type_e mode) {
+void Node::render(bool selection, SelectionState mode) {
     GL_PUSH_MATRIX();
     glTranslated(position.x, position.y, position.z);
     glRotated(rotation.x, 1, 0, 0);
@@ -114,7 +114,8 @@ void Node::renderDescription(bool extra) {
 
 bool Node::choose(int name) {
     if (name == model->select_name) {
-        debug->info(Debug::Subsystem::Selection, "%s has been selected!\n", this->name.c_str());
+        debug.info(Debug::Subsystem::Selection, "%s has been selected!\n", this->name.c_str());
         return true;
     }
+    return false;
 }

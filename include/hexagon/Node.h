@@ -14,6 +14,9 @@
 
 #include <string>
 
+#include "hexagon/Choreographer.h"
+#include "hexagon/Vector.h"
+
 typedef enum {
     DEFAULT = 0,
     FILE_ON_DISK_TYPE,
@@ -70,7 +73,7 @@ public:
     ~Node();
 
     // Renders the node via either it's selected or unselected model.
-    void render(bool selection, Select_Type_e mode);
+    void render(bool selection, SelectionState mode);
 
     // Renders the descriptive text of the object.
     void renderDescription(bool extra);

@@ -16,14 +16,14 @@ extern Port *platform;
 
 // class constructor
 Camera::Camera() {
-    debug->info(Debug::Subsystem::Trace, "Camera()\n");
+    debug.info(Debug::Subsystem::Trace, "Camera()\n");
     init();
 }
 
 // class destructor
 Camera::~Camera() {
     // insert your code here
-    debug->info(Debug::Subsystem::Trace, "~Camera()\n");
+    debug.info(Debug::Subsystem::Trace, "~Camera()\n");
 }
 
 void Camera::place(void) {
@@ -43,9 +43,9 @@ void Camera::move(void) {
     // if we should move...
     Vector pan = dest - to;
     if (pan.abs() > 0) {
-        // debug->info("dest.print()=%s\n",dest.print());
-        // debug->info("to.print()=%s\n",to.print());
-        // debug->info("pan.abs()=%lf\n",pan.abs());
+        // debug.info("dest.print()=%s\n",dest.print());
+        // debug.info("to.print()=%s\n",to.print());
+        // debug.info("pan.abs()=%lf\n",pan.abs());
 
         Vector dv = pan;
         double d = pan.abs();
@@ -88,8 +88,8 @@ void Camera::selection(int x, int y) {
     /* setup the viewport */
     glGetIntegerv(GL_VIEWPORT, viewport);
 
-    if (debug->state == true) {
-        debug->info(Debug::Subsystem::Selection, "Clicked at x,y = { %d, %d }\n", x, y);
+    if (debug.state == true) {
+        debug.info(Debug::Subsystem::Selection, "Clicked at x,y = { %d, %d }\n", x, y);
     }
 
     /********************************************************************/
@@ -105,12 +105,12 @@ void Camera::selection(int x, int y) {
     /********************************************************************/
     y = (viewport[3] / 2 - y) + (viewport[3] / 2);
 
-    if (debug->state == true) {
-        debug->info(Debug::Subsystem::Selection, "Altered Clicked at x,y = { %d, %d }\n", x, y);
+    if (debug.state == true) {
+        debug.info(Debug::Subsystem::Selection, "Altered Clicked at x,y = { %d, %d }\n", x, y);
 
-        debug->info(Debug::Subsystem::Selection, "Viewport = { %d, %d, %d, %d }\n", viewport[0], viewport[1],
-                    viewport[2], viewport[3]);
-        debug->flush();
+        debug.info(Debug::Subsystem::Selection, "Viewport = { %d, %d, %d, %d }\n", viewport[0], viewport[1],
+                   viewport[2], viewport[3]);
+        debug.flush();
     }
 
     // I have no real idea what any of this does....
@@ -125,7 +125,7 @@ void Camera::selection(int x, int y) {
 
 // Re-Initializes the camera.
 void Camera::init(void) {
-    debug->info(Debug::Subsystem::Trace, "Camera.init()\n");
+    debug.info(Debug::Subsystem::Trace, "Camera.init()\n");
 
     mode = Camera::Type::Spherical;
     radius = 20;
@@ -149,14 +149,14 @@ void Camera::init(void) {
 char *Camera::printInfo(void) {
     static char info[160];
     memset(info, 0, sizeof(info));
-    sprintf(info,
-            "Camera: \n"
-            "From=(%.3lf,%.3lf,%.3lf)\n"
-            //"To=(%.3lf,%.3lf,%.3lf)\n"
-            "Radius=%.3lf\tTheta=%.3lf\tPhi=%.3lf\n",
-            from.x, from.y, from.z,
-            // to.x,to.y,to.z,
-            radius, theta, phi);
+    snprintf(info, sizeof(info),
+             "Camera: \n"
+             "From=(%.3lf,%.3lf,%.3lf)\n"
+             //"To=(%.3lf,%.3lf,%.3lf)\n"
+             "Radius=%.3lf\tTheta=%.3lf\tPhi=%.3lf\n",
+             from.x, from.y, from.z,
+             // to.x,to.y,to.z,
+             radius, theta, phi);
     return info;
 }
 

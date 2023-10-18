@@ -39,26 +39,26 @@ void Model::loadModel(const char *extension) {
     Key *dir = platform->ps->getKey("IconDirectory");
 
     snprintf(fullpath, sizeof(fullpath), "%s\\3ds\\%s.3ds", dir->getValue().c_str(), extension);
-    debug->info(Debug::Subsystem::Models, "Searching for object: %s\n", fullpath);
+    debug.info(Debug::Subsystem::Models, "Searching for object: %s\n", fullpath);
 
-    L3DS loader;
-    loader.LoadFile(fullpath);
-    int mesh_count = loader.GetMeshCount();
-    if (mesh_count != 0) {
-        debug->info(Debug::Subsystem::Models, "There are %d meshes in the 3ds file\n", mesh_count);
-        for (int i = 0; i < mesh_count; i++) {
-            debug->info(Debug::Subsystem::Models, "Mesh %d has %d vertices and %d triangles\n", i,
-                        loader.GetMesh(i).GetVertexCount(), loader.GetMesh(i).GetTriangleCount());
-        }
+    // L3DS loader;
+    // loader.LoadFile(fullpath);
+    // int mesh_count = loader.GetMeshCount();
+    // if (mesh_count != 0) {
+    //     debug.info(Debug::Subsystem::Models, "There are %d meshes in the 3ds file\n", mesh_count);
+    //     for (int i = 0; i < mesh_count; i++) {
+    //         debug.info(Debug::Subsystem::Models, "Mesh %d has %d vertices and %d triangles\n", i,
+    //                    loader.GetMesh(i).GetVertexCount(), loader.GetMesh(i).GetTriangleCount());
+    //     }
 
-        normal = buildMesh(loader, 0.7, 0.1, 0.7, 0.3);
-        selected = buildMesh(loader, 1.0, 1.0, 1.0, 0.7);
-    } else {
-        // couldn't find it?
-        // just load the hexagon call item for now...
-        normal = buildHexagon(0.8, 0.2);
-        selected = buildSelectedHexagon(0.8, 0.2);
-    }
+    //     normal = buildMesh(loader, 0.7, 0.1, 0.7, 0.3);
+    //     selected = buildMesh(loader, 1.0, 1.0, 1.0, 0.7);
+    // } else {
+    // couldn't find it?
+    // just load the hexagon call item for now...
+    normal = buildHexagon(0.8, 0.2);
+    selected = buildSelectedHexagon(0.8, 0.2);
+    // }
     info();
 }
 
@@ -69,17 +69,16 @@ void Model::loadPoly() {
 }
 
 void Model::info() {
-    debug->info(Debug::Subsystem::Models, "Loaded Model into GL Call List (%i,%i)\n", normal, selected);
+    debug.info(Debug::Subsystem::Models, "Loaded Model into GL Call List (%i,%i)\n", normal, selected);
     REPORT_ERROR(info, true);
 }
 
 // Renders the model based on it's mode
-void Model::render(bool selection, Select_Type_e mode) {
+void Model::render(bool selection, SelectionState mode) {
     if (selection == true) {
         IsSelected = false;
         glLoadName(select_name);
-        debug->info(Debug::Subsystem::Selection, "Name,Normal,Selected={0x%08x,%d,%d}\n", select_name, normal,
-                    selected);
+        debug.info(Debug::Subsystem::Selection, "Name,Normal,Selected={0x%08x,%d,%d}\n", select_name, normal, selected);
         REPORT_ERROR(render, true);
     }
 
@@ -99,35 +98,35 @@ void Model::render(bool selection, Select_Type_e mode) {
  * Loads the mesh into a Call List (returning the call name)
  * with the parameterized color.
  */
-GLuint Model::buildMesh(L3DS &loader, GLfloat r, GLfloat g, GLfloat b, GLfloat a) {
-    GLuint shape = glGenLists(1);
-    CHECKERROR(shape, false);
-    glNewList(shape, GL_COMPILE);
+// GLuint Model::buildMesh(L3DS &loader, GLfloat r, GLfloat g, GLfloat b, GLfloat a) {
+//     GLuint shape = glGenLists(1);
+//     CHECKERROR(shape, false);
+//     glNewList(shape, GL_COMPILE);
 
-    glEnableClientState(GL_VERTEX_ARRAY);
-    glEnableClientState(GL_NORMAL_ARRAY);
-    // glEnableClientState(GL_COLOR_ARRAY);
-    glEnable(GL_CULL_FACE);
+//     glEnableClientState(GL_VERTEX_ARRAY);
+//     glEnableClientState(GL_NORMAL_ARRAY);
+//     // glEnableClientState(GL_COLOR_ARRAY);
+//     glEnable(GL_CULL_FACE);
 
-    glColor4f(r, g, b, a);
-    for (uint i = 0; i < loader.GetMeshCount(); i++) {
-        LMesh &mesh = loader.GetMesh(i);
+//     glColor4f(r, g, b, a);
+//     for (uint i = 0; i < loader.GetMeshCount(); i++) {
+//         // LMesh &mesh = loader.GetMesh(i);
 
-        glVertexPointer(4, GL_FLOAT, 0, &mesh.GetVertex(0));
-        glNormalPointer(GL_FLOAT, 0, &mesh.GetNormal(0));
-        // glColorPointer(3, GL_FLOAT, 0, &mesh.GetBinormal(0));
-        glDrawElements(GL_TRIANGLES, mesh.GetTriangleCount() * 3, GL_UNSIGNED_SHORT, &mesh.GetTriangle(0));
-    }
+//         // glVertexPointer(4, GL_FLOAT, 0, &mesh.GetVertex(0));
+//         // glNormalPointer(GL_FLOAT, 0, &mesh.GetNormal(0));
+//         // // glColorPointer(3, GL_FLOAT, 0, &mesh.GetBinormal(0));
+//         // glDrawElements(GL_TRIANGLES, mesh.GetTriangleCount() * 3, GL_UNSIGNED_SHORT, &mesh.GetTriangle(0));
+//     }
 
-    glDisable(GL_CULL_FACE);
-    // glDisableClientState(GL_COLOR_ARRAY);
-    glDisableClientState(GL_NORMAL_ARRAY);
-    glDisableClientState(GL_VERTEX_ARRAY);
+//     glDisable(GL_CULL_FACE);
+//     // glDisableClientState(GL_COLOR_ARRAY);
+//     glDisableClientState(GL_NORMAL_ARRAY);
+//     glDisableClientState(GL_VERTEX_ARRAY);
 
-    glEndList();
+//     glEndList();
 
-    return shape;
-}
+//     return shape;
+// }
 
 /****************************************************************************
  *        Name:

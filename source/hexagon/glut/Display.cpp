@@ -15,18 +15,18 @@ static Color mat_ambient(0, 0, 0, 1);
 static Color mat_specular(1.0, 1.0, 1.0, 0.15);
 static GLfloat mat_shiny = 100.0;
 
-#define GL_SET_AND_TEST(flag)                                             \
-    {                                                                     \
-        glEnable(flag);                                                   \
-        if (glIsEnabled(flag) == GL_TRUE)                                 \
-            debug->info(Debug::Subsystem::Internal, #flag " Enabled\n");  \
-        else if (glIsEnabled(flag) == GL_FALSE)                           \
-            debug->info(Debug::Subsystem::Internal, #flag " Disabled\n"); \
+#define GL_SET_AND_TEST(flag)                                            \
+    {                                                                    \
+        glEnable(flag);                                                  \
+        if (glIsEnabled(flag) == GL_TRUE)                                \
+            debug.info(Debug::Subsystem::Internal, #flag " Enabled\n");  \
+        else if (glIsEnabled(flag) == GL_FALSE)                          \
+            debug.info(Debug::Subsystem::Internal, #flag " Disabled\n"); \
     }
 
 // class constructor
 Display::Display() {
-    debug->info(Debug::Subsystem::Trace, "+Display()\n");
+    debug.info(Debug::Subsystem::Trace, "+Display()\n");
 
     renderGrid = false;
     renderText = false;
@@ -45,7 +45,7 @@ Display::Display() {
     fg.setBlueFloat(1.0);
     fg.print();
 
-    debug->info(Debug::Subsystem::Trace, "-Display()\n");
+    debug.info(Debug::Subsystem::Trace, "-Display()\n");
 }
 
 // class destructor
@@ -55,7 +55,7 @@ Display::~Display() {
 
 // Enable or Disable special parts of the OpenGL pipeline.
 void Display::initOpenGL() {
-    debug->info(Debug::Subsystem::Trace, "initOpenGL()\n");
+    debug.info(Debug::Subsystem::Trace, "initOpenGL()\n");
 
     // Enable Blending Method...
     glBlendFunc(GL_SRC_ALPHA, GL_ONE);
@@ -88,7 +88,7 @@ void Display::initOpenGL() {
 
 // GLUT Callback to Resize the Display
 void Display::resize(int w, int h) {
-    debug->info(Debug::Subsystem::Trace, "Resized to %ix%i\n", w, h);
+    debug.info(Debug::Subsystem::Trace, "Resized to %ix%i\n", w, h);
     width = w;
     height = h;
     glViewport(0, 0, w, h);
@@ -125,22 +125,22 @@ int Display::drawSelection(int x, int y) {
     /* munch buffer */
     hits = glRenderMode(GL_RENDER);
 
-    debug->info(Debug::Subsystem::Selection, "Hits: %d\n", hits);
-    debug->flush();
+    debug.info(Debug::Subsystem::Selection, "Hits: %d\n", hits);
+    debug.flush();
 
     if (hits > 0) {
         int i = 0, j;
         for (j = 0; j < hits; j++) {
-            debug->info(Debug::Subsystem::Selection, "%i: %u Names on stack at time of hit\n", i, sel[i]);
+            debug.info(Debug::Subsystem::Selection, "%i: %u Names on stack at time of hit\n", i, sel[i]);
             i++;
-            debug->info(Debug::Subsystem::Selection, "%i: %u min z\n", i, sel[i]);
+            debug.info(Debug::Subsystem::Selection, "%i: %u min z\n", i, sel[i]);
             i++;
-            debug->info(Debug::Subsystem::Selection, "%i: %u max z\n", i, sel[i]);
+            debug.info(Debug::Subsystem::Selection, "%i: %u max z\n", i, sel[i]);
             i++;
-            debug->info(Debug::Subsystem::Selection, "%i: 0x%08x on bottom of name stack\n", i, sel[i]);
+            debug.info(Debug::Subsystem::Selection, "%i: 0x%08x on bottom of name stack\n", i, sel[i]);
             name = sel[i];
             i++;
-            debug->flush();
+            debug.flush();
         }
     }
 
@@ -149,11 +149,11 @@ int Display::drawSelection(int x, int y) {
      * places the camera.
      */
 
-    if (debug->state) {
-        debug->info(Debug::Subsystem::Selection, "-----------------------------------\n");
-        debug->flush();
+    if (debug.state) {
+        debug.info(Debug::Subsystem::Selection, "-----------------------------------\n");
+        debug.flush();
     }
-    debug->info(Debug::Subsystem::Trace, "drawSelection()::name=0x%08x\n", name);
+    debug.info(Debug::Subsystem::Trace, "drawSelection()::name=0x%08x\n", name);
     return name;
 }
 
@@ -196,7 +196,7 @@ int Display::print2DText(int x, int y, char const *const format, ...) {
     static char buffer[255];
 
     va_start(args, format);
-    vsprintf(buffer, format, args);
+    vsnprintf(buffer, sizeof(buffer), format, args);
     va_end(args);
 
     glRasterPos2i(x, y);
@@ -223,7 +223,7 @@ void Display::print3DText(Vector p, char const *const format, ...) {
     static char buffer[255];
 
     va_start(args, format);
-    vsprintf(buffer, format, args);
+    vsnprintf(buffer, sizeof(buffer), format, args);
     va_end(args);
 
     line = 0;
@@ -321,7 +321,7 @@ void Display::renderScreenText(void) {
 }
 
 void Display::renderOverLay(void) {
-    if (world->selection.state == SELECTION_CONTEXT_MENU) {
+    if (world->selection.state == Selection::ContextMenu) {
         if (world->menu != NULL) {
             world->menu->render(world->selection.x, world->selection.y);
         }

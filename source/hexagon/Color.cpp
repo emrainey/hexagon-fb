@@ -27,7 +27,7 @@ Color::Color(int seed) {
     int quo = rand() % r;
     float frand = (float)quo / r;
 
-    debug->info(Debug::Subsystem::Info, "+Color::Color() r=%d, Channels=%d, index=%d, quo=%d, frand=%lf\n", r, Channels, index, quo,
+    debug.info(Debug::Subsystem::Info, "+Color::Color() r=%d, Channels=%d, index=%d, quo=%d, frand=%lf\n", r, Channels, index, quo,
                 frand);
 
     memset((char *)colors, 0, sizeof(colors) * sizeof(float));
@@ -35,10 +35,10 @@ Color::Color(int seed) {
     print();
 }
 
-Color::~Color() { debug->info(Debug::Subsystem::Info, "-Color::Color()\n"); }
+Color::~Color() { debug.info(Debug::Subsystem::Info, "-Color::Color()\n"); }
 
 void Color::print() {
-    debug->info(Debug::Subsystem::Info, "Color={%0.2lf,%0.2lf,%0.2lf,%0.2lf}\n", colors[Red], colors[Green], colors[Blue],
+    debug.info(Debug::Subsystem::Info, "Color={%0.2lf,%0.2lf,%0.2lf,%0.2lf}\n", colors[Red], colors[Green], colors[Blue],
                 colors[Alpha]);
 }
 

@@ -10,17 +10,20 @@
  ******************************************************************************/
 
 #define EXCLUDE_EXTERNS
+#include "hexagon/glut/Wrapper.h"
+
+#include "hexagon/Debug.h"
 #include "hexagon/port/Port.h"
 
 extern Port *platform;
-extern Debug *debug;
+extern Debug debug;
 
-#define TEST_PLATFORM()                                                     \
-    {                                                                       \
-        if (platform == NULL) {                                             \
-            debug->info(Debug::Subsystem::Internal, "Platform is NULL!\n"); \
-            return;                                                         \
-        }                                                                   \
+#define TEST_PLATFORM()                                                    \
+    {                                                                      \
+        if (platform == NULL) {                                            \
+            debug.info(Debug::Subsystem::Internal, "Platform is NULL!\n"); \
+            return;                                                        \
+        }                                                                  \
     }
 
 // The thin GLUT wrappers. These are needed because we can't cast these Class
@@ -61,7 +64,9 @@ void glut_drawScreen(void) {
 }
 
 void glut_timerFired(int value) {
-    if (platform != NULL) platform->scheduler.timed(value);
+    if (platform != NULL) {
+        platform->scheduler.timed(value);
+    }
 
     /* reinstall the timer */
     glutTimerFunc(5, glut_timerFired, 0);
@@ -100,37 +105,35 @@ void glLocalPopMatrix(char const *const filename, int const line) {
     CheckError(glGetError(), true, "Local Pop", filename, line);
 }
 
-GLuint CheckError(GLuint error, bool stop, char const *const name, char const *const filename, int line) {
+GLuint CheckError(GLuint error, bool stop, char const *const name, char const *const filename, int const line) {
     switch (error) {
         case GL_NO_ERROR:
             // don't bother checking anything else.
             return error;
         case GL_INVALID_ENUM:
-            debug->info(Debug::Subsystems::Error, "ERROR: Invalid enumeration %s=0x%08x in %s on line %i\n", name,
-                        error, filename, line);
+            debug.info(Debug::Subsystem::Error, "ERROR: Invalid enumeration %s=0x%08x in %s on line %i\n", name, error,
+                       filename, line);
             break;
         case GL_INVALID_VALUE:
-            debug->info(Debug::Subsystems::Error, "ERROR: Invalid value %s=0x%08x in %s on line %i\n", name, error,
-                        filename, line);
+            debug.info(Debug::Subsystem::Error, "ERROR: Invalid value %s=0x%08x in %s on line %i\n", name, error,
+                       filename, line);
             break;
         case GL_INVALID_OPERATION:
-            debug->info(Debug::Subsystems::Error, "ERROR: Invalid operation %s=0x%08x in %s on line %i\n", name, error,
-                        filename, line);
+            debug.info(Debug::Subsystem::Error, "ERROR: Invalid operation %s=0x%08x in %s on line %i\n", name, error,
+                       filename, line);
             break;
         case GL_STACK_OVERFLOW:
-            debug->info(Debug::Subsystems::Error, "ERROR: Stack overflow @%s in %s on line %i!\n", name, filename,
-                        line);
+            debug.info(Debug::Subsystem::Error, "ERROR: Stack overflow @%s in %s on line %i!\n", name, filename, line);
             break;
         case GL_STACK_UNDERFLOW:
-            debug->info(Debug::Subsystems::Error, "ERROR: Stack underflow @%s in %s on line %i!\n", name, filename,
-                        line);
+            debug.info(Debug::Subsystem::Error, "ERROR: Stack underflow @%s in %s on line %i!\n", name, filename, line);
             break;
         case GL_OUT_OF_MEMORY:
-            debug->info(Debug::Subsystems::Error, "ERROR: Out Of Memory @%s in %s on line %i!\n", name, filename, line);
+            debug.info(Debug::Subsystem::Error, "ERROR: Out Of Memory @%s in %s on line %i!\n", name, filename, line);
             break;
         default:
-            debug->info(Debug::Subsystems::Error, "ERROR: Unknown Error %d (0x%08x) @%s in %s on line %i!\n", error,
-                        error, name, filename, line);
+            debug.info(Debug::Subsystem::Error, "ERROR: Unknown Error %d (0x%08x) @%s in %s on line %i!\n", error,
+                       error, name, filename, line);
             break;
     }
     if (stop == true) {
@@ -139,6 +142,14 @@ GLuint CheckError(GLuint error, bool stop, char const *const name, char const *c
     }
 
     return error;
+}
+
+void report_error(char const *const name, bool stop, char const *const filename, int const line) {
+    GLuint _error;
+    do {
+        _error = glGetError();
+        CheckError(_error, stop, name, filename, line);
+    } while (_error != GL_NO_ERROR);
 }
 
 /*****************************************************************************/

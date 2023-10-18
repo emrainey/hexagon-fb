@@ -16,14 +16,14 @@
 
 // class constructor
 Menu::Menu(std::string name) {
-    debug->info(Debug::Subsystem::Trace, "+Menu()\n");
+    debug.info(Debug::Subsystem::Trace, "+Menu()\n");
     next_y = 0;
     num_options = 0;
     max_width = 0;
     max_height = platform->display.font_height;
-    debug->info(Debug::Subsystem::Menu, "Menu::max_height = %i\n", max_height);
+    debug.info(Debug::Subsystem::Menu, "Menu::max_height = %i\n", max_height);
     addOption(name, 0, NULL);
-    debug->info(Debug::Subsystem::Trace, "-Menu()\n");
+    debug.info(Debug::Subsystem::Trace, "-Menu()\n");
 }
 
 // class destructor
@@ -37,10 +37,10 @@ Menu::~Menu() {
 
 // No description
 void Menu::addOption(std::string name, int letter, ShellExecutor *shell) {
-    debug->info(Debug::Subsystem::Trace, "+Menu::addOption(%s)\n", name.c_str());
+    debug.info(Debug::Subsystem::Trace, "+Menu::addOption(%s)\n", name.c_str());
 
     int width = name.size() * FONT_WIDTH;
-    debug->info(Debug::Subsystem::Menu, "new width=%i, max_width=%i\n", width, max_width);
+    debug.info(Debug::Subsystem::Menu, "new width=%i, max_width=%i\n", width, max_width);
     if (width > max_width) {
         max_width = width;
 
@@ -59,7 +59,7 @@ void Menu::addOption(std::string name, int letter, ShellExecutor *shell) {
     menu_options.push_back(m);
     num_options++;
 
-    debug->info(Debug::Subsystem::Trace, "-Menu::addOption()\n");
+    debug.info(Debug::Subsystem::Trace, "-Menu::addOption()\n");
 }
 
 // No description
@@ -91,18 +91,17 @@ void Menu::render(int ix, int iy) {
 
 // Finds the option selected.
 bool Menu::choose(int x, int y) {
-    debug->info(Debug::Subsystem::Menu, "Selected @ {%i,%i}, Last @ {%i,%i};\n", x, y, last_render_x, last_render_y);
+    debug.info(Debug::Subsystem::Menu, "Selected @ {%i,%i}, Last @ {%i,%i};\n", x, y, last_render_x, last_render_y);
 
     int index = 0;
     int offset_x = x - last_render_x;
     int offset_y = y - last_render_y;
 
-    std::list<MenuOption *>::iterator lit = menu_options.begin();
-    while (lit != menu_options.end()) {
-        if ((*lit)->choose(index++, offset_x, offset_y) == true) {
-            debug->info(Debug::Subsystem::Menu, "Option %s selected!\n", (*lit)->getName().c_str());
+    for (auto lit : menu_options) {
+        if (lit->choose(index++, offset_x, offset_y) == true) {
+            debug.info(Debug::Subsystem::Menu, "Option %s selected!\n", lit->getName().c_str());
             break;
         }
-        lit++;
     }
+    return true;
 }

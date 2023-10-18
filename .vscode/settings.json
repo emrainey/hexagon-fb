@@ -66,7 +66,11 @@
         "compare": "cpp",
         "concepts": "cpp",
         "algorithm": "cpp",
-        "__assert": "cpp"
+        "__assert": "cpp",
+        "charconv": "cpp",
+        "__tree": "cpp",
+        "iomanip": "cpp",
+        "set": "cpp"
     },
     "editor.formatOnSave": true,
     "C_Cpp.clang_format_fallbackStyle": "Google",
@@ -75,4 +79,8 @@
         "LOCAL_LIB": "~/.local/lib",
         "LOCAL_BIN": "~/.local/bin",
     },
+    "cmake.buildArgs": [
+        "-j12",
+        "--verbose"
+    ]
 }

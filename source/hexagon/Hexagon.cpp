@@ -19,7 +19,7 @@ Port *platform = NULL;
 World *world = NULL;
 
 // The pointer the debug object
-Debug *debug = NULL;
+Debug debug;
 
 // set the default number of views
 static int num_views = 1;
@@ -28,8 +28,8 @@ static int num_views = 1;
 static std::string *start_view = new std::string(".");
 
 void info(void) {
-    debug->info(Debug::Subsystem::Info, "Hexagon, by Erik Rainey\n");
-    debug->info(Debug::Subsystem::Info, "Copyright 2002 (C) All Rights Reserved (for now...)\n");
+    debug.info(Debug::Subsystem::Info, "Hexagon, by Erik Rainey\n");
+    debug.info(Debug::Subsystem::Info, "Copyright 2002 (C) All Rights Reserved (for now...)\n");
 }
 
 void ProcessArgs(int argc, char *argv[]) {
@@ -49,7 +49,7 @@ void ProcessArgs(int argc, char *argv[]) {
                     if (i + 1 >= argc) break;
                     // set the default directory to it...
                     start_view = new std::string(argv[i + 1]);
-                    debug->info(Debug::Subsystem::Info, "Start Directory set to %s\n", start_view->c_str());
+                    debug.info(Debug::Subsystem::Info, "Start Directory set to %s\n", start_view->c_str());
                     break;
                 default:
                     break;
@@ -61,7 +61,7 @@ void ProcessArgs(int argc, char *argv[]) {
 int main(int argc, char *argv[]) {
     // instantiate a new Debug object
     debug = new Debug();
-    debug->state = true;
+    debug.state = true;
 
     info();
 

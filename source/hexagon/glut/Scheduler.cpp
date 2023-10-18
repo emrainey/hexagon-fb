@@ -19,7 +19,7 @@ extern Port *platform;
 // class constructor
 Scheduler::Scheduler() {
     // insert your code here
-    debug->info(Debug::Subsystem::Trace, "Scheduler()\n");
+    debug.info(Debug::Subsystem::Trace, "Scheduler()\n");
 }
 
 // class destructor
@@ -33,7 +33,7 @@ void Scheduler::timed(int value) {
 
     if (platform == NULL) return;
 
-    // debug->info(Debug::Subsystem::Trace,"+Scheduler::timer()\n");
+    // debug.info(Debug::Subsystem::Trace,"+Scheduler::timer()\n");
 
     // if we are in the new selected state, then set the selected object's
     // render call item index to selected.
@@ -51,7 +51,7 @@ void Scheduler::timed(int value) {
         // platform->display.bg.perturb(rand());
     }
 
-    // debug->info(Debug::Subsystem::Trace,"-Scheduler::timer()\n");
+    // debug.info(Debug::Subsystem::Trace,"-Scheduler::timer()\n");
 }
 
 // GLUT Default Schedulerr Callback
@@ -63,7 +63,7 @@ void Scheduler::idle(void) {
     diff = timer;
     timer = clock();
     diff = timer - diff;
-    // debug->info("Idle last called %i usecs ago\n",diff);
+    // debug.info("Idle last called %i usecs ago\n",diff);
 
     /* give up the time slice */
     sleep(1);

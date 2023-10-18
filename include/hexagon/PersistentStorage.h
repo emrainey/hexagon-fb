@@ -14,6 +14,8 @@
 
 #include <string>
 
+#include "hexagon/Key.h"
+
 /**
  * This object represents the basic attributes that a persistent database of
  * information about the project has. If a particular port wants to use a

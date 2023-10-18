@@ -44,7 +44,7 @@
 
 #define PORT_SPECIFIC_PERSISTENT_STORAGE PosixRegistry
 #define PORT_SPECIFIC_FILE_SYSTEM PosixFileSystem
-#define PORT_SPECIFIC_ACTION_RETRIEVER Posix2ActionRetriever
+#define PORT_SPECIFIC_ACTION_RETRIEVER PosixActionRetriever
 #define PORT_SPECIFIC_SHELL_EXECUTOR PosixExec
 #endif
 
@@ -85,5 +85,7 @@ public:
      */
     void postInitialize();
 };
+
+extern Port *platform;
 
 #endif  // PORT_H

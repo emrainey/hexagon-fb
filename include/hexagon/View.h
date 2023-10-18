@@ -54,7 +54,7 @@ public:
     ~View();
 
     // Renders the view
-    void render(bool selection, Select_Type_e mode);
+    void render(bool selection, SelectionState mode);
     // Allows the selection engine to select something.
     bool choose(int name);
     // Adds a layer to the view

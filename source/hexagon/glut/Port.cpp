@@ -13,11 +13,11 @@
 
 // class constructor
 Port::Port(int argc, char *argv[]) {
-    debug->info(Debug::Subsystem::Trace, "+Port()\n");
+    debug.info(Debug::Subsystem::Trace, "+Port()\n");
 
-    char title[80];
+    static char title[1024];
 
-    sprintf(title, "Hexagon %s %s by Erik Rainey. %s %s", VERSION, BUILD_STRING, __DATE__, __TIME__);
+    snprintf(title, sizeof(title), "Hexagon %s %s by Erik Rainey. %s %s", VERSION, BUILD_STRING, __DATE__, __TIME__);
 
     // Create an RGA, Alpha Channel, Double Buffered Multisampled, Depth Buffered
     // rendering ... thingy.
@@ -44,7 +44,7 @@ Port::Port(int argc, char *argv[]) {
     // initialize the Shell Executor...
     shell = new PORT_SPECIFIC_SHELL_EXECUTOR();
 
-    if (debug->state) {
+    if (debug.state) {
         Key date_key("Compile Date", __DATE__);
         Key time_key("Compile Time", __TIME__);
         Key version("Version", VERSION);
@@ -54,15 +54,15 @@ Port::Port(int argc, char *argv[]) {
         Key *k1 = ps->getKey("Compile Date");
         Key *k2 = ps->getKey("Compile Time");
         Key *k3 = ps->getKey("Version");
-        debug->info(Debug::Subsystem::Platform, "Key:%s:%s\n", k1->getName().c_str(), k1->getValue().c_str());
-        debug->info(Debug::Subsystem::Platform, "Key:%s:%s\n", k2->getName().c_str(), k2->getValue().c_str());
-        debug->info(Debug::Subsystem::Platform, "Key:%s:%s\n", k3->getName().c_str(), k3->getValue().c_str());
+        debug.info(Debug::Subsystem::Platform, "Key:%s:%s\n", k1->getName().c_str(), k1->getValue().c_str());
+        debug.info(Debug::Subsystem::Platform, "Key:%s:%s\n", k2->getName().c_str(), k2->getValue().c_str());
+        debug.info(Debug::Subsystem::Platform, "Key:%s:%s\n", k3->getName().c_str(), k3->getValue().c_str());
     }
 
     // time to hook up all the GLUT stuff!
     glutWrappers_assignCallbacks();
 
-    debug->info(Debug::Subsystem::Trace, "-Port()\n");
+    debug.info(Debug::Subsystem::Trace, "-Port()\n");
 }
 
 // class destructor

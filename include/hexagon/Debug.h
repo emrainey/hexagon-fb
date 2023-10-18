@@ -13,6 +13,12 @@
 #define DEBUG_H
 
 #include <cstdint>
+#include <type_traits>
+
+template <typename Enum>
+constexpr typename std::underlying_type<Enum>::type to_underlying(Enum e) noexcept {
+    return static_cast<typename std::underlying_type<Enum>::type>(e);
+}
 
 template <typename ENUM_TYPE, typename MASK_TYPE>
 class Mask {
@@ -49,7 +55,7 @@ public:
     // Is debug on or off?
     bool state;
 
-    enum class Subsystem : uint32_t {
+    enum class Subsystem : std::uint32_t {
         Error,
         Info,
         Selection,
@@ -60,6 +66,7 @@ public:
         Platform,
         Trace,
     };
+    using MaskType = std::uint32_t;
 
     // class constructor
     Debug();
@@ -84,13 +91,17 @@ public:
      */
     void enable(Subsystem subsystem);
 
+    void operator=(MaskType mask) { subsystems = mask; }
+    void operator^=(Subsystem const& sub) { subsystems ^= sub; }
+    void operator|=(Subsystem const& sub) { subsystems |= sub; }
+
 protected:
-    // which subsystems are enabled?
-    Mask<Subsystem, uint32_t> subsystems;
+    // which Subsystem are enabled?
+    Mask<Subsystem, MaskType> subsystems;
 };
 
 #ifndef EXCLUDE_EXTERNS
-extern Debug* debug;
+extern Debug debug;
 #endif
 
 #endif  // DEBUG_H

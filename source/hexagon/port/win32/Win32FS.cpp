@@ -88,9 +88,9 @@ std::list<std::string> *Win32FS::getDirectoryList(std::string path) {
         if ((hFind = FindFirstFile("*.*", &fdata)) != INVALID_HANDLE_VALUE) {
             do {
                 if (name == NULL)
-                    debug->info(Debug::Subsystem::Platform, "Name is NULL\n%s @ %u\n", __FILE__, __LINE__);
+                    debug.info(Debug::Subsystem::Platform, "Name is NULL\n%s @ %u\n", __FILE__, __LINE__);
                 else
-                    debug->info(Debug::Subsystem::Platform, "%s\n", name);
+                    debug.info(Debug::Subsystem::Platform, "%s\n", name);
 
                 if (strcmp(name, ".") == 0 || strcmp(name, "..") == 0) continue;
 
@@ -139,7 +139,7 @@ string *Win32FS::getMetaData(std::string path, std::string name) {
         std::string fullpath = path + SYSTEM_DELIMITER + name;
         fullpath = translateToExternal(fullpath);
         DWORD attributes = GetFileAttributes(fullpath.c_str());
-        debug->info(Debug::Subsystem::Platform, "Attributes=0x%08x\n", attributes);
+        debug.info(Debug::Subsystem::Platform, "Attributes=0x%08x\n", attributes);
         if ((attributes & FILE_ATTRIBUTE_DIRECTORY) == FILE_ATTRIBUTE_DIRECTORY) {
             *d += "Directory\n";
         } else {
@@ -171,23 +171,23 @@ string *Win32FS::getMetaData(std::string path, std::string name) {
 
 // Gets the Node Type of the file system item
 Node_Type_e Win32FS::getNodeType(std::string path, std::string name) {
-    debug->info(Debug::Subsystem::Platform, "---------------------------------------------------\n");
+    debug.info(Debug::Subsystem::Platform, "---------------------------------------------------\n");
     if (path == ROOT_PATH) {
-        debug->info(Debug::Subsystem::Platform, "%s is a root directory\n", name.c_str());
+        debug.info(Debug::Subsystem::Platform, "%s is a root directory\n", name.c_str());
         return DIRECTORY_TYPE;
     } else {
         std::string fullpath = path + SYSTEM_DELIMITER + name;
         fullpath = translateToExternal(fullpath);
-        debug->info(Debug::Subsystem::Platform, "FullPath=%s\n", fullpath.c_str());
+        debug.info(Debug::Subsystem::Platform, "FullPath=%s\n", fullpath.c_str());
         DWORD attributes = GetFileAttributes(fullpath.c_str());
-        debug->info(Debug::Subsystem::Platform, "Attribute: 0x%08x\n", attributes);
-        debug->info(Debug::Subsystem::Platform, "FILE_ATTRIBUTE_DIRECTORY=0x%08x\n", FILE_ATTRIBUTE_DIRECTORY);
+        debug.info(Debug::Subsystem::Platform, "Attribute: 0x%08x\n", attributes);
+        debug.info(Debug::Subsystem::Platform, "FILE_ATTRIBUTE_DIRECTORY=0x%08x\n", FILE_ATTRIBUTE_DIRECTORY);
         if ((attributes & FILE_ATTRIBUTE_DIRECTORY) == FILE_ATTRIBUTE_DIRECTORY) {
-            debug->info(Debug::Subsystem::Platform, "%s is a directory\n", name.c_str());
+            debug.info(Debug::Subsystem::Platform, "%s is a directory\n", name.c_str());
             return DIRECTORY_TYPE;
         } else  // if (attribute & FILE_ATTRIBUTE_NORMAL >
         {
-            debug->info(Debug::Subsystem::Platform, "%s is a file\n", name.c_str());
+            debug.info(Debug::Subsystem::Platform, "%s is a file\n", name.c_str());
             return FILE_ON_DISK_TYPE;
         }
     }
@@ -213,7 +213,7 @@ Model_Type_e Win32FS::getModelType(std::string path, std::string name) {
                 return RAMDISK_DRIVE;
 
             case 1:
-                // debug->info("Drive %s does not exist.\n",name.c_str());
+                // debug.info("Drive %s does not exist.\n",name.c_str());
             case 0:
                 /****************************/
                 /* intentional fall-through */
@@ -242,11 +242,11 @@ char *Win32FS::setCurrentDirectory(std::string directory) {
 
         // first we have to "set" our current directory
         directory = translateToExternal(directory);
-        debug->info(Debug::Subsystem::Platform, "Setting Current Directory to %s\n", directory.c_str());
+        debug.info(Debug::Subsystem::Platform, "Setting Current Directory to %s\n", directory.c_str());
         SetCurrentDirectory(directory.c_str());
         char fullpath[255];
         GetCurrentDirectory(255, fullpath);
-        debug->info(Debug::Subsystem::Platform, "Current Directory is %s\n", fullpath);
+        debug.info(Debug::Subsystem::Platform, "Current Directory is %s\n", fullpath);
 
         // trim the slash off the return std::string
         int len = strlen(fullpath);
@@ -254,7 +254,7 @@ char *Win32FS::setCurrentDirectory(std::string directory) {
 
         // did we change directories at all?
         if (strcmp(fullpath, directory.c_str()) != 0) {
-            debug->info(Debug::Subsystem::Platform, "Couldn't change directories to that path! Trying again!\n");
+            debug.info(Debug::Subsystem::Platform, "Couldn't change directories to that path! Trying again!\n");
 
             retry_count++;
             if (retry_count > DIRECTORY_CHANGE_RETRY) return NULL;

@@ -28,11 +28,6 @@
 #include <string>
 #include <type_traits>
 
-template <typename Enum>
-constexpr typename std::underlying_type<Enum>::type to_underlying(Enum e) noexcept {
-    return static_cast<typename std::underlying_type<Enum>::type>(e);
-}
-
 /*****************************************************************************/
 // Some MACROS
 /*****************************************************************************/
@@ -47,59 +42,15 @@ constexpr typename std::underlying_type<Enum>::type to_underlying(Enum e) noexce
 #define VERSION ("v1.0.10 alpha")
 #define BUILD_STRING ("in C++")
 
-/*****************************************************************************/
-// Some FUNCTION MACROS
-/*****************************************************************************/
-
-#define GL_PUSH_MATRIX() glLocalPushMatrix(__FILE__, __LINE__)
-#define GL_POP_MATRIX() glLocalPopMatrix(__FILE__, __LINE__)
-
-/* simply toggles the ls bit */
-#define TOGGLE_BOOL(a)  \
-    {                   \
-        if (a == false) \
-            a = true;   \
-        else            \
-            a = false;  \
-    }
-
-#define REPORT_ERROR(name, stop)                                \
-    {                                                           \
-        GLuint error = glGetError();                            \
-        do {                                                    \
-            CheckError(error, stop, #name, __FILE__, __LINE__); \
-        } while (error != GL_NO_ERROR);                         \
-    }
-
-#define CHECKERROR(a, b) CheckError(a, b, #a, __FILE__, __LINE__)
-
 /* These macros convert cos and sin to degree inputs not redians. */
 
-#define Rad2Deg(rad) (((double)(rad) / TWO_PI) * 360)
-#define Deg2Rad(deg) (((double)(deg) / 360) * TWO_PI)
+constexpr double Rad2Deg(double rad) { return (rad / TWO_PI) * 360.0; }
+constexpr double Deg2Rad(double deg) { return (deg / 360.0) * TWO_PI; }
 #define COS(n) cos(Deg2Rad(n))
 #define SIN(n) sin(Deg2Rad(n))
 
-/*****************************************************************************/
-// Some Typedefs
-/*****************************************************************************/
-
-// we need to get rid of these...
-typedef unsigned int GLenum;
-typedef unsigned int GLuint;
-typedef float GLfloat;
-
-/*****************************************************************************/
-// Some prototypes
-/*****************************************************************************/
-void glLocalPushMatrix(char const *const filename, int const line);
-void glLocalPopMatrix(char const *const filename, int const line);
-void glutWrappers_assignCallbacks(void);
-GLuint CheckError(GLuint error, bool stop, char const *const name, char const *const filename, int const line);
-// No description
-void toggleDisplayText(void);
-void toggleControlState(void);
-void createNewView(void);
+constexpr void toggle(bool &a) { a = not a; }
+constexpr bool toogle(bool a) { return not a; }
 
 /*****************************************************************************/
 // Include all the Object Definitions
@@ -143,7 +94,6 @@ void createNewView(void);
 #ifndef EXCLUDE_EXTERNS
 extern Port *platform;
 extern World *world;
-extern Debug *debug;
 #endif
 
 /*****************************************************************************/

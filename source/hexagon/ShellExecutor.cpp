@@ -21,7 +21,7 @@ ShellExecutor::~ShellExecutor() {
 
 bool ShellExecutor::bangCommand(std::string command) {
     if (command[0] == '!') {
-        debug->info(Debug::Subsystem::Internal, "bangCommand: %s\n", command.c_str());
+        debug.info(Debug::Subsystem::Internal, "bangCommand: %s\n", command.c_str());
 
         // it's a bang command
         if (command == BANG_COMMAND_TEXT_TOGGLE) {

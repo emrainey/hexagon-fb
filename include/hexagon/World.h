@@ -14,10 +14,10 @@
 
 #include <string>
 
-typedef enum { SELECTION_OLD = 0, SELECTION_NEW, SELECTION_CONTEXT_MENU } Selection_Mode_e;
+enum class Selection : uint8_t { Old = 0, Newer, ContextMenu };
 
 typedef struct {
-    Selection_Mode_e state;
+    Selection state;
     int x;
     int y;
 } Selection_Point_t;

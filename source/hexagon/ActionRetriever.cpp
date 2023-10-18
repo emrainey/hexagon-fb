@@ -21,7 +21,7 @@ ActionRetriever::~ActionRetriever() {
 
 Menu *ActionRetriever::bangCommand(std::string fileType) {
     if (fileType[0] == '!') {
-        debug->info(Debug::Subsystem::Internal, "bangCommand: %s\n", fileType.c_str());
+        debug.info(Debug::Subsystem::Internal, "bangCommand: %s\n", fileType.c_str());
 
         // it's a bang command
         if (fileType == ACTION_DIRECTORY) {

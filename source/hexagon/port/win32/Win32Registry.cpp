@@ -28,15 +28,15 @@ Win32Registry::Win32Registry() {
                        proot, &disposition)
         == ERROR_SUCCESS) {
         // success!
-        debug->info(Debug::Subsystem::Platform, "Success in opening the Registry!\n");
+        debug.info(Debug::Subsystem::Platform, "Success in opening the Registry!\n");
 
         if (disposition == REG_CREATED_NEW_KEY) {
-            debug->info(Debug::Subsystem::Platform, "Root Key did not exist before!\n");
+            debug.info(Debug::Subsystem::Platform, "Root Key did not exist before!\n");
         } else if (disposition == REG_OPENED_EXISTING_KEY) {
-            debug->info(Debug::Subsystem::Platform, "Root Key existed before-hand.\n");
+            debug.info(Debug::Subsystem::Platform, "Root Key existed before-hand.\n");
         }
     } else {
-        debug->info(Debug::Subsystem::Platform, "Failed to open registry!\n");
+        debug.info(Debug::Subsystem::Platform, "Failed to open registry!\n");
     }
 }
 
@@ -56,21 +56,21 @@ Key *Win32Registry::getKey(std::string name) {
     DWORD size = LOCAL_SIZE;
     DWORD type = 0;
 
-    debug->info(Debug::Subsystem::Trace, "+getKey(\"%s\")\n", name.c_str());
+    debug.info(Debug::Subsystem::Trace, "+getKey(\"%s\")\n", name.c_str());
 
     if (RegQueryValueEx(root_key, name.c_str(), 0, &type, (BYTE *)value, &size) != ERROR_SUCCESS) {
-        debug->info(Debug::Subsystem::Platform, "RegQueryValueEx() failed!\n");
+        debug.info(Debug::Subsystem::Platform, "RegQueryValueEx() failed!\n");
     } else {
-        debug->info(Debug::Subsystem::Platform, "RegQueryValueEx() Succeed!\n");
-        debug->info(Debug::Subsystem::Platform, "value==0x%08x\n", value);
-        debug->info(Debug::Subsystem::Platform, "size==%i\n", size);
+        debug.info(Debug::Subsystem::Platform, "RegQueryValueEx() Succeed!\n");
+        debug.info(Debug::Subsystem::Platform, "value==0x%08x\n", value);
+        debug.info(Debug::Subsystem::Platform, "size==%i\n", size);
         if (size != 0) {
             std::string v(value, strlen(value));
             k = new Key(name, v);
         }
     }
 
-    debug->info(Debug::Subsystem::Trace, "-getKey()\n");
+    debug.info(Debug::Subsystem::Trace, "-getKey()\n");
     return k;
 }
 
@@ -82,8 +82,8 @@ Key *Win32Registry::getKey(std::string name) {
 void Win32Registry::setKey(Key k) {
     int len = strlen(k.getValue().c_str());
     if (RegSetValueEx(root_key, k.getName().c_str(), 0, REG_SZ, (BYTE *)k.getValue().c_str(), len) != ERROR_SUCCESS) {
-        debug->info(Debug::Subsystem::Platform, "RegSetValueEx() failed!\n");
+        debug.info(Debug::Subsystem::Platform, "RegSetValueEx() failed!\n");
     } else {
-        debug->info(Debug::Subsystem::Platform, "RegSetValueEx() Succeeded!\n");
+        debug.info(Debug::Subsystem::Platform, "RegSetValueEx() Succeeded!\n");
     }
 }

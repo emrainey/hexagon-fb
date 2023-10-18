@@ -16,7 +16,7 @@
 #define DEBUG_MODIFIER(op, bit)                      \
     {                                                \
         if (glutGetModifiers() == GLUT_ACTIVE_ALT) { \
-            debug->systems op(bit);                  \
+            debug op(bit);                           \
         }                                            \
     }
 
@@ -26,7 +26,7 @@ extern Port *platform;
 // class constructor
 Input::Input() {
     // insert your code here
-    debug->info(Debug::Subsystem::Trace, "Input()\n");
+    debug.info(Debug::Subsystem::Trace, "Input()\n");
 }
 
 // class destructor
@@ -36,7 +36,7 @@ Input::~Input() {
 
 // GLUT Mouse Click Callback
 void Input::mouseClick(int button, int state, int x, int y) {
-    debug->info(Debug::Subsystem::Trace, "+Input::mouseClick(%i,%i,%i,%i)\n", button, state, x, y);
+    debug.info(Debug::Subsystem::Trace, "+Input::mouseClick(%i,%i,%i,%i)\n", button, state, x, y);
 
     // these initializations are only done once.
     static int last_x = x;
@@ -50,7 +50,7 @@ void Input::mouseClick(int button, int state, int x, int y) {
         last_x = x;
         last_y = y;
         // we don't do anything on downs.
-        debug->info(Debug::Subsystem::Trace, "-Input::mouseClick() [1]\n");
+        debug.info(Debug::Subsystem::Trace, "-Input::mouseClick() [1]\n");
         return;
     } else if (state == GLUT_UP) {
         // is this click in-place?
@@ -63,14 +63,14 @@ void Input::mouseClick(int button, int state, int x, int y) {
     // assumed reaction. left button will invoke the "open" command as normal
     // but a right click will show all the possible actions.
 
-    debug->info(Debug::Subsystem::Input, "Selection State = %i\n", world->selection.state);
+    debug.info(Debug::Subsystem::Input, "Selection State = %i\n", world->selection.state);
 
     // left or right buttons in-place?
     if (button == GLUT_LEFT_BUTTON && clicked == true) {
-        if (world->selection.state == SELECTION_CONTEXT_MENU) {
-            debug->info(Debug::Subsystem::Input, "Checking Menu for Hit...\n");
+        if (world->selection.state == Selection::ContextMenu) {
+            debug.info(Debug::Subsystem::Input, "Checking Menu for Hit...\n");
             if (world->menu->choose(x, y) == true) {
-                debug->info(Debug::Subsystem::Trace, "-Input::mouseClick() [2]\n");
+                debug.info(Debug::Subsystem::Trace, "-Input::mouseClick() [2]\n");
 
                 return;
             }
@@ -79,7 +79,7 @@ void Input::mouseClick(int button, int state, int x, int y) {
         }
 
         // record the selection point on the screen
-        world->selection.state = SELECTION_NEW;
+        world->selection.state = Selection::Newer;
 
         // save the coordinates...
         world->selection.x = x;
@@ -87,7 +87,7 @@ void Input::mouseClick(int button, int state, int x, int y) {
 
     } else if (button == GLUT_RIGHT_BUTTON && clicked == true) {
         /* future capability */
-        world->selection.state = SELECTION_CONTEXT_MENU;
+        world->selection.state = Selection::ContextMenu;
 
         // save the coordinates...
         world->selection.x = x;
@@ -97,9 +97,9 @@ void Input::mouseClick(int button, int state, int x, int y) {
     // get the selection name of the item selected...
     int name = platform->display.drawSelection(x, y);
 
-    debug->info(Debug::Subsystem::Input, "Chosen Name = 0x%08x\n", name);
+    debug.info(Debug::Subsystem::Input, "Chosen Name = 0x%08x\n", name);
 
-    if (world->selection.state == SELECTION_CONTEXT_MENU) {
+    if (world->selection.state == Selection::ContextMenu) {
         // delete the old menu...
         delete world->menu;
         // be sure to set it to null so that it won't be rendered.
@@ -110,11 +110,11 @@ void Input::mouseClick(int button, int state, int x, int y) {
     world->choose(name);
 
     // set the new camera destination
-    debug->info(Debug::Subsystem::Input, "Focus Position=%s\n", world->focus->position.print());
+    debug.info(Debug::Subsystem::Input, "Focus Position=%s\n", world->focus->position.print());
 
     platform->camera.dest = world->focus->top->position;
 
-    debug->info(Debug::Subsystem::Trace, "-Input::mouseClick()\n");
+    debug.info(Debug::Subsystem::Trace, "-Input::mouseClick()\n");
 }
 
 // GLUT Mouse Drag Callback
@@ -155,7 +155,7 @@ void Input::mouseMove(int x, int y) {
 
 // GLUT Keyboard Callback for Normal Keys
 void Input::keyboardNormal(unsigned char key, int x, int y) {
-    debug->info(Debug::Subsystem::Trace, "Key %c (%i) pressed\n", key, key);
+    debug.info(Debug::Subsystem::Trace, "Key %c (%i) pressed\n", key, key);
     switch (key) {
         case ESC:
             // DestroyStack();
@@ -262,14 +262,14 @@ void Input::keyboardNormal(unsigned char key, int x, int y) {
 
 // GLUT Keyboard Callback for Special Keys
 void Input::keyboardSpecial(int key, int x, int y) {
-    debug->info(Debug::Subsystem::Trace, "Special Key %i pressed\n", key);
+    debug.info(Debug::Subsystem::Trace, "Special Key %i pressed\n", key);
     switch (key) {
         case GLUT_KEY_F1:
-            TOGGLE_BOOL(platform->display.renderHelp);
+            toggle(platform->display.renderHelp);
             break;
 
         case GLUT_KEY_F2:
-            TOGGLE_BOOL(debug->state);
+            toggle(debug.state);
             break;
 
         case GLUT_KEY_F3:
@@ -303,7 +303,7 @@ void Input::keyboardSpecial(int key, int x, int y) {
             break;
 
         case GLUT_KEY_F9:
-            TOGGLE_BOOL(platform->display.renderGrid);
+            toggle(platform->display.renderGrid);
             break;
 
         case GLUT_KEY_PAGE_UP:
@@ -330,26 +330,31 @@ void toggleControlState(void) {
     ctrl = (ctrl + 1) % CONTROL_MOD;
     switch (ctrl) {
         case KEYBOARD_CONTROL:
-            sprintf(platform->display.control_message, "Keyboard control");
+            snprintf(platform->display.control_message, sizeof(platform->display.control_message), "Keyboard control");
             break;
         case MOUSE_DRAG:
-            sprintf(platform->display.control_message, "Mouse Draggable");
+            snprintf(platform->display.control_message, sizeof(platform->display.control_message), "Mouse Draggable");
             break;
         case MOUSE_ZOOM:
-            sprintf(platform->display.control_message, "Mouse Zooming");
+            snprintf(platform->display.control_message, sizeof(platform->display.control_message), "Mouse Zooming");
             break;
         default:
-            sprintf(platform->display.control_message, "Unknown control state %d", ctrl);
+            snprintf(platform->display.control_message, sizeof(platform->display.control_message),
+                     "Unknown control state %d", ctrl);
             break;
     }
 
-    if (debug->state) {
-        debug->info(Debug::Subsystem::Internal, "toggleControlState() %s\n", platform->display.control_message);
-        debug->flush();
+    if (debug.state) {
+        debug.info(Debug::Subsystem::Internal, "toggleControlState() %s\n", platform->display.control_message);
+        debug.flush();
     }
     platform->control_state = (Control_State_t)ctrl;
 }
 
-void toggleDisplayText(void) { TOGGLE_BOOL(platform->display.renderText); }
+void toggleDisplayText(void) { toggle(platform->display.renderText); }
 
-void createNewView(void) { world->addView(); }
+void createNewView(void) {
+    if (world) {
+        world->addView();
+    }
+}

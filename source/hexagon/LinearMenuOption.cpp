@@ -30,8 +30,8 @@ LinearMenuOption::~LinearMenuOption() { shell = nullptr; }
 bool LinearMenuOption::choose(int index, int offset_x, int offset_y) {
     calcBounds();
 
-    debug->info(Debug::Subsystem::Menu, "[%i] Selection @ {%i,%i}, Rect={%i,%i}->{%i,%i}\n", index, offset_x, offset_y,
-                x1, y1, x2, y2);
+    debug.info(Debug::Subsystem::Menu, "[%i] Selection @ {%i,%i}, Rect={%i,%i}->{%i,%i}\n", index, offset_x, offset_y,
+               x1, y1, x2, y2);
 
     if ((offset_x > x1 && offset_x < x2) && (offset_y > y1 && offset_y < y2)) {
         execute("");
@@ -83,7 +83,7 @@ void LinearMenuOption::render(int index, int ix, int iy) {
  * @param width The new width.
  */
 void LinearMenuOption::setWidth(int width) {
-    debug->info(Debug::Subsystem::Trace, "LinearMenuOption::setWidth(%i)\n", width);
+    debug.info(Debug::Subsystem::Trace, "LinearMenuOption::setWidth(%i)\n", width);
     x2 = width;
 }
 

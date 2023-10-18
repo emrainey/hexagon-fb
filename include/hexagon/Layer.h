@@ -12,7 +12,9 @@
 #ifndef LAYER_H
 #define LAYER_H
 
-#include "hexagon/Hexagon.h"
+#include "hexagon/Model.h"
+#include "hexagon/Node.h"
+#include "hexagon/Vector.h"
 
 // This contains the node list for display.
 class Layer {
@@ -44,7 +46,7 @@ public:
     ~Layer();
 
     // renders the layer
-    void render(bool selection, Select_Type_e mode);
+    void render(bool selection, SelectionState mode);
 
     // finds the OpenGL selection item
     bool choose(int name);
