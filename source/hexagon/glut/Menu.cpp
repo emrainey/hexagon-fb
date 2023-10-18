@@ -82,10 +82,8 @@ void Menu::render(int ix, int iy) {
     last_render_x = ix;
     last_render_y = iy;
 
-    std::list<MenuOption *>::iterator lit = menu_options.begin();
-    while (lit != menu_options.end()) {
-        (*lit)->render(index++, ix, iy);
-        lit++;
+    for (auto lit : menu_options) {
+        lit->render(index++, ix, iy);
     }
 }
 

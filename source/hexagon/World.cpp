@@ -90,9 +90,8 @@ void World::addView(void) {
 
 // class destructor
 World::~World() {
-    std::list<View *>::iterator lit = view_list.begin();
-    while (lit != view_list.end()) {
-        delete (*lit);
+    for (auto lit : view_list) {
+        delete lit;
     }
 }
 
@@ -100,13 +99,12 @@ World::~World() {
 void World::render(bool selection) {
     // cycle through all the view and render them, if the view is not the focus
     // then set it's mode to NORMAL
-    std::list<View *>::iterator lit = view_list.begin();
-    while (lit != view_list.end()) {
-        if ((*lit) == focus)
+    for (auto lit : view_list) {
+        if (lit == focus) {
             ;  // do nothing, this is to fix the depth problem
-        else
-            (*lit)->render(selection, NORMAL);
-        lit++;
+        } else {
+            lit->render(selection, NORMAL);
+        }
     }
 
     // now render the focus's item
@@ -118,14 +116,12 @@ void World::choose(int name) {
     debug.info(Debug::Subsystem::Trace, "+World::choose(0x%08x)\n", name);
     debug.info(Debug::Subsystem::Menu, "selection.state=%i\n", selection.state);
 
-    std::list<View *>::iterator lit = view_list.begin();
-    while (lit != view_list.end()) {
-        if ((*lit)->choose(name) == true) {
-            focus = (*lit);
+    for (auto lit : view_list) {
+        if (lit->choose(name) == true) {
+            focus = lit;
             debug.info(Debug::Subsystem::Trace, "-World::choose(0x%08x) [2]\n", name);
             return;
         }
-        lit++;
     }
 
     // nothing was chosen so...
@@ -331,10 +327,8 @@ void World::addLight(Light *l) {
 
 // Turns on or off lights.
 void World::shine(bool on) {
-    std::list<Light *>::iterator lit = lights.begin();
-    while (lit != lights.end()) {
-        (*lit)->shine(on);
-        lit++;
+    for (auto lit : lights) {
+        lit->shine(on);
     }
 }
 
