@@ -18,6 +18,7 @@ Node::Node() {
     description = "A default Node() instance";
 
     node_type = DEFAULT;
+    is_permitted = true;
 
     // the default model;
     model = new Model("");
@@ -79,6 +80,7 @@ Node::Node(std::string n, std::string p, std::string d, Node_Type_e nt, Model_Ty
     }
     model->IsSelected = false;
     model->select_name = select_name;
+    is_permitted = true;
 }
 
 // class destructor
@@ -95,7 +97,7 @@ void Node::render(bool selection, SelectionState mode) {
     glRotated(rotation.x, 1, 0, 0);
     glRotated(rotation.y, 0, 1, 0);
     glRotated(rotation.z, 0, 0, 1);
-    model->render(selection, mode);
+    model->render(selection, mode, is_permitted);
     GL_POP_MATRIX();
 }
 

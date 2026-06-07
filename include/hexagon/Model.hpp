@@ -26,6 +26,8 @@ public:
     // the normal and selected Call List items
     GLuint normal;
     GLuint selected;
+    GLuint normal_unpermitted;
+    GLuint selected_unpermitted;
 
     // this is the GL Name of the model used during rendering and selection
     GLuint select_name;
@@ -53,17 +55,21 @@ public:
     void info();
 
     // Renders the model based on it's mode
-    void render(bool selection, SelectionState mode);
+    void render(bool selection, SelectionState mode, bool is_permitted = true);
 
     // we only need one copy of the following stuff...
     static GLuint buildHexagon(double radius, double height);
     static GLuint buildSelectedHexagon(double radius, double height);
+    static GLuint buildUnpermittedHexagon(double radius, double height);
+    static GLuint buildSelectedUnpermittedHexagon(double radius, double height);
     static GLuint buildDownArrow(double length, double width, double height);
     static GLuint buildPoly(double radius, double height);
     static GLuint buildSelPoly(double radius, double height);
 
     static void renderHexagon(double radius, double height);
     static void renderSelectedHexagon(double radius, double height);
+    static void renderUnpermittedHexagon(double radius, double height);
+    static void renderSelectedUnpermittedHexagon(double radius, double height);
     static void renderDownArrow(double length, double width, double height);
     static void renderPoly(double radius, double height);
     static void renderSelPoly(double radius, double height);

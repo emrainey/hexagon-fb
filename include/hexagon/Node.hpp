@@ -65,6 +65,9 @@ public:
     // the file directory path
     std::string path;
 
+    // permission check for directories
+    bool is_permitted;
+
     Choreographer *choreographer;  // pointer to the class which determines
                                    // how this node moves
 

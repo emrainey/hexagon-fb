@@ -10,6 +10,9 @@
 
 #include <filesystem>
 #include <format>
+#ifndef _WIN32
+#include <unistd.h>
+#endif
 
 #include "hexagon/Hexagon.hpp"  // class's header file
 
@@ -132,6 +135,7 @@ void Layer::addNode(std::string path, std::string name) {
         std::string description = "Unknown";
         Node_Type_e type = Node_Type_e::DEFAULT;
         Model_Type_e model_type = Model_Type_e::USER_DEFINED;
+        bool is_permitted = true;
 
         try {
             std::filesystem::path fullpath = std::filesystem::path(path) / name;
@@ -139,6 +143,11 @@ void Layer::addNode(std::string path, std::string name) {
                 description = "Directory";
                 type = DIRECTORY_TYPE;
                 model_type = FOLDER;
+#ifndef _WIN32
+                if (access(fullpath.string().c_str(), R_OK | X_OK) != 0) {
+                    is_permitted = false;
+                }
+#endif
             } else if (std::filesystem::is_regular_file(fullpath)) {
                 auto sz = std::filesystem::file_size(fullpath);
                 description = (sz < 1024) ? std::format("{} bytes", sz) : std::format("{} kb", sz / 1024);
@@ -151,6 +160,7 @@ void Layer::addNode(std::string path, std::string name) {
             }
         } catch (const std::filesystem::filesystem_error &) {
             description = "Unavailable";
+            is_permitted = false;
         }
 
         // tell the node what it's selection number is
@@ -158,6 +168,7 @@ void Layer::addNode(std::string path, std::string name) {
 
         // declare a new node...
         n = new Node(name, path, description, type, model_type, select_name);
+        n->is_permitted = is_permitted;
 
         Vector *dp = placeNode(size - 1);
         n->position = position + *dp;  // place it down

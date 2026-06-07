@@ -13,10 +13,19 @@
 extern Port *platform;
 
 Model::Model() {
-    // insert your code here
+    normal = 0;
+    selected = 0;
+    normal_unpermitted = 0;
+    selected_unpermitted = 0;
 }
 
-Model::Model(const char *extension) { loadModel(extension); }
+Model::Model(const char *extension) {
+    normal = 0;
+    selected = 0;
+    normal_unpermitted = 0;
+    selected_unpermitted = 0;
+    loadModel(extension);
+}
 
 // class destructor
 Model::~Model() {
@@ -26,6 +35,8 @@ Model::~Model() {
 void Model::loadDownArrow() {
     normal = buildDownArrow(0.8, 0.8, 0.2);
     selected = buildDownArrow(0.8, 0.8, 0.2);
+    normal_unpermitted = normal;
+    selected_unpermitted = selected;
     info();
 }
 
@@ -58,6 +69,8 @@ void Model::loadModel(const char *extension) {
     // just load the hexagon call item for now...
     normal = buildHexagon(0.8, 0.2);
     selected = buildSelectedHexagon(0.8, 0.2);
+    normal_unpermitted = buildUnpermittedHexagon(0.8, 0.2);
+    selected_unpermitted = buildSelectedUnpermittedHexagon(0.8, 0.2);
     // }
     info();
 }
@@ -65,6 +78,8 @@ void Model::loadModel(const char *extension) {
 void Model::loadPoly() {
     normal = buildPoly(0.8, 0);
     selected = buildSelPoly(0.8, 0);
+    normal_unpermitted = normal;
+    selected_unpermitted = selected;
     info();
 }
 
@@ -74,7 +89,7 @@ void Model::info() {
 }
 
 // Renders the model based on it's mode
-void Model::render(bool selection, SelectionState mode) {
+void Model::render(bool selection, SelectionState mode, bool is_permitted) {
     if (selection == true) {
         IsSelected = false;
         glLoadName(select_name);
@@ -85,11 +100,19 @@ void Model::render(bool selection, SelectionState mode) {
     if (mode == NORMAL) {
         // glutSolidTorus(0.2,0.6,20,20);
         // renderHexagon(0.8,0.2);
-        glCallList(normal);
+        if (!is_permitted) {
+            glCallList(normal_unpermitted);
+        } else {
+            glCallList(normal);
+        }
     } else if (mode == SELECTED) {
         // glutSolidTorus(0.2,0.6,20,20);
         // renderSelectedHexagon(0.8,0.2);
-        glCallList(selected);
+        if (!is_permitted) {
+            glCallList(selected_unpermitted);
+        } else {
+            glCallList(selected);
+        }
     }
     REPORT_ERROR(render, true);
 }
@@ -625,4 +648,56 @@ void Model::HexWirePoly(double radius, double height) {
     glVertex3d(radius * COS(300), radius * SIN(300), height);
     glVertex3d(radius * COS(0), radius * SIN(0), height);
     glEnd();
+}
+
+GLuint Model::buildUnpermittedHexagon(double radius, double height) {
+    static GLuint shape = 0;
+    static double last_radius = 0;
+    static double last_height = 0;
+
+    if (shape != 0 && last_radius == radius && last_height == height) return shape;
+
+    shape = glGenLists(1);
+    CHECKERROR(shape, false);
+    glNewList(shape, GL_COMPILE);
+    renderUnpermittedHexagon(radius, height);
+    glEndList();
+
+    last_height = height;
+    last_radius = radius;
+
+    return shape;
+}
+
+void Model::renderUnpermittedHexagon(double radius, double height) {
+    glColor4f(0.4f, 0.0f, 0.0f, 0.3f);
+    solidHexagon(radius, height);
+    glColor4f(1.0f, 1.0f, 1.0f, 0.7f);
+    wireHexagon(radius, height);
+}
+
+GLuint Model::buildSelectedUnpermittedHexagon(double radius, double height) {
+    static GLuint shape = 0;
+    static double last_radius = 0;
+    static double last_height = 0;
+
+    if (shape != 0 && last_radius == radius && last_height == height) return shape;
+
+    shape = glGenLists(1);
+    CHECKERROR(shape, false);
+    glNewList(shape, GL_COMPILE);
+    renderSelectedUnpermittedHexagon(radius, height);
+    glEndList();
+
+    last_height = height;
+    last_radius = radius;
+
+    return shape;
+}
+
+void Model::renderSelectedUnpermittedHexagon(double radius, double height) {
+    glColor4f(0.6f, 0.0f, 0.0f, 0.5f);
+    solidHexagon(radius, height);
+    glColor4f(1.0f, 1.0f, 1.0f, 0.7f);
+    wireHexagon(radius, height);
 }
