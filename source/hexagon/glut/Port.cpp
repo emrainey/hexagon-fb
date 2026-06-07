@@ -8,7 +8,7 @@
  * @author Erik Rainey
  ******************************************************************************/
 
-#include "hexagon/Hexagon.h"
+#include "hexagon/Hexagon.hpp"
 
 // class constructor
 Port::Port(int argc, char *argv[]) {

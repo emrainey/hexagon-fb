@@ -9,7 +9,7 @@
  ******************************************************************************/
 
 #define EXCLUDE_EXTERNS  // don't pull in the externs for platform and world.
-#include "hexagon/Hexagon.h"
+#include "hexagon/Hexagon.hpp"
 
 // The pointer to all the port specific functions and variables
 Port *platform = NULL;

@@ -11,9 +11,9 @@
 #ifndef LAYER_H
 #define LAYER_H
 
-#include "hexagon/Model.h"
-#include "hexagon/Node.h"
-#include "hexagon/Vector.h"
+#include "hexagon/Model.hpp"
+#include "hexagon/Node.hpp"
+#include "hexagon/Vector.hpp"
 
 // This contains the node list for display.
 class Layer {

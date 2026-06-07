@@ -13,7 +13,7 @@
 
 #include <string>
 
-#include "hexagon/ActionRetriever.h"
+#include "hexagon/ActionRetriever.hpp"
 
 /**
  * This class implements the ActionRetriever Object for Posix.

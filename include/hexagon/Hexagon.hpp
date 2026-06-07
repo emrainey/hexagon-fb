@@ -59,34 +59,34 @@ constexpr bool toogle(bool a) { return not a; }
 /*****************************************************************************/
 
 // base classes and simpe objects
-#include "hexagon/Choreographer.h"
-#include "hexagon/Color.h"
-#include "hexagon/Debug.h"
-#include "hexagon/Iconcache.h"
-#include "hexagon/Key.h"
-#include "hexagon/Light.h"
-#include "hexagon/Model.h"
-#include "hexagon/Vector.h"
+#include "hexagon/Choreographer.hpp"
+#include "hexagon/Color.hpp"
+#include "hexagon/Debug.hpp"
+#include "hexagon/Iconcache.hpp"
+#include "hexagon/Key.hpp"
+#include "hexagon/Light.hpp"
+#include "hexagon/Model.hpp"
+#include "hexagon/Vector.hpp"
 
 // containers for Not so simple objects
-#include "hexagon/Layer.h"
-#include "hexagon/Node.h"
-#include "hexagon/View.h"
+#include "hexagon/Layer.hpp"
+#include "hexagon/Node.hpp"
+#include "hexagon/View.hpp"
 
 // Generic Interfaces
-#include "hexagon/ActionRetriever.h"
-#include "hexagon/MenuOption.h"
-#include "hexagon/PersistentStorage.h"
-#include "hexagon/ShellExecutor.h"
-#include "hexagon/World.h"
-#include "hexagon/glut/Menu.h"
+#include "hexagon/ActionRetriever.hpp"
+#include "hexagon/MenuOption.hpp"
+#include "hexagon/PersistentStorage.hpp"
+#include "hexagon/ShellExecutor.hpp"
+#include "hexagon/World.hpp"
+#include "hexagon/glut/Menu.hpp"
 
 #ifndef _MENU_TYPE_
 #define _MENU_TYPE_
-#include "hexagon/LinearMenuOption.h"
+#include "hexagon/LinearMenuOption.hpp"
 #endif
 
-#include "hexagon/port/Port.h"
+#include "hexagon/port/Port.hpp"
 
 /*****************************************************************************/
 // Now for the globals

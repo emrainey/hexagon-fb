@@ -8,7 +8,7 @@
  * @author Erik Rainey
  ******************************************************************************/
 
-#include "hexagon/Hexagon.h"
+#include "hexagon/Hexagon.hpp"
 
 // define a pointer to the Port object
 extern Port *platform;

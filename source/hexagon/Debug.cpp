@@ -10,7 +10,7 @@
 
 #include <print>
 
-#include "hexagon/Hexagon.h"
+#include "hexagon/Hexagon.hpp"
 
 Debug::Debug() : state{false}, subsystems{} {
     info(Debug::Subsystem::Trace, "Debug(%s)\n", (state ? "true" : "false"));

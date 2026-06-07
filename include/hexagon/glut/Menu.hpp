@@ -11,7 +11,7 @@
 #ifndef MENU_H
 #define MENU_H
 
-#include "hexagon/MenuOption.h"
+#include "hexagon/MenuOption.hpp"
 
 typedef void (*Void_Function_t)(void);
 

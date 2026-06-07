@@ -8,7 +8,7 @@
  * @author Erik Rainey
  ******************************************************************************/
 
-#include "hexagon/Hexagon.h"  // project's header file
+#include "hexagon/Hexagon.hpp"  // project's header file
 
 // class constructor
 Light::Light(Vector p, Light_Type_e t, int total_num_lights) {

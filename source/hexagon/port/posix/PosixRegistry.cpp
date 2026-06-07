@@ -1,5 +1,5 @@
 
-#include "hexagon/port/posix/PosixRegistry.h"
+#include "hexagon/port/posix/PosixRegistry.hpp"
 
 PosixRegistry::PosixRegistry() {
     // Set a default IconDirectory key so it is not nullptr

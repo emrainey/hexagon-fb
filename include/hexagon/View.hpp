@@ -13,9 +13,9 @@
 
 #include <string>
 
-#include "hexagon/Layer.h"
-#include "hexagon/Model.h"
-#include "hexagon/Vector.h"
+#include "hexagon/Layer.hpp"
+#include "hexagon/Model.hpp"
+#include "hexagon/Vector.hpp"
 
 // No description
 class View {

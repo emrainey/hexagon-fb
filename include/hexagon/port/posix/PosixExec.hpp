@@ -13,7 +13,7 @@
 
 #include <unistd.h>
 
-#include "hexagon/ShellExecutor.h"
+#include "hexagon/ShellExecutor.hpp"
 
 /**
  * Posix Implementation of the ShellExecutor

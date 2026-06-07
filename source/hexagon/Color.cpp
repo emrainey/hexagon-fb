@@ -8,7 +8,7 @@
  * @author Erik Rainey
  ******************************************************************************/
 
-#include "hexagon/Hexagon.h"
+#include "hexagon/Hexagon.hpp"
 
 Color::Color() { memset((char *)colors, 0, sizeof(colors) * sizeof(float)); }
 

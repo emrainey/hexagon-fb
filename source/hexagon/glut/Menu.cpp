@@ -8,7 +8,7 @@
  * @author Erik Rainey
  ******************************************************************************/
 
-#include "hexagon/Hexagon.h"
+#include "hexagon/Hexagon.hpp"
 
 #define INSET (4)
 #define FONT_WIDTH (10)

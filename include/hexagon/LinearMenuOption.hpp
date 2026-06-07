@@ -8,16 +8,49 @@
  * @author Erik Rainey
  ******************************************************************************/
 
-#ifndef MENUOPTION_H
-#define MENUOPTION_H
+#ifndef LINEARMENUOPTION_H
+#define LINEARMENUOPTION_H
 
-#include "hexagon/ShellExecutor.h"
+#include <string>
 
-// A single menu option
-class MenuOption {
+#include "hexagon/Debug.hpp"
+#include "hexagon/MenuOption.hpp"
+#include "hexagon/ShellExecutor.hpp"
+
+/**
+ * A linearly laid-out menu option.
+ */
+class LinearMenuOption : public MenuOption {
+private:
+    /** The displayed name of the option */
+    std::string name;
+
+    /** The shortcut letter */
+    int letter;
+
+    /** The pointer to the execution object */
+    ShellExecutor *shell;
+
+    /** The bounds of the menu options rectangle (for choose). */
+    int x1, y1, x2, y2;
+
+    /** The rendering inset */
+    int inset;
+
+    /** The linear index of this option */
+    int index;
+
+    /** The height of the MenuOption */
+    int item_height;
+
+    /** Calculates the outer bounds of this menu item */
+    void calcBounds();
+
 public:
-    /** Allow child drestructors to be called! */
-    virtual ~MenuOption() = 0;
+    // class constructor
+    LinearMenuOption();
+    // class destructor
+    ~LinearMenuOption();
 
     /**
      * Determines is a point was selected in the rectangle of the option.
@@ -25,7 +58,7 @@ public:
      * @param x The x value of the selection point.
      * @param y The y value of the selection point.
      */
-    virtual bool choose(int index, int x, int y) = 0;
+    bool choose(int index, int x, int y);
 
     /**
      * Renders the menu option
@@ -33,30 +66,30 @@ public:
      * @param ix The x value of the render point.
      * @param iy The y value of the render point.
      */
-    virtual void render(int index, int ix, int iy) = 0;
+    void render(int index, int ix, int iy);
 
     /**
      * Sets the MenuOptions Width.
      * @param width The new width.
      */
-    virtual void setWidth(int width) = 0;
+    void setWidth(int width);
 
     /**
      * Sets the MenuOption's Inset which is the distance from one
      * menu item to it's border.
      * @param i The inset to use around all items.
      */
-    virtual void setInset(int i) = 0;
+    void setInset(int i);
 
     /**
      * @param n Sets the name of the option.
      */
-    virtual void setName(std::string n) = 0;
+    void setName(std::string n);
 
     /**
      * @return Returns the name of the MenuOption
      */
-    virtual std::string getName() = 0;
+    std::string getName();
 
     /**
      * Sets the ShellExecutor Object to call once the item is called.
@@ -64,19 +97,19 @@ public:
      *           correct parameters.
      * @param parameters The parameters to pass to the executor.
      */
-    virtual void setShellExecutor(ShellExecutor *sh) = 0;
+    void setShellExecutor(ShellExecutor *sh);
 
     /**
      * Calls the ShellExecutor object to execute the command.
      * @param parameters The parameters to pass to the executor.
      */
-    virtual void execute(std::string parameters) = 0;
+    void execute(std::string parameters);
 
     /**
      * Sets the index of this MenuOption in the menu, zero based.
      * @param index Zero based index.
      */
-    virtual void setIndex(int index) = 0;
+    void setIndex(int index);
 };
 
-#endif  // MENUOPTION_H
+#endif  // LINEARMENUOPTION_H

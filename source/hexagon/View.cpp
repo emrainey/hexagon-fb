@@ -8,7 +8,7 @@
  * @author Erik Rainey
  ******************************************************************************/
 
-#include "hexagon/Hexagon.h"
+#include "hexagon/Hexagon.hpp"
 
 // class constructor
 View::View(int select_name) {

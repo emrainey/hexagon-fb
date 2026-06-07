@@ -13,7 +13,7 @@
 
 #include <string>
 
-#include "hexagon/glut/Menu.h"
+#include "hexagon/glut/Menu.hpp"
 
 /**
  * An ActionRetriever implements the ability to retrieve file specific action

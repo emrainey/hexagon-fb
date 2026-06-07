@@ -13,9 +13,9 @@
 
 #define MIN_FRAMES (30)
 
-#include "hexagon/Color.h"
-#include "hexagon/Vector.h"
-#include "hexagon/glut/Camera.h"
+#include "hexagon/Color.hpp"
+#include "hexagon/Vector.hpp"
+#include "hexagon/glut/Camera.hpp"
 
 // No description
 class Display {

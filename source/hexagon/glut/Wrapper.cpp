@@ -9,10 +9,10 @@
  ******************************************************************************/
 
 #define EXCLUDE_EXTERNS
-#include "hexagon/glut/Wrapper.h"
+#include "hexagon/glut/Wrapper.hpp"
 
-#include "hexagon/Debug.h"
-#include "hexagon/port/Port.h"
+#include "hexagon/Debug.hpp"
+#include "hexagon/port/Port.hpp"
 
 extern Port *platform;
 extern Debug debug;

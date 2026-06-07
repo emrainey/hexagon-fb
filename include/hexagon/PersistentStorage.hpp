@@ -8,13 +8,12 @@
  * @author Erik Rainey
  ******************************************************************************/
 
-#ifndef POSIX_REGISTRY_H
-#define POSIX_REGISTRY_H
+#ifndef PERSISTENTSTORAGE_H
+#define PERSISTENTSTORAGE_H
 
-#include <map>
 #include <string>
 
-#include "hexagon/PersistentStorage.h"
+#include "hexagon/Key.hpp"
 
 /**
  * This object represents the basic attributes that a persistent database of
@@ -22,25 +21,18 @@
  * different mechanism than another, then great. Everyone calls through the
  * object interface and everyone is happy.
  */
-class PosixRegistry : public PersistentStorage {
+class PersistentStorage {
 public:
-    // class constructor
-    PosixRegistry();
-    // class destructor
-    ~PosixRegistry() = default;
     /**
      * Adds the supplied parameter to PersistentStorage. If there is
      * a collision then the existing Key is overwritten. No return code
      * is given.
      */
-    void setKey(Key k) override;
+    virtual void setKey(Key k) = 0;
     /**
      * This method fetches a Key object out of the PersistentStorage.
      */
-    Key *getKey(std::string name) override;
-
-private:
-    std::map<std::string, Key> m_keys;
+    virtual Key *getKey(std::string name) = 0;
 };
 
-#endif  // POSIX_REGISTRY_H
+#endif  // PERSISTENTSTORAGE_H

@@ -8,7 +8,7 @@
  * @author Erik Rainey
  ******************************************************************************/
 
-#include "hexagon/Hexagon.h"  // class's header file
+#include "hexagon/Hexagon.hpp"  // class's header file
 
 #define SIDES (6)  // the only place where we should define the number of sides
 #define PREV(i) ((i - 1 < 0) ? (SIDES - 1) : (i - 1))

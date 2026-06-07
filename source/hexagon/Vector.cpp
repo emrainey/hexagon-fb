@@ -8,7 +8,7 @@
  * @author Erik Rainey
  ******************************************************************************/
 
-#include "hexagon/Vector.h"
+#include "hexagon/Vector.hpp"
 
 #include <cmath>
 #include <cstdio>

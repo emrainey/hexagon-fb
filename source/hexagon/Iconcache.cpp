@@ -8,7 +8,7 @@
  * @author Erik Rainey
  ******************************************************************************/
 
-#include "hexagon/Hexagon.h"  // class's header file
+#include "hexagon/Hexagon.hpp"  // class's header file
 
 // class constructor
 IconCache::IconCache() {

@@ -11,7 +11,7 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
-#include "hexagon/Vector.h"
+#include "hexagon/Vector.hpp"
 
 // No description
 class Camera {

@@ -13,8 +13,8 @@
 
 #include <string>
 
-#include "hexagon/Choreographer.h"
-#include "hexagon/Vector.h"
+#include "hexagon/Choreographer.hpp"
+#include "hexagon/Vector.hpp"
 
 typedef enum {
     DEFAULT = 0,

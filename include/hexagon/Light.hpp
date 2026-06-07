@@ -11,8 +11,8 @@
 #ifndef LIGHT_H
 #define LIGHT_H
 
-#include "hexagon/Vector.h"
-#include "hexagon/glut/Wrapper.h"
+#include "hexagon/Vector.hpp"
+#include "hexagon/glut/Wrapper.hpp"
 
 typedef enum { SIMPLE, SPOT, NUM_LIGHT_TYPES } Light_Type_e;
 

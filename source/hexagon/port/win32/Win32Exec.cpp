@@ -10,7 +10,7 @@
 
 #include <filesystem>
 
-#include "hexagon/Hexagon.h"  // class's header file
+#include "hexagon/Hexagon.hpp"  // class's header file
 
 // class constructor
 Win32Exec::Win32Exec() {

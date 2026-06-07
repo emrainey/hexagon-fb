@@ -10,7 +10,7 @@
 
 #include <chrono>
 
-#include "hexagon/Hexagon.h"
+#include "hexagon/Hexagon.hpp"
 
 static Color mat_ambient(0, 0, 0, 1);
 static Color mat_specular(1.0, 1.0, 1.0, 0.15);

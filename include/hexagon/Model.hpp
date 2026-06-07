@@ -12,7 +12,7 @@
 #define MODEL_H
 
 // #include <lib3ds.h>
-#include "hexagon/glut/Wrapper.h"
+#include "hexagon/glut/Wrapper.hpp"
 
 typedef enum { NORMAL, SELECTED, NUM_SELECT_TYPES } SelectionState;
 

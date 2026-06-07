@@ -12,7 +12,7 @@
 #include <thread>
 #include <time.h>
 
-#include "hexagon/Hexagon.h"
+#include "hexagon/Hexagon.hpp"
 
 // define a pointer the Port object
 extern Port *platform;
