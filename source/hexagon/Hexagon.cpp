@@ -60,8 +60,8 @@ void ProcessArgs(int argc, char *argv[]) {
 
 int main(int argc, char *argv[]) {
     // instantiate a new Debug object
-    debug = new Debug();
-    debug.state = true;
+    debug = Debug(true);
+    debug = 0xFFFFFFFF; // Enable all subsystems
 
     info();
 

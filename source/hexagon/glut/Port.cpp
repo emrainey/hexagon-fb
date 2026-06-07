@@ -19,13 +19,13 @@ Port::Port(int argc, char *argv[]) {
 
     snprintf(title, sizeof(title), "Hexagon %s %s by Erik Rainey. %s %s", VERSION, BUILD_STRING, __DATE__, __TIME__);
 
+    glutInit(&argc, argv);
     // Create an RGA, Alpha Channel, Double Buffered Multisampled, Depth Buffered
     // rendering ... thingy.
     glutInitDisplayMode(GLUT_RGBA | GLUT_DEPTH | GLUT_DOUBLE | GLUT_MULTISAMPLE | GLUT_ALPHA);
 
     glutInitWindowPosition(100, 100);
     glutInitWindowSize(640, 480);
-    glutInit(&argc, argv);
 
     glutCreateWindow(title);
 
@@ -54,9 +54,13 @@ Port::Port(int argc, char *argv[]) {
         Key *k1 = ps->getKey("Compile Date");
         Key *k2 = ps->getKey("Compile Time");
         Key *k3 = ps->getKey("Version");
-        debug.info(Debug::Subsystem::Platform, "Key:%s:%s\n", k1->getName().c_str(), k1->getValue().c_str());
-        debug.info(Debug::Subsystem::Platform, "Key:%s:%s\n", k2->getName().c_str(), k2->getValue().c_str());
-        debug.info(Debug::Subsystem::Platform, "Key:%s:%s\n", k3->getName().c_str(), k3->getValue().c_str());
+        if (k1 && k2 && k3) {
+            debug.info(Debug::Subsystem::Platform, "Key:%s:%s\n", k1->getName().c_str(), k1->getValue().c_str());
+            debug.info(Debug::Subsystem::Platform, "Key:%s:%s\n", k2->getName().c_str(), k2->getValue().c_str());
+            debug.info(Debug::Subsystem::Platform, "Key:%s:%s\n", k3->getName().c_str(), k3->getValue().c_str());
+        } else {
+            debug.info(Debug::Subsystem::Platform, "Compiled keys not found in persistent storage.\n");
+        }
     }
 
     // time to hook up all the GLUT stuff!

@@ -12,6 +12,7 @@
 #ifndef POSIX_REGISTRY_H
 #define POSIX_REGISTRY_H
 
+#include <map>
 #include <string>
 
 #include "hexagon/PersistentStorage.h"
@@ -33,11 +34,14 @@ public:
      * a collision then the existing Key is overwritten. No return code
      * is given.
      */
-    void setKey(Key k);
+    void setKey(Key k) override;
     /**
      * This method fetches a Key object out of the PersistentStorage.
      */
-    Key *getKey(std::string name);
+    Key *getKey(std::string name) override;
+
+private:
+    std::map<std::string, Key> m_keys;
 };
 
 #endif  // POSIX_REGISTRY_H

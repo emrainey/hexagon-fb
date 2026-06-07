@@ -37,8 +37,9 @@ void Model::loadModel(const char *extension) {
 
     // find this file in the format of <extension>.3ds
     Key *dir = platform->ps->getKey("IconDirectory");
+    std::string dir_val = dir ? dir->getValue() : ".";
 
-    snprintf(fullpath, sizeof(fullpath), "%s\\3ds\\%s.3ds", dir->getValue().c_str(), extension);
+    snprintf(fullpath, sizeof(fullpath), "%s/3ds/%s.3ds", dir_val.c_str(), extension);
     debug.info(Debug::Subsystem::Models, "Searching for object: %s\n", fullpath);
 
     // L3DS loader;

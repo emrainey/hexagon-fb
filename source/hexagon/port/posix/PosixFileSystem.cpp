@@ -66,8 +66,7 @@ Node_Type_e PosixFileSystem::getNodeType(std::string path, std::string name) { r
 Model_Type_e PosixFileSystem::getModelType(std::string path, std::string name) { return Model_Type_e::FOLDER; }
 
 // Sets the current directory...
-char const *PosixFileSystem::setCurrentDirectory(std::string directory) {
+void PosixFileSystem::setCurrentDirectory(std::string directory) {
     fs::path _dir = directory;
     std::filesystem::current_path(_dir);
-    return directory.c_str();
 }

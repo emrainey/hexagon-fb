@@ -63,7 +63,7 @@ public:
     virtual Model_Type_e getModelType(std::string path, std::string name) = 0;
 
     /// Sets the current directory...
-    virtual char const *setCurrentDirectory(std::string directory) = 0;
+    virtual void setCurrentDirectory(std::string directory) = 0;
 };
 
 #endif  // FILESYSTEM_H

@@ -33,7 +33,7 @@ public:
     void populateNodeList(Layer *layer, std::string path) override;
     Node_Type_e getNodeType(std::string path, std::string name) override;
     Model_Type_e getModelType(std::string path, std::string name) override;
-    char const *setCurrentDirectory(std::string directory) override;
+    void setCurrentDirectory(std::string directory) override;
 };
 
 #endif  // POSIX_FS_H

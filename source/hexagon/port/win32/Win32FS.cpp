@@ -233,7 +233,7 @@ Model_Type_e Win32FS::getModelType(std::string path, std::string name) {
 }
 
 // Sets the current directory...
-char *Win32FS::setCurrentDirectory(std::string directory) {
+void Win32FS::setCurrentDirectory(std::string directory) {
     bool done = false;
     int retry_count = 0;
     while (!done) {
@@ -257,7 +257,7 @@ char *Win32FS::setCurrentDirectory(std::string directory) {
             debug.info(Debug::Subsystem::Platform, "Couldn't change directories to that path! Trying again!\n");
 
             retry_count++;
-            if (retry_count > DIRECTORY_CHANGE_RETRY) return NULL;
+            if (retry_count > DIRECTORY_CHANGE_RETRY) return;
 
             // change the path to the root of that drive...
             char simple[3];
