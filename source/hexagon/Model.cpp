@@ -15,43 +15,57 @@ extern Port *platform;
 Model::Model() {
     normal = 0;
     selected = 0;
-    normal_unpermitted = 0;
-    selected_unpermitted = 0;
+    // Default appearance (Permitted directories purple color scheme)
+    appearance.face_color          = Color(0.7f, 0.1f, 0.7f, 0.3f);
+    appearance.wire_color          = Color(1.0f, 1.0f, 1.0f, 0.7f);
+    appearance.selected_face_color = Color(0.8f, 0.1f, 0.0f, 0.3f);
+    appearance.selected_wire_color = Color(1.0f, 1.0f, 1.0f, 0.7f);
+    appearance.model_name          = "";
+}
+
+Model::Model(Appearance app) {
+    normal = 0;
+    selected = 0;
+    appearance = app;
 }
 
 Model::Model(const char *extension) {
     normal = 0;
     selected = 0;
-    normal_unpermitted = 0;
-    selected_unpermitted = 0;
+    // Default appearance (Permitted directories purple color scheme)
+    appearance.face_color          = Color(0.7f, 0.1f, 0.7f, 0.3f);
+    appearance.wire_color          = Color(1.0f, 1.0f, 1.0f, 0.7f);
+    appearance.selected_face_color = Color(0.8f, 0.1f, 0.0f, 0.3f);
+    appearance.selected_wire_color = Color(1.0f, 1.0f, 1.0f, 0.7f);
+    appearance.model_name          = "";
+    loadModel(extension);
+}
+
+Model::Model(const char *extension, Appearance app) {
+    normal = 0;
+    selected = 0;
+    appearance = app;
     loadModel(extension);
 }
 
 // class destructor
 Model::~Model() {
-    // insert your code here
+    if (normal != 0) {
+        glDeleteLists(normal, 1);
+    }
+    if (selected != 0) {
+        glDeleteLists(selected, 1);
+    }
 }
 
 void Model::loadDownArrow() {
-    normal = buildDownArrow(0.8, 0.8, 0.2);
-    selected = buildDownArrow(0.8, 0.8, 0.2);
-    normal_unpermitted = normal;
-    selected_unpermitted = selected;
+    normal = buildDownArrow(0.8, 0.8, 0.2, appearance.face_color, appearance.wire_color);
+    selected = buildDownArrow(0.8, 0.8, 0.2, appearance.selected_face_color, appearance.selected_wire_color);
     info();
 }
 
 // Loads a model from the filesystem
 void Model::loadModel(const char *extension) {
-    // fullpath to location
-    char fullpath[255];
-
-    // find this file in the format of <extension>.3ds
-    Key *dir = platform->ps->getKey("IconDirectory");
-    std::string dir_val = dir ? dir->getValue() : ".";
-
-    snprintf(fullpath, sizeof(fullpath), "%s/3ds/%s.3ds", dir_val.c_str(), extension);
-    debug.info(Debug::Subsystem::Models, "Searching for object: %s\n", fullpath);
-
     // L3DS loader;
     // loader.LoadFile(fullpath);
     // int mesh_count = loader.GetMeshCount();
@@ -61,25 +75,20 @@ void Model::loadModel(const char *extension) {
     //         debug.info(Debug::Subsystem::Models, "Mesh %d has %d vertices and %d triangles\n", i,
     //                    loader.GetMesh(i).GetVertexCount(), loader.GetMesh(i).GetTriangleCount());
     //     }
-
     //     normal = buildMesh(loader, 0.7, 0.1, 0.7, 0.3);
     //     selected = buildMesh(loader, 1.0, 1.0, 1.0, 0.7);
     // } else {
     // couldn't find it?
     // just load the hexagon call item for now...
-    normal = buildHexagon(0.8, 0.2);
-    selected = buildSelectedHexagon(0.8, 0.2);
-    normal_unpermitted = buildUnpermittedHexagon(0.8, 0.2);
-    selected_unpermitted = buildSelectedUnpermittedHexagon(0.8, 0.2);
+    normal = buildHexagon(0.8, 0.2, appearance.face_color, appearance.wire_color);
+    selected = buildHexagon(0.8, 0.2, appearance.selected_face_color, appearance.selected_wire_color);
     // }
     info();
 }
 
 void Model::loadPoly() {
-    normal = buildPoly(0.8, 0);
-    selected = buildSelPoly(0.8, 0);
-    normal_unpermitted = normal;
-    selected_unpermitted = selected;
+    normal = buildPoly(0.8, 0, appearance.face_color, appearance.wire_color);
+    selected = buildPoly(0.8, 0, appearance.selected_face_color, appearance.selected_wire_color);
     info();
 }
 
@@ -89,7 +98,7 @@ void Model::info() {
 }
 
 // Renders the model based on it's mode
-void Model::render(bool selection, SelectionState mode, bool is_permitted) {
+void Model::render(bool selection, SelectionState mode) {
     if (selection == true) {
         IsSelected = false;
         glLoadName(select_name);
@@ -98,91 +107,36 @@ void Model::render(bool selection, SelectionState mode, bool is_permitted) {
     }
 
     if (mode == NORMAL) {
-        // glutSolidTorus(0.2,0.6,20,20);
-        // renderHexagon(0.8,0.2);
-        if (!is_permitted) {
-            glCallList(normal_unpermitted);
-        } else {
-            glCallList(normal);
-        }
+        glCallList(normal);
     } else if (mode == SELECTED) {
-        // glutSolidTorus(0.2,0.6,20,20);
-        // renderSelectedHexagon(0.8,0.2);
-        if (!is_permitted) {
-            glCallList(selected_unpermitted);
-        } else {
-            glCallList(selected);
-        }
+        glCallList(selected);
     }
     REPORT_ERROR(render, true);
 }
 
-/*
- * Loads the mesh into a Call List (returning the call name)
- * with the parameterized color.
- */
-// GLuint Model::buildMesh(L3DS &loader, GLfloat r, GLfloat g, GLfloat b, GLfloat a) {
-//     GLuint shape = glGenLists(1);
-//     CHECKERROR(shape, false);
-//     glNewList(shape, GL_COMPILE);
-
-//     glEnableClientState(GL_VERTEX_ARRAY);
-//     glEnableClientState(GL_NORMAL_ARRAY);
-//     // glEnableClientState(GL_COLOR_ARRAY);
-//     glEnable(GL_CULL_FACE);
-
-//     glColor4f(r, g, b, a);
-//     for (uint i = 0; i < loader.GetMeshCount(); i++) {
-//         // LMesh &mesh = loader.GetMesh(i);
-
-//         // glVertexPointer(4, GL_FLOAT, 0, &mesh.GetVertex(0));
-//         // glNormalPointer(GL_FLOAT, 0, &mesh.GetNormal(0));
-//         // // glColorPointer(3, GL_FLOAT, 0, &mesh.GetBinormal(0));
-//         // glDrawElements(GL_TRIANGLES, mesh.GetTriangleCount() * 3, GL_UNSIGNED_SHORT, &mesh.GetTriangle(0));
-//     }
-
-//     glDisable(GL_CULL_FACE);
-//     // glDisableClientState(GL_COLOR_ARRAY);
-//     glDisableClientState(GL_NORMAL_ARRAY);
-//     glDisableClientState(GL_VERTEX_ARRAY);
-
-//     glEndList();
-
-//     return shape;
-// }
-
 /****************************************************************************
  *        Name:
  *  Parameters:
  *     Returns:
  * Description:
  ****************************************************************************/
-GLuint Model::buildHexagon(double radius, double height) {
-    static GLuint shape = 0;
-    static double last_radius = 0;
-    static double last_height = 0;
-
-    if (shape != 0 && last_radius == radius && last_height == height) return shape;
-
-    shape = glGenLists(1);
-    CHECKERROR(shape, false);
+GLuint Model::buildHexagon(double radius, double height, Color face, Color wire) {
+    GLuint shape = glGenLists(1);
+    if (shape == 0) {
+        REPORT_ERROR(glGenLists, false);
+    }
     glNewList(shape, GL_COMPILE);
-    // glutSolidTorus(0.2,0.6,20,20);
-    renderHexagon(radius, height);
+    renderHexagon(radius, height, face, wire);
     glEndList();
 
     REPORT_ERROR(buildHexagon, false);
-
-    last_height = height;
-    last_radius = radius;
-
     return shape;
 }
 
-void Model::renderHexagon(double radius, double height) {
-    glColor4f(0.7, 0.1, 0.7, 0.3);
+void Model::renderHexagon(double radius, double height, Color face, Color wire) {
+    glColor4f(face.getRedFloat(), face.getGreenFloat(), face.getBlueFloat(), face.getAlphaFloat());
     solidHexagon(radius, height);
-    glColor4f(1.0, 1.0, 1.0, 0.7);
+    glColor4f(wire.getRedFloat(), wire.getGreenFloat(), wire.getBlueFloat(), wire.getAlphaFloat());
     wireHexagon(radius, height);
 }
 
@@ -192,63 +146,21 @@ void Model::renderHexagon(double radius, double height) {
  *     Returns:
  * Description:
  ****************************************************************************/
-GLuint Model::buildSelectedHexagon(double radius, double height) {
-    static GLuint shape = 0;
-    static double last_radius = 0;
-    static double last_height = 0;
-
-    if (shape != 0 && last_radius == radius && last_height == height) return shape;
-
-    shape = glGenLists(1);
-    CHECKERROR(shape, false);
+GLuint Model::buildPoly(double radius, double height, Color face, Color wire) {
+    GLuint shape = glGenLists(1);
+    if (shape == 0) {
+        REPORT_ERROR(glGenLists, false);
+    }
     glNewList(shape, GL_COMPILE);
-    // glutSolidTorus(0.2,0.6,20,20);
-    renderSelectedHexagon(radius, height);
+    renderPoly(radius, height, face, wire);
     glEndList();
-
-    REPORT_ERROR(buildHexagon, false);
-
-    last_height = height;
-    last_radius = radius;
-
     return shape;
 }
 
-void Model::renderSelectedHexagon(double radius, double height) {
-    glColor4f(0.8, 0.1, 0.0, 0.3);
-    solidHexagon(radius, height);
-    glColor4f(1.0, 1.0, 1.0, 0.7);
-    wireHexagon(radius, height);
-}
-/****************************************************************************
- *        Name:
- *  Parameters:
- *     Returns:
- * Description:
- ****************************************************************************/
-GLuint Model::buildPoly(double radius, double height) {
-    static GLuint shape = 0;
-    static double last_radius = 0;
-    static double last_height = 0;
-
-    if (shape != 0 && last_radius == radius && last_height == height) return shape;
-
-    shape = glGenLists(1);
-    CHECKERROR(shape, false);
-    glNewList(shape, GL_COMPILE);
-    renderPoly(radius, height);
-    glEndList();
-
-    last_height = height;
-    last_radius = radius;
-
-    return shape;
-}
-
-void Model::renderPoly(double radius, double height) {
-    glColor4f(0.7, 0.1, 0.7, 0.3);
+void Model::renderPoly(double radius, double height, Color face, Color wire) {
+    glColor4f(face.getRedFloat(), face.getGreenFloat(), face.getBlueFloat(), face.getAlphaFloat());
     HexPoly(radius, height);
-    glColor4f(1.0, 1.0, 1.0, 0.7);
+    glColor4f(wire.getRedFloat(), wire.getGreenFloat(), wire.getBlueFloat(), wire.getAlphaFloat());
     HexWirePoly(radius, height);
 }
 
@@ -258,56 +170,21 @@ void Model::renderPoly(double radius, double height) {
  *     Returns:
  * Description:
  ****************************************************************************/
-GLuint Model::buildSelPoly(double radius, double height) {
-    static GLuint shape = 0;
-    static double last_radius = 0;
-    static double last_height = 0;
-
-    if (shape != 0 && last_radius == radius && last_height == height) return shape;
-
-    shape = glGenLists(1);
-    CHECKERROR(shape, false);
+GLuint Model::buildDownArrow(double length, double width, double height, Color face, Color wire) {
+    GLuint shape = glGenLists(1);
+    if (shape == 0) {
+        REPORT_ERROR(glGenLists, false);
+    }
     glNewList(shape, GL_COMPILE);
-    renderSelPoly(radius, height);
-    glEndList();
-
-    last_height = height;
-    last_radius = radius;
-
-    return shape;
-}
-
-void Model::renderSelPoly(double radius, double height) {
-    glColor4f(0.8, 0.1, 0.0, 0.3);
-    HexPoly(radius, height);
-    glColor4f(1.0, 1.0, 1.0, 0.7);
-    HexWirePoly(radius, height);
-}
-
-/****************************************************************************
- *        Name:
- *  Parameters:
- *     Returns:
- * Description:
- ****************************************************************************/
-GLuint Model::buildDownArrow(double length, double width, double height) {
-    static GLuint shape = 0;
-
-    if (shape != 0) return shape;
-
-    shape = glGenLists(1);
-    CHECKERROR(shape, false);
-    glNewList(shape, GL_COMPILE);
-    // glRotated(-90,1,0,0);
-    renderDownArrow(length, width, height);
+    renderDownArrow(length, width, height, face, wire);
     glEndList();
     return shape;
 }
 
-void Model::renderDownArrow(double length, double width, double height) {
-    glColor4f(0.7, 0.1, 0.7, 0.3);
+void Model::renderDownArrow(double length, double width, double height, Color face, Color wire) {
+    glColor4f(face.getRedFloat(), face.getGreenFloat(), face.getBlueFloat(), face.getAlphaFloat());
     solidDownArrow(length, width, height);
-    glColor4f(1.0, 1.0, 1.0, 0.7);
+    glColor4f(wire.getRedFloat(), wire.getGreenFloat(), wire.getBlueFloat(), wire.getAlphaFloat());
     wireDownArrow(length, width, height);
 }
 
@@ -648,56 +525,4 @@ void Model::HexWirePoly(double radius, double height) {
     glVertex3d(radius * COS(300), radius * SIN(300), height);
     glVertex3d(radius * COS(0), radius * SIN(0), height);
     glEnd();
-}
-
-GLuint Model::buildUnpermittedHexagon(double radius, double height) {
-    static GLuint shape = 0;
-    static double last_radius = 0;
-    static double last_height = 0;
-
-    if (shape != 0 && last_radius == radius && last_height == height) return shape;
-
-    shape = glGenLists(1);
-    CHECKERROR(shape, false);
-    glNewList(shape, GL_COMPILE);
-    renderUnpermittedHexagon(radius, height);
-    glEndList();
-
-    last_height = height;
-    last_radius = radius;
-
-    return shape;
-}
-
-void Model::renderUnpermittedHexagon(double radius, double height) {
-    glColor4f(0.4f, 0.0f, 0.0f, 0.3f);
-    solidHexagon(radius, height);
-    glColor4f(1.0f, 1.0f, 1.0f, 0.7f);
-    wireHexagon(radius, height);
-}
-
-GLuint Model::buildSelectedUnpermittedHexagon(double radius, double height) {
-    static GLuint shape = 0;
-    static double last_radius = 0;
-    static double last_height = 0;
-
-    if (shape != 0 && last_radius == radius && last_height == height) return shape;
-
-    shape = glGenLists(1);
-    CHECKERROR(shape, false);
-    glNewList(shape, GL_COMPILE);
-    renderSelectedUnpermittedHexagon(radius, height);
-    glEndList();
-
-    last_height = height;
-    last_radius = radius;
-
-    return shape;
-}
-
-void Model::renderSelectedUnpermittedHexagon(double radius, double height) {
-    glColor4f(0.6f, 0.0f, 0.0f, 0.5f);
-    solidHexagon(radius, height);
-    glColor4f(1.0f, 1.0f, 1.0f, 0.7f);
-    wireHexagon(radius, height);
 }

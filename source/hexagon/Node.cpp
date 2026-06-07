@@ -19,48 +19,54 @@ Node::Node() {
 
     node_type = DEFAULT;
     is_permitted = true;
+    is_executable = false;
+    appearance = AppearanceLookup::getAppearance(node_type, is_executable, is_permitted);
 
     // the default model;
-    model = new Model("");
+    model = new Model("", appearance);
 }
 
-Node::Node(std::string n, std::string p, std::string d, Node_Type_e nt, Model_Type_e mt, int select_name) {
+Node::Node(const std::string &n, const std::string &p, const std::string &d, Node_Type_e nt, Model_Type_e mt, int select_name, bool is_permitted, bool is_executable) {
     // set our name, path and description
     name = n;
     path = p;
     description = d;
+    node_type = nt;
+    model_type = mt;
+    this->is_permitted = is_permitted;
+    this->is_executable = is_executable;
+
+    appearance = AppearanceLookup::getAppearance(node_type, is_executable, is_permitted);
 
     // pass our choreographer our reference so he can fuck with us...
     choreographer = new Choreographer(this);
 
     // initialize our model
-    node_type = nt;
-    model_type = mt;
     switch (mt) {
         case DOWN_ARROW:
-            model = new Model();
+            model = new Model(appearance);
             model->loadDownArrow();
             break;
 
         case REMOVABLE_DRIVE:
             // get the model for it
-            model = new Model("removeable_drive");
+            model = new Model("removeable_drive", appearance);
             break;
         case REMOTE_DRIVE:
             // get the model for it
-            model = new Model("remote_drive");
+            model = new Model("remote_drive", appearance);
             break;
         case FIXED_DRIVE:
             // get the model for it
-            model = new Model("fixed_drive");
+            model = new Model("fixed_drive", appearance);
             break;
         case RAMDISK_DRIVE:
             // get the model for it
-            model = new Model("ramdisk_drive");
+            model = new Model("ramdisk_drive", appearance);
             break;
         case CDROM_DRIVE:
             // get the model for it
-            model = new Model("cdrom_drive");
+            model = new Model("cdrom_drive", appearance);
             break;
         case USER_DEFINED:
             // where do we load the model from???
@@ -74,13 +80,12 @@ Node::Node(std::string n, std::string p, std::string d, Node_Type_e nt, Model_Ty
                 ext = name.substr(ext_idx, len);
             }
 
-            model = new Model(ext.c_str());  // get the default model type
+            model = new Model(ext.c_str(), appearance);  // get the default model type
             choreographer->setType(PROLATION);
             break;
     }
     model->IsSelected = false;
     model->select_name = select_name;
-    is_permitted = true;
 }
 
 // class destructor
@@ -97,7 +102,7 @@ void Node::render(bool selection, SelectionState mode) {
     glRotated(rotation.x, 1, 0, 0);
     glRotated(rotation.y, 0, 1, 0);
     glRotated(rotation.z, 0, 0, 1);
-    model->render(selection, mode, is_permitted);
+    model->render(selection, mode);
     GL_POP_MATRIX();
 }
 

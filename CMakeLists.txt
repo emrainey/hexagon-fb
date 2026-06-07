@@ -34,6 +34,7 @@ target_sources(hexagon
         ${CMAKE_CURRENT_SOURCE_DIR}/source/hexagon/Light.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/hexagon/LinearMenuOption.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/hexagon/Model.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/hexagon/Appearance.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/hexagon/Node.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/hexagon/PersistentStorage.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/hexagon/Shape.cpp

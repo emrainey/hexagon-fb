@@ -68,13 +68,14 @@ void Input::mouseClick(int button, int state, int x, int y) {
     if (button == GLUT_LEFT_BUTTON && clicked == true) {
         if (world->selection.state == Selection::ContextMenu) {
             debug.info(Debug::Subsystem::Input, "Checking Menu for Hit...\n");
-            if (world->menu->choose(x, y) == true) {
+            if (world->menu && world->menu->choose(x, y) == true) {
                 debug.info(Debug::Subsystem::Trace, "-Input::mouseClick() [2]\n");
 
                 return;
             }
 
             delete world->menu;
+            world->menu = NULL;
         }
 
         // record the selection point on the screen

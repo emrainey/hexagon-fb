@@ -128,7 +128,7 @@ void Layer::addNode(std::string path, std::string name) {
     Node *n = NULL;
     if (size == 0) {
         std::string description("Click this to go back down the stack");
-        n = new Node(name, "..", description, DIRECTORY_TYPE, DOWN_ARROW, name_space | 1);
+        n = new Node(name, "..", description, DIRECTORY_TYPE, DOWN_ARROW, name_space | 1, true, false);
         n->position = position + *(new Vector(0, 0, 1));
     } else  // else there are already 1+ objects in the list
     {
@@ -136,6 +136,7 @@ void Layer::addNode(std::string path, std::string name) {
         Node_Type_e type = Node_Type_e::DEFAULT;
         Model_Type_e model_type = Model_Type_e::USER_DEFINED;
         bool is_permitted = true;
+        bool is_executable = false;
 
         try {
             std::filesystem::path fullpath = std::filesystem::path(path) / name;
@@ -153,10 +154,26 @@ void Layer::addNode(std::string path, std::string name) {
                 description = (sz < 1024) ? std::format("{} bytes", sz) : std::format("{} kb", sz / 1024);
                 type = FILE_ON_DISK_TYPE;
                 model_type = USER_DEFINED;
+#ifndef _WIN32
+                if (access(fullpath.string().c_str(), R_OK) != 0) {
+                    is_permitted = false;
+                }
+                if (access(fullpath.string().c_str(), X_OK) == 0) {
+                    is_executable = true;
+                }
+#endif
             } else if (std::filesystem::is_symlink(fullpath)) {
                 description = "Symbolic Link";
                 type = SYMLINK_TYPE;
                 model_type = USER_DEFINED;
+#ifndef _WIN32
+                if (access(fullpath.string().c_str(), R_OK) != 0) {
+                    is_permitted = false;
+                }
+                if (access(fullpath.string().c_str(), X_OK) == 0) {
+                    is_executable = true;
+                }
+#endif
             }
         } catch (const std::filesystem::filesystem_error &) {
             description = "Unavailable";
@@ -167,8 +184,7 @@ void Layer::addNode(std::string path, std::string name) {
         int select_name = name_space | (size + 1);
 
         // declare a new node...
-        n = new Node(name, path, description, type, model_type, select_name);
-        n->is_permitted = is_permitted;
+        n = new Node(name, path, description, type, model_type, select_name, is_permitted, is_executable);
 
         Vector *dp = placeNode(size - 1);
         n->position = position + *dp;  // place it down

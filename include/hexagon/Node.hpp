@@ -14,30 +14,9 @@
 
 #include <string>
 
+#include "hexagon/Appearance.hpp"
 #include "hexagon/Choreographer.hpp"
 #include "hexagon/Vector.hpp"
-
-typedef enum {
-    DEFAULT = 0,
-    FILE_ON_DISK_TYPE,
-    FILE_REMOTE_TYPE,
-    DIRECTORY_TYPE,
-    DEVICE_TYPE,
-    SYMLINK_TYPE,
-    NUM_NODE_TYPES
-} Node_Type_e;
-
-typedef enum {
-    USER_DEFINED,
-    FOLDER,
-    REMOVABLE_DRIVE,
-    REMOTE_DRIVE,
-    FIXED_DRIVE,
-    RAMDISK_DRIVE,
-    CDROM_DRIVE,
-    DOWN_ARROW,
-    NUM_MODEL_TYPES
-} Model_Type_e;
 
 /**
  * @class Node
@@ -68,12 +47,17 @@ public:
     // permission check for directories
     bool is_permitted;
 
+    // executable check for files
+    bool is_executable;
+
+    // the visual appearance configuration
+    Appearance appearance;
+
     Choreographer *choreographer;  // pointer to the class which determines
                                    // how this node moves
 
-    // class constructor
     Node();
-    Node(std::string n, std::string p, std::string d, Node_Type_e nt, Model_Type_e mt, int select_name);
+    Node(const std::string &n, const std::string &p, const std::string &d, Node_Type_e nt, Model_Type_e mt, int select_name, bool is_permitted = true, bool is_executable = false);
 
     // class destructor
     ~Node();

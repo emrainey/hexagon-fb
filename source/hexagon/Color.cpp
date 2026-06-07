@@ -10,7 +10,7 @@
 
 #include "hexagon/Hexagon.hpp"
 
-Color::Color() { memset((char *)colors, 0, sizeof(colors) * sizeof(float)); }
+Color::Color() { memset((char *)colors, 0, sizeof(colors)); }
 
 Color::Color(float r, float g, float b, float a) {
     colors[Red] = r;
@@ -29,7 +29,7 @@ Color::Color(int seed) {
     debug.info(Debug::Subsystem::Info, "+Color::Color() r=%d, Channels=%d, index=%d, quo=%d, frand=%lf\n", r, Channels, index, quo,
                 frand);
 
-    memset((char *)colors, 0, sizeof(colors) * sizeof(float));
+    memset((char *)colors, 0, sizeof(colors));
     colors[index] = frand;
     print();
 }
