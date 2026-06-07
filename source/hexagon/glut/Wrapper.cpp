@@ -1,12 +1,11 @@
 /*******************************************************************************
- * COPYRIGHT (C) 2003, ERIK RAINEY.
+ * COPYRIGHT (C) 2003-2026, ERIK RAINEY.
  *
  * This source code has not yet been approved for release under any license
  * and as such has no warranty or fitness of purpose associated with it. Use at
  * your own discretion.
  *
  * @author Erik Rainey
- * @version 1.0
  ******************************************************************************/
 
 #define EXCLUDE_EXTERNS
