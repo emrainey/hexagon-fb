@@ -229,6 +229,14 @@ void Display::print3DText(Vector p, char const *const format, ...) {
 
     line = 0;
 
+    glPushAttrib(GL_ENABLE_BIT | GL_CURRENT_BIT | GL_DEPTH_BUFFER_BIT);
+
+    glDisable(GL_LIGHTING);
+    glDisable(GL_TEXTURE_2D);
+    glDisable(GL_DEPTH_TEST);
+
+    glColor3f(fg.getRedFloat(), fg.getGreenFloat(), fg.getBlueFloat());
+
     glRasterPos3d(p.x, p.y, p.z);
     len = strlen(buffer);
 
@@ -241,6 +249,8 @@ void Display::print3DText(Vector p, char const *const format, ...) {
             glutBitmapCharacter(font, buffer[i]);
         }
     }
+
+    glPopAttrib();
 }
 
 /*****************************************************************************/
