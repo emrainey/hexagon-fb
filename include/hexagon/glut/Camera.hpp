@@ -1,4 +1,4 @@
-/*******************************************************************************
+/**
  * COPYRIGHT (C) 2003-2026, ERIK RAINEY.
  *
  * This source code has not yet been approved for release under any license
@@ -6,17 +6,25 @@
  * your own discretion.
  *
  * @author Erik Rainey
- ******************************************************************************/
+ * @file Camera.hpp
+ */
 
 #ifndef CAMERA_H
 #define CAMERA_H
 
 #include "hexagon/Vector.hpp"
 
-// No description
+/**
+ * @class Camera
+ * @brief 3D camera view and navigation controller.
+ */
 class Camera {
 public:
-    enum class Type : uint32_t { Free, Spherical };
+    enum/**
+ * @class Type
+ * @brief Description for class Type.
+ */
+ class Type : uint32_t { Free, Spherical };
 
     // The basic up camera vector;
     Vector up;

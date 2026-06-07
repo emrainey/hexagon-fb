@@ -1,4 +1,4 @@
-/*******************************************************************************
+/**
  * COPYRIGHT (C) 2003-2026, ERIK RAINEY.
  *
  * This source code has not yet been approved for release under any license
@@ -6,12 +6,16 @@
  * your own discretion.
  *
  * @author Erik Rainey
- ******************************************************************************/
+ * @file Input.hpp
+ */
 
 #ifndef INPUT_H
 #define INPUT_H
 
-// No description
+/**
+ * @class Input
+ * @brief GLUT mouse and keyboard input callback handler.
+ */
 class Input {
 public:
     int lastx, lasty;

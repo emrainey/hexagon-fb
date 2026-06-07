@@ -1,4 +1,4 @@
-/*******************************************************************************
+/**
  * COPYRIGHT (C) 2003-2026, ERIK RAINEY.
  *
  * This source code has not yet been approved for release under any license
@@ -6,7 +6,8 @@
  * your own discretion.
  *
  * @author Erik Rainey
- ******************************************************************************/
+ * @file Port.hpp
+ */
 
 #ifndef PORT_H
 #define PORT_H
@@ -52,7 +53,10 @@ typedef enum {
     KEYBOARD_CONTROL
 } Control_State_t;
 
-// No description
+/**
+ * @class Port
+ * @brief Platform porting and graphics context wrapper.
+ */
 class Port {
 public:
     // GLUT related objects...

@@ -1,4 +1,4 @@
-/*******************************************************************************
+/**
  * COPYRIGHT (C) 2003-2026, ERIK RAINEY.
  *
  * This source code has not yet been approved for release under any license
@@ -6,7 +6,8 @@
  * your own discretion.
  *
  * @author Erik Rainey
- ******************************************************************************/
+ * @file Layer.hpp
+ */
 
 #ifndef LAYER_H
 #define LAYER_H
@@ -15,7 +16,10 @@
 #include "hexagon/Node.hpp"
 #include "hexagon/Vector.hpp"
 
-// This contains the node list for display.
+/**
+ * @class Layer
+ * @brief This contains the node list for display.
+ */
 class Layer {
 public:
     // the template list of Nodes

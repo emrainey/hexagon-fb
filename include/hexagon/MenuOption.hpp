@@ -1,4 +1,4 @@
-/*******************************************************************************
+/**
  * COPYRIGHT (C) 2003-2026, ERIK RAINEY.
  *
  * This source code has not yet been approved for release under any license
@@ -6,14 +6,18 @@
  * your own discretion.
  *
  * @author Erik Rainey
- ******************************************************************************/
+ * @file MenuOption.hpp
+ */
 
 #ifndef MENUOPTION_H
 #define MENUOPTION_H
 
 #include "hexagon/ShellExecutor.hpp"
 
-// A single menu option
+/**
+ * @class MenuOption
+ * @brief A single menu option
+ */
 class MenuOption {
 public:
     /** Allow child drestructors to be called! */

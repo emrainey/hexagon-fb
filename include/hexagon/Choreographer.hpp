@@ -1,4 +1,4 @@
-/*******************************************************************************
+/**
  * COPYRIGHT (C) 2003-2026, ERIK RAINEY.
  *
  * This source code has not yet been approved for release under any license
@@ -6,7 +6,8 @@
  * your own discretion.
  *
  * @author Erik Rainey
- ******************************************************************************/
+ * @file Choreographer.hpp
+ */
 
 #ifndef CHOREOGRAPHER_H
 #define CHOREOGRAPHER_H
@@ -15,7 +16,10 @@ typedef enum { FROZEN = 0, SPINNER, PROLATION, EXPANDER, CONTRACTOR, NUM_MOVEMEN
 
 class Node;
 
-// No description
+/**
+ * @class Choreographer
+ * @brief Coordinates animations and transitions for nodes.
+ */
 class Choreographer {
 public:
     // this will define which choregrapher it will use...

@@ -1,4 +1,4 @@
-/*******************************************************************************
+/**
  * COPYRIGHT (C) 2003-2026, ERIK RAINEY.
  *
  * This source code has not yet been approved for release under any license
@@ -6,7 +6,8 @@
  * your own discretion.
  *
  * @author Erik Rainey
- ******************************************************************************/
+ * @file Debug.hpp
+ */
 
 #ifndef DEBUG_H
 #define DEBUG_H
@@ -19,6 +20,10 @@ constexpr typename std::underlying_type<Enum>::type to_underlying(Enum e) noexce
     return static_cast<typename std::underlying_type<Enum>::type>(e);
 }
 
+/**
+ * @class Mask
+ * @brief Helper template class for bitmask fields.
+ */
 template <typename ENUM_TYPE, typename MASK_TYPE>
 class Mask {
 public:
@@ -48,13 +53,20 @@ protected:
     MASK_TYPE m_mask;
 };
 
-// Super Class of all debugging classes.
+/**
+ * @class Debug
+ * @brief Super Class of all debugging classes.
+ */
 class Debug {
 public:
     // Is debug on or off?
     bool state;
 
-    enum class Subsystem : std::uint32_t {
+    enum/**
+ * @class Subsystem
+ * @brief Description for class Subsystem.
+ */
+ class Subsystem : std::uint32_t {
         Error,
         Info,
         Selection,

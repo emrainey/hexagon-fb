@@ -1,4 +1,4 @@
-/*******************************************************************************
+/**
  * COPYRIGHT (C) 2003-2026, ERIK RAINEY.
  *
  * This source code has not yet been approved for release under any license
@@ -6,7 +6,8 @@
  * your own discretion.
  *
  * @author Erik Rainey
- ******************************************************************************/
+ * @file Model.hpp
+ */
 
 #ifndef MODEL_H
 #define MODEL_H
@@ -16,7 +17,10 @@
 
 typedef enum { NORMAL, SELECTED, NUM_SELECT_TYPES } SelectionState;
 
-// This is the wrapper class around loading 3ds models from the FileSystem.
+/**
+ * @class Model
+ * @brief This is the wrapper class around loading 3ds models from the FileSystem.
+ */
 class Model {
 public:
     // the normal and selected Call List items

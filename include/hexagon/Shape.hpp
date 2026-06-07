@@ -3,7 +3,10 @@
 #ifndef SHAPE_H
 #define SHAPE_H
 
-// Creates default shapes for the view.
+/**
+ * @class Shape
+ * @brief Creates default shapes for the view.
+ */
 class Shape {
 public:
     // class constructor

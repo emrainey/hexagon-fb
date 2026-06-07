@@ -1,4 +1,4 @@
-/*******************************************************************************
+/**
  * COPYRIGHT (C) 2003-2026, ERIK RAINEY.
  *
  * This source code has not yet been approved for release under any license
@@ -6,7 +6,8 @@
  * your own discretion.
  *
  * @author Erik Rainey
- ******************************************************************************/
+ * @file Display.hpp
+ */
 
 #ifndef DISPLAY_H
 #define DISPLAY_H
@@ -17,7 +18,10 @@
 #include "hexagon/Vector.hpp"
 #include "hexagon/glut/Camera.hpp"
 
-// No description
+/**
+ * @class Display
+ * @brief OpenGL and GLUT display and screen text renderer.
+ */
 class Display {
 public:
     // we need a refence to the camera object

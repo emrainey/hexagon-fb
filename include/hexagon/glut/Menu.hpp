@@ -1,4 +1,4 @@
-/*******************************************************************************
+/**
  * COPYRIGHT (C) 2003-2026, ERIK RAINEY.
  *
  * This source code has not yet been approved for release under any license
@@ -6,7 +6,8 @@
  * your own discretion.
  *
  * @author Erik Rainey
- ******************************************************************************/
+ * @file Menu.hpp
+ */
 
 #ifndef MENU_H
 #define MENU_H
@@ -15,6 +16,10 @@
 
 typedef void (*Void_Function_t)(void);
 
+/**
+ * @class Menu
+ * @brief Represents a 2D popup or context menu.
+ */
 class Menu {
 public:
     // the list of menu options

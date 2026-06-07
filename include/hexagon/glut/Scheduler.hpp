@@ -1,4 +1,4 @@
-/*******************************************************************************
+/**
  * COPYRIGHT (C) 2003-2026, ERIK RAINEY.
  *
  * This source code has not yet been approved for release under any license
@@ -6,14 +6,18 @@
  * your own discretion.
  *
  * @author Erik Rainey
- ******************************************************************************/
+ * @file Scheduler.hpp
+ */
 
 #ifndef SCHEDULER_H
 #define SCHEDULER_H
 
 #include <chrono>
 
-// No description
+/**
+ * @class Scheduler
+ * @brief Timer and idle frame rate scheduler.
+ */
 class Scheduler {
 public:
     std::chrono::steady_clock::time_point timer;

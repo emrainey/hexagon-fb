@@ -1,4 +1,4 @@
-/*******************************************************************************
+/**
  * COPYRIGHT (C) 2003-2026, ERIK RAINEY.
  *
  * This source code has not yet been approved for release under any license
@@ -6,7 +6,8 @@
  * your own discretion.
  *
  * @author Erik Rainey
- ******************************************************************************/
+ * @file Node.hpp
+ */
 
 #ifndef NODE_H
 #define NODE_H
@@ -38,7 +39,10 @@ typedef enum {
     NUM_MODEL_TYPES
 } Model_Type_e;
 
-// The basic object of the hexagon view system.
+/**
+ * @class Node
+ * @brief The basic object of the hexagon view system.
+ */
 class Node {
 public:
     Node_Type_e node_type;    // what type of node is it? A file

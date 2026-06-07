@@ -1,4 +1,4 @@
-/*******************************************************************************
+/**
  * COPYRIGHT (C) 2003-2026, ERIK RAINEY.
  *
  * This source code has not yet been approved for release under any license
@@ -6,11 +6,16 @@
  * your own discretion.
  *
  * @author Erik Rainey
- ******************************************************************************/
+ * @file Color.hpp
+ */
 
 #ifndef _COLOR_H_
 #define _COLOR_H_
 
+/**
+ * @class Color
+ * @brief Represents an RGBA color.
+ */
 class Color {
     //************
     // VARIABLES

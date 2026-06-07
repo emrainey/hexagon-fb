@@ -1,4 +1,4 @@
-/*******************************************************************************
+/**
  * COPYRIGHT (C) 2003-2026, ERIK RAINEY.
  *
  * This source code has not yet been approved for release under any license
@@ -6,7 +6,8 @@
  * your own discretion.
  *
  * @author Erik Rainey
- ******************************************************************************/
+ * @file Light.hpp
+ */
 
 #ifndef LIGHT_H
 #define LIGHT_H
@@ -16,7 +17,10 @@
 
 typedef enum { SIMPLE, SPOT, NUM_LIGHT_TYPES } Light_Type_e;
 
-// Simple Light Class
+/**
+ * @class Light
+ * @brief Simple Light Class
+ */
 class Light {
 public:
     // the total number of lights

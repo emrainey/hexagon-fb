@@ -1,4 +1,4 @@
-/*******************************************************************************
+/**
  * COPYRIGHT (C) 2003-2026, ERIK RAINEY.
  *
  * This source code has not yet been approved for release under any license
@@ -6,7 +6,8 @@
  * your own discretion.
  *
  * @author Erik Rainey
- ******************************************************************************/
+ * @file View.hpp
+ */
 
 #ifndef VIEW_H
 #define VIEW_H
@@ -17,7 +18,10 @@
 #include "hexagon/Model.hpp"
 #include "hexagon/Vector.hpp"
 
-// No description
+/**
+ * @class View
+ * @brief Represents a single view containing stacked directory layers.
+ */
 class View {
 public:
     // our neighbors
