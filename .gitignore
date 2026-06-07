@@ -1,1 +1,50 @@
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# IDEs and editors
+.idea/
+.vscode/
+*.swp
+*~
+.DS_Store
+
+# CMake build outputs (if not building in build/)
+CMakeCache.txt
+CMakeFiles/
+CMakeFILES/
+Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+
+# Local build directories
 build/
+.cache/
+bin/
+lib/

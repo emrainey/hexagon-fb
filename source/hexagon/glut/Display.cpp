@@ -9,6 +9,8 @@
  * @version 1.0
  ******************************************************************************/
 
+#include <chrono>
+
 #include "hexagon/Hexagon.h"
 
 static Color mat_ambient(0, 0, 0, 1);
@@ -265,11 +267,11 @@ void Display::frameStatistics() {
     /************************************************/
 
     frames++;
-    platform->scheduler.finish = clock();
+    platform->scheduler.finish = std::chrono::steady_clock::now();
     if (frames >= MIN_FRAMES) {
-        clock_t diff = platform->scheduler.finish - platform->scheduler.start;
-        fps = (float)frames / ((float)(diff) / CLOCKS_PER_SEC);
-        platform->scheduler.start = clock();
+        auto diff = std::chrono::duration_cast<std::chrono::duration<double>>(platform->scheduler.finish - platform->scheduler.start).count();
+        fps = (float)frames / diff;
+        platform->scheduler.start = std::chrono::steady_clock::now();
         frames = 0;
     }
 }
@@ -277,8 +279,9 @@ void Display::frameStatistics() {
 void Display::renderScreenText(void) {
     int start_point = 15, end = 0;
     if (renderText == true) {
-        print2DText(5, start_point += 15, "f.p.s.: %.3lf\nRun Time: %.3lf secs", fps,
-                    (float)platform->scheduler.timer / CLOCKS_PER_SEC);
+        auto now = std::chrono::steady_clock::now();
+        double run_time = std::chrono::duration_cast<std::chrono::duration<double>>(now - platform->scheduler.start_time).count();
+        print2DText(5, start_point += 15, "f.p.s.: %.3lf\nRun Time: %.3lf secs", fps, run_time);
         end = height - (font_height * 3);
         // end = print2DText(5,end,platform->camera.printInfo());
         end = print2DText(5, end, "%s\n", control_message);

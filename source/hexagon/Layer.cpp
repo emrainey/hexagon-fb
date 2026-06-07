@@ -9,6 +9,9 @@
  * @version 1.0
  ******************************************************************************/
 
+#include <filesystem>
+#include <format>
+
 #include "hexagon/Hexagon.h"  // class's header file
 
 // class constructor
@@ -61,11 +64,7 @@ bool Layer::choose(int name) {
                         if (selected->model_type == DOWN_ARROW)
                             world->focus->popLayer();
                         else {
-                            std::string fullpath;
-                            if (path == ROOT_PATH)
-                                fullpath = path + node->name;
-                            else
-                                fullpath = path + SYSTEM_DELIMITER + node->name;
+                            std::string fullpath = (std::filesystem::path(path) / node->name).string();
                             world->focus->pushLayer(fullpath);
                         }
                     } else if (world->selection.state == Selection::ContextMenu) {
@@ -107,14 +106,15 @@ void Layer::initNodes(void) {
     std::string down = "Down";
     addNode(path, down);
 
-    std::list<std::string> *others = platform->fs->getDirectoryList(path);
-    if (others == NULL) {
-        // we have a serious problem...
-        return;
-    }
-
-    for (auto entry : *others) {
-        addNode(path, entry);
+    try {
+        std::filesystem::path p(path);
+        if (std::filesystem::exists(p) && std::filesystem::is_directory(p)) {
+            for (const auto &entry : std::filesystem::directory_iterator(p)) {
+                addNode(path, entry.path().filename().string());
+            }
+        }
+    } catch (const std::filesystem::filesystem_error &e) {
+        debug.info(Debug::Subsystem::Error, "Filesystem error scanning directory: %s\n", e.what());
     }
 }
 
@@ -130,14 +130,29 @@ void Layer::addNode(std::string path, std::string name) {
         n->position = position + *(new Vector(0, 0, 1));
     } else  // else there are already 1+ objects in the list
     {
-        // and a description
-        std::string description = platform->fs->getMetaData(path, name);
+        std::string description = "Unknown";
+        Node_Type_e type = Node_Type_e::DEFAULT;
+        Model_Type_e model_type = Model_Type_e::USER_DEFINED;
 
-        // and we have to get it's type from the file system
-        Node_Type_e type = platform->fs->getNodeType(path, name);
-
-        // And we have to get it's model type (if it's a device)
-        Model_Type_e model_type = platform->fs->getModelType(path, name);
+        try {
+            std::filesystem::path fullpath = std::filesystem::path(path) / name;
+            if (std::filesystem::is_directory(fullpath)) {
+                description = "Directory";
+                type = DIRECTORY_TYPE;
+                model_type = FOLDER;
+            } else if (std::filesystem::is_regular_file(fullpath)) {
+                auto sz = std::filesystem::file_size(fullpath);
+                description = (sz < 1024) ? std::format("{} bytes", sz) : std::format("{} kb", sz / 1024);
+                type = FILE_ON_DISK_TYPE;
+                model_type = USER_DEFINED;
+            } else if (std::filesystem::is_symlink(fullpath)) {
+                description = "Symbolic Link";
+                type = SYMLINK_TYPE;
+                model_type = USER_DEFINED;
+            }
+        } catch (const std::filesystem::filesystem_error &) {
+            description = "Unavailable";
+        }
 
         // tell the node what it's selection number is
         int select_name = name_space | (size + 1);

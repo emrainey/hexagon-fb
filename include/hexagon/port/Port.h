@@ -29,21 +29,17 @@
 /// separate
 #include <hexagon/port/Win32/Win32AR.h>
 #include <hexagon/port/Win32/Win32Exec.h>
-#include <hexagon/port/Win32/Win32FS.h>
 #include <hexagon/port/Win32/Win32Registry.h>
 
 #define PORT_SPECIFIC_PERSISTENT_STORAGE Win32Registry
-#define PORT_SPECIFIC_FILE_SYSTEM Win32FS
 #define PORT_SPECIFIC_ACTION_RETRIEVER Win32AR
 #define PORT_SPECIFIC_SHELL_EXECUTOR Win32Exec
 #else
 #include <hexagon/port/posix/PosixActionRetriever.h>
 #include <hexagon/port/posix/PosixExec.h>
-#include <hexagon/port/posix/PosixFileSystem.h>
 #include <hexagon/port/posix/PosixRegistry.h>
 
 #define PORT_SPECIFIC_PERSISTENT_STORAGE PosixRegistry
-#define PORT_SPECIFIC_FILE_SYSTEM PosixFileSystem
 #define PORT_SPECIFIC_ACTION_RETRIEVER PosixActionRetriever
 #define PORT_SPECIFIC_SHELL_EXECUTOR PosixExec
 #endif
@@ -68,7 +64,6 @@ public:
     Control_State_t control_state;
 
     // platform specific implementations of interfaces...
-    FileSystem *fs;
     PersistentStorage *ps;
     ActionRetriever *ar;
     ShellExecutor *shell;

@@ -9,6 +9,8 @@
  * @version 1.0
  ******************************************************************************/
 
+#include <print>
+
 #include "hexagon/Hexagon.h"
 
 Debug::Debug() : state{false}, subsystems{} {
@@ -43,7 +45,7 @@ void Debug::info(Subsystem subsystem, char const* const format, ...) {
                 buffer[len - 1] = '\0';
             }
         }
-        printf("[0x%08x & 0x%08x] %s", subsystems.Get(), subsystems.AsMask(subsystem), buffer);
+        std::print("[0x{:08x} & 0x{:08x}] {}\n", subsystems.Get(), subsystems.AsMask(subsystem), buffer);
     }
 }
 

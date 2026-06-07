@@ -13,6 +13,7 @@
 
 // class constructor
 Port::Port(int argc, char *argv[]) {
+    scheduler.start_time = std::chrono::steady_clock::now();
     debug.info(Debug::Subsystem::Trace, "+Port()\n");
 
     static char title[1024];
@@ -35,8 +36,7 @@ Port::Port(int argc, char *argv[]) {
     // initialize the persistent storage to a platform specific version!
     ps = new PORT_SPECIFIC_PERSISTENT_STORAGE();
 
-    // initialize the port specific file system...
-    fs = new PORT_SPECIFIC_FILE_SYSTEM();
+
 
     // initialize the port specific action retriever
     ar = new PORT_SPECIFIC_ACTION_RETRIEVER();
@@ -76,7 +76,7 @@ Port::~Port() {
 
 void Port::run() {
     display.fps = 25;
-    scheduler.start = clock();
+    scheduler.start = std::chrono::steady_clock::now();
 
     glutMainLoop();
 }

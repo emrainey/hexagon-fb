@@ -9,6 +9,8 @@
  * @version 1.0
  ******************************************************************************/
 
+#include <chrono>
+#include <thread>
 #include <time.h>
 
 #include "hexagon/Hexagon.h"
@@ -58,15 +60,13 @@ void Scheduler::timed(int value) {
 void Scheduler::idle(void) {
     if (platform == NULL) return;
 
-    static clock_t diff;
-
-    diff = timer;
-    timer = clock();
-    diff = timer - diff;
-    // debug.info("Idle last called %i usecs ago\n",diff);
+    static auto last_time = std::chrono::steady_clock::now();
+    auto now = std::chrono::steady_clock::now();
+    [[maybe_unused]] auto diff = std::chrono::duration_cast<std::chrono::microseconds>(now - last_time).count();
+    last_time = now;
 
     /* give up the time slice */
-    sleep(1);
+    std::this_thread::sleep_for(std::chrono::milliseconds(1));
 
     glutPostRedisplay();
 }

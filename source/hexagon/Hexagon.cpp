@@ -41,7 +41,7 @@ void ProcessArgs(int argc, char *argv[]) {
                     // verify argv[i+1] exists...
                     if (i + 1 >= argc) break;
                     // now read it...
-                    num_views = atoi(argv[i + 1]);
+                    num_views = std::stoi(argv[i + 1]);
                     break;
                 case 'o':
                 case 'O':

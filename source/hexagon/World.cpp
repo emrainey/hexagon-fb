@@ -79,7 +79,7 @@ void World::addView(void) {
     }
 
     // add a layer to the view
-    v->pushLayer(ROOT_PATH);
+    v->pushLayer("/");
 
     // put this on the list
     view_list.push_back(v);

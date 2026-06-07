@@ -9,6 +9,8 @@
  * @version 1.0
  ******************************************************************************/
 
+#include <filesystem>
+
 #include "hexagon/Hexagon.h"  // class's header file
 
 // class constructor
@@ -30,11 +32,13 @@ void Win32Exec::initialize(std::string c, std::string p, std::string f) {
 bool Win32Exec::execute() {
     if (bangCommand(command) == true) return true;
 
-    path = platform->fs->translateToExternal(path);
+    std::filesystem::path p(path);
+    p.make_preferred();
+    path = p.string();
 
     if (debug.state) {
-        std::string fullpath = path + REAL_SYSTEM_DELIMITER + file;
-        debug.info(Debug::Subsystem::Platform, "Attempting to %s %s\n", command.c_str(), fullpath.c_str());
+        std::filesystem::path fullpath = p / file;
+        debug.info(Debug::Subsystem::Platform, "Attempting to %s %s\n", command.c_str(), fullpath.string().c_str());
     }
 
     HINSTANCE rc = ShellExecute(NULL, command.c_str(), file.c_str(), NULL, path.c_str(), SW_SHOWNORMAL);

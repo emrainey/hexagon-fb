@@ -15,9 +15,10 @@
 // #warning Including Hexagon
 
 // include the standard stuff...
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
+#include <cstdio>
+#include <cstdlib>
+#include <chrono>
+#include <thread>
 
 #include <iostream>
 
@@ -41,6 +42,8 @@
 
 #define VERSION ("v1.0.10 alpha")
 #define BUILD_STRING ("in C++")
+
+
 
 /* These macros convert cos and sin to degree inputs not redians. */
 
@@ -73,7 +76,6 @@ constexpr bool toogle(bool a) { return not a; }
 
 // Generic Interfaces
 #include "hexagon/ActionRetriever.h"
-#include "hexagon/FileSystem.h"
 #include "hexagon/MenuOption.h"
 #include "hexagon/PersistentStorage.h"
 #include "hexagon/ShellExecutor.h"

@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.22.0)
 project(hexgaon VERSION 0.1.0 LANGUAGES CXX)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
@@ -47,7 +47,6 @@ target_sources(hexagon
         # $<$<CXX_COMPILER_ID:MSVC>:${CMAKE_CURRENT_SOURCE_DIR}/source/hexagon/port/win32/Win32Registry.cpp>
         ${CMAKE_CURRENT_SOURCE_DIR}/source/hexagon/port/posix/PosixActionRetriever.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/hexagon/port/posix/PosixExec.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/hexagon/port/posix/PosixFileSystem.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/hexagon/port/posix/PosixRegistry.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/hexagon/glut/Camera.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/hexagon/glut/Input.cpp

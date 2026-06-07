@@ -12,12 +12,15 @@
 #ifndef SCHEDULER_H
 #define SCHEDULER_H
 
+#include <chrono>
+
 // No description
 class Scheduler {
 public:
-    clock_t timer;
-    clock_t start;
-    clock_t finish;
+    std::chrono::steady_clock::time_point timer;
+    std::chrono::steady_clock::time_point start;
+    std::chrono::steady_clock::time_point finish;
+    std::chrono::steady_clock::time_point start_time;
 
     // class constructor
     Scheduler();

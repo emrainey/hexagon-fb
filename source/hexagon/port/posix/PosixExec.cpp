@@ -9,8 +9,9 @@
  * @version 1.0
  ******************************************************************************/
 
-#include "hexagon/port/posix/PosixExec.h"  // class's header file
+#include <filesystem>
 
+#include "hexagon/port/posix/PosixExec.h"  // class's header file
 #include "hexagon/Debug.h"
 #include "hexagon/port/Port.h"
 
@@ -35,11 +36,9 @@ bool PosixExec::execute() {
         return true;
     }
 
-    path = platform->fs->translateToExternal(path);
-
     if (debug.state) {
-        std::string fullpath = path + REAL_SYSTEM_DELIMITER + file;
-        debug.info(Debug::Subsystem::Platform, "Attempting to %s %s\n", command.c_str(), fullpath.c_str());
+        std::filesystem::path fullpath = std::filesystem::path(path) / file;
+        debug.info(Debug::Subsystem::Platform, "Attempting to %s %s\n", command.c_str(), fullpath.string().c_str());
     }
 
     // FIXME exec the command
