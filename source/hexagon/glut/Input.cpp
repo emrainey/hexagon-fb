@@ -157,8 +157,13 @@ void Input::keyboardNormal(unsigned char key, int x, int y) {
     debug.info(Debug::Subsystem::Trace, "Key %c (%i) pressed\n", key, key);
     switch (key) {
         case ESC:
-            // DestroyStack();
-            exit(0);
+            if (world->selection.state == Selection::ContextMenu) {
+                delete world->menu;
+                world->menu = nullptr;
+                world->selection.state = Selection::Old;
+            } else {
+                exit(0);
+            }
             break;
 
         case ENTER:

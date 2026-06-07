@@ -117,33 +117,24 @@ bool View::choose(int name) {
         model->IsSelected = true;
         return true;
     } else if ((VIEW_SPACE_MASK & name) == name_space) {
-        // is the name in our name-space?
-        // what object in our space is it?
-        // if it's a layer then we'll need to select it by popping off
-        // all layers above it.
-
-        // find the object in our current layer...
-        for (auto layer : layer_list) {
-            if (layer->choose(name) == true) {
-                if (world->selection.state == Selection::Newer) {
-                    // if the object is the last layer on the stack then we return
-                    if (layer == layer_list.back()) {
-                        debug.info(Debug::Subsystem::Menu, "-View::choose() layer is back-most\n");
-                        return true;
-                    } else {
-                        // otherwise we need to pop off all other layers above this
-                        // one and then it will be selected by default.
-                        // and we need to start at the end!
-                        while (layer_list.back()->choose(name) == false) {
-                            popLayer();
-                        }
-                        debug.info(Debug::Subsystem::Menu, "-View::choose() layer is now back-most\n");
-                        return true;
-                    }
-                } else if (world->selection.state == Selection::ContextMenu) {
+        if (world->selection.state == Selection::Newer) {
+            // If the node belongs to the active top layer, directly process it
+            if ((LAYER_SPACE_MASK & name) == layer_list.back()->name_space) {
+                return layer_list.back()->choose(name);
+            }
+            // Otherwise, it belongs to a previous layer. Pop layers until that layer is active.
+            while (layer_list.size() > 1 && (LAYER_SPACE_MASK & name) != layer_list.back()->name_space) {
+                popLayer();
+            }
+            if ((LAYER_SPACE_MASK & name) == layer_list.back()->name_space) {
+                return layer_list.back()->choose(name);
+            }
+        } else if (world->selection.state == Selection::ContextMenu) {
+            for (auto layer : layer_list) {
+                if (layer->choose(name) == true) {
                     debug.info(Debug::Subsystem::Menu, "View::choose() Menu on layer!\n");
-                    // create a new one...
                     world->menu = platform->ar->getActions(ACTION_LAYER);
+                    return true;
                 }
             }
         }
