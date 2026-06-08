@@ -15,4 +15,4 @@ public:
     ~Shape();
 };
 
-#endif  // SHAPE_H
+#endif    // SHAPE_H

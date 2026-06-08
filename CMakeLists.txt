@@ -1,5 +1,12 @@
 cmake_minimum_required(VERSION 3.22.0)
-project(hexgaon VERSION 0.1.0 LANGUAGES CXX)
+project(hexgaon VERSION 0.2.1
+    LANGUAGES CXX
+    DESCRIPTION "3D File Explorer"
+    HOMEPAGE_URL "https://github.com/emrainey/hexagon-fb"
+)
+set(PROJECT_AUTHOR "Erik Rainey")
+set(PROJECT_COPYRIGHT "(C) 2026, ERIK RAINEY.")
+set(PROJECT_TRADEMARKS "")
 
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -19,6 +26,12 @@ message(STATUS "LOCAL_INCLUDE: $ENV{LOCAL_INCLUDE}")
 message(STATUS "LOCAL_LIB: $ENV{LOCAL_LIB}")
 include_directories($ENV{LOCAL_INCLUDE})
 link_directories($ENV{LOCAL_LIB})
+
+configure_file(
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/hexagon/Hexagon_Console_private.hpp.in
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/hexagon/Hexagon_Console_private.hpp   
+    @ONLY                                                                     
+)
 
 add_executable(hexagon)
 target_sources(hexagon

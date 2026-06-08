@@ -14,7 +14,11 @@
 
 #include <string>
 
-enum class Selection : uint8_t { Old = 0, Newer, ContextMenu };
+enum class Selection : uint8_t {
+    Old = 0,
+    Newer,
+    ContextMenu
+};
 
 typedef struct {
     Selection state;
@@ -99,4 +103,4 @@ private:
     Vector *direction(int direction);
 };
 
-#endif  // WORLD_H
+#endif    // WORLD_H

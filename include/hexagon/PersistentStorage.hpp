@@ -36,4 +36,4 @@ public:
     virtual Key *getKey(std::string name) = 0;
 };
 
-#endif  // PERSISTENTSTORAGE_H
+#endif    // PERSISTENTSTORAGE_H

@@ -15,7 +15,9 @@
 #include <string>
 
 // class constructor
-Vector::Vector() { zeroize(); }
+Vector::Vector() {
+    zeroize();
+}
 
 // another class constructor
 Vector::Vector(float xi, float yi, float zi) {
@@ -30,11 +32,13 @@ void Vector::zeroize() {
     z = 0;
 }
 
-float Vector::abs() { return (float)sqrt(x * x + y * y + z * z); }
+float Vector::abs() {
+    return (float)sqrt(x * x + y * y + z * z);
+}
 
 void Vector::normalize() {
-    float tol = 0.0001f;  // we gotta define a tolerance otherwise we'll divide
-                          // by zero, and be in a real jam.
+    float tol = 0.0001f;    // we gotta define a tolerance otherwise we'll divide
+                            // by zero, and be in a real jam.
 
     double m = abs();
     if (m <= tol) m = 1;
@@ -94,7 +98,9 @@ Vector& Vector::operator/=(float s) {
     return *this;
 }
 
-Vector Vector::operator-(void) { return Vector(-x, -y, -z); }
+Vector Vector::operator-(void) {
+    return Vector(-x, -y, -z);
+}
 
 Vector& Vector::operator=(Vector u) {
     x = u.x;
@@ -104,7 +110,9 @@ Vector& Vector::operator=(Vector u) {
     return *this;
 }
 
-bool Vector::operator==(Vector a) { return (a.abs() == abs()); }
+bool Vector::operator==(Vector a) {
+    return (a.abs() == abs());
+}
 
 float Vector::operator[](int i) {
     if (i == 0)
@@ -130,20 +138,32 @@ float Vector::getAngleWith(Vector a) {
     return acos(dot / (a.abs() * b.abs()));
 }
 
-float Vector::getAngleX() { return acos(x / abs()); }
+float Vector::getAngleX() {
+    return acos(x / abs());
+}
 
-float Vector::getAngleY() { return acos(y / abs()); }
+float Vector::getAngleY() {
+    return acos(y / abs());
+}
 
-float Vector::getAngleZ() { return acos(z / abs()); }
+float Vector::getAngleZ() {
+    return acos(z / abs());
+}
 
 // These overloads return new Objects
 
-Vector operator+(Vector u, Vector v) { return Vector(u.x + v.x, u.y + v.y, u.z + v.z); }
+Vector operator+(Vector u, Vector v) {
+    return Vector(u.x + v.x, u.y + v.y, u.z + v.z);
+}
 
-Vector operator-(Vector u, Vector v) { return Vector(u.x - v.x, u.y - v.y, u.z - v.z); }
+Vector operator-(Vector u, Vector v) {
+    return Vector(u.x - v.x, u.y - v.y, u.z - v.z);
+}
 
 // dot product
-float operator*(Vector u, Vector v) { return (u.x * v.x + u.y * v.y + u.z * v.z); }
+float operator*(Vector u, Vector v) {
+    return (u.x * v.x + u.y * v.y + u.z * v.z);
+}
 
 // cross product
 Vector operator^(Vector u, Vector v) {

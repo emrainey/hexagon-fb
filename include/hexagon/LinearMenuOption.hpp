@@ -113,4 +113,4 @@ public:
     void setIndex(int index);
 };
 
-#endif  // LINEARMENUOPTION_H
+#endif    // LINEARMENUOPTION_H

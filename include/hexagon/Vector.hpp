@@ -45,23 +45,23 @@ public:
     float getAngleZ();
 
     // Now we use C++ like it was meant to be used, to overload cool shit!
-    Vector& operator+=(Vector a);  // simple addition
-    Vector& operator-=(Vector a);  // simple subtract
-    Vector& operator*=(float s);   // scalar multiply
-    Vector& operator/=(float s);   // scalar divide
-    Vector& operator=(Vector a);   // set
-    bool operator==(Vector a);     // are abs() equal?
-    Vector operator-(void);        // same as reverse
-    float operator[](int i);       // index the vector components by index
-                                   // x = 0, y = 1, z = 2;
+    Vector& operator+=(Vector a);    // simple addition
+    Vector& operator-=(Vector a);    // simple subtract
+    Vector& operator*=(float s);     // scalar multiply
+    Vector& operator/=(float s);     // scalar divide
+    Vector& operator=(Vector a);     // set
+    bool operator==(Vector a);       // are abs() equal?
+    Vector operator-(void);          // same as reverse
+    float operator[](int i);         // index the vector components by index
+                                     // x = 0, y = 1, z = 2;
 
     // Returns a std::string containing debug info for vector
     char* print(void);
 };
 
-Vector operator+(Vector u, Vector v);  // vec addition
-Vector operator-(Vector u, Vector v);  // vec subtraction
-float operator*(Vector u, Vector v);   // dot product
-Vector operator^(Vector u, Vector v);  // cros product
+Vector operator+(Vector u, Vector v);    // vec addition
+Vector operator-(Vector u, Vector v);    // vec subtraction
+float operator*(Vector u, Vector v);     // dot product
+Vector operator^(Vector u, Vector v);    // cros product
 
-#endif  // VECTOR_H
+#endif                                   // VECTOR_H

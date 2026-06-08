@@ -8,7 +8,7 @@
  * @author Erik Rainey
  ******************************************************************************/
 
-#include "hexagon/Hexagon.hpp"  // project's header file
+#include "hexagon/Hexagon.hpp"    // project's header file
 
 // class constructor
 Light::Light(Vector p, Light_Type_e t, int total_num_lights) {
@@ -27,7 +27,9 @@ Light::Light(Vector p, Light_Type_e t, int total_num_lights) {
 }
 
 // class destructor
-Light::~Light() { debug.info(Debug::Subsystem::Trace, "~Light(%u)\n", number); }
+Light::~Light() {
+    debug.info(Debug::Subsystem::Trace, "~Light(%u)\n", number);
+}
 
 /*
  * If the parameter is true then the light shines if false it's turned off.
@@ -54,7 +56,9 @@ void Light::shine(bool on) {
     glEnd();
 }
 
-GLenum Light::getGLenum(void) { return GL_LIGHT0 + number; }
+GLenum Light::getGLenum(void) {
+    return GL_LIGHT0 + number;
+}
 
 // Sets the lights ambient, diffuse, and specular colors
 void Light::setColorAttributes(GLfloat *a, GLfloat *d, GLfloat *s) {

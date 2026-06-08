@@ -65,4 +65,4 @@ public:
     static Appearance getAppearance(Node_Type_e node_type, bool is_executable, bool is_permitted);
 };
 
-#endif // APPEARANCE_HPP
+#endif    // APPEARANCE_HPP

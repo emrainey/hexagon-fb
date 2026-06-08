@@ -15,9 +15,9 @@
 // #warning Including Hexagon
 
 // include the standard stuff...
+#include <chrono>
 #include <cstdio>
 #include <cstdlib>
-#include <chrono>
 #include <thread>
 
 #include <iostream>
@@ -43,17 +43,23 @@
 #define VERSION ("v1.0.10 alpha")
 #define BUILD_STRING ("in C++")
 
-
-
 /* These macros convert cos and sin to degree inputs not redians. */
 
-constexpr double Rad2Deg(double rad) { return (rad / TWO_PI) * 360.0; }
-constexpr double Deg2Rad(double deg) { return (deg / 360.0) * TWO_PI; }
+constexpr double Rad2Deg(double rad) {
+    return (rad / TWO_PI) * 360.0;
+}
+constexpr double Deg2Rad(double deg) {
+    return (deg / 360.0) * TWO_PI;
+}
 #define COS(n) cos(Deg2Rad(n))
 #define SIN(n) sin(Deg2Rad(n))
 
-constexpr void toggle(bool &a) { a = not a; }
-constexpr bool toogle(bool a) { return not a; }
+constexpr void toggle(bool &a) {
+    a = not a;
+}
+constexpr bool toogle(bool a) {
+    return not a;
+}
 
 /*****************************************************************************/
 // Include all the Object Definitions

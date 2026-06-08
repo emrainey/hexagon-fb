@@ -24,13 +24,13 @@
  */
 class Node {
 public:
-    Node_Type_e node_type;    // what type of node is it? A file
-    Model_Type_e model_type;  // what type of model should use?
+    Node_Type_e node_type;      // what type of node is it? A file
+    Model_Type_e model_type;    // what type of model should use?
 
-    Vector position;  // it's current position
-    Vector velocity;  // it's current velocity
-    Vector rotation;  // it's current rotation about each axis
-                      //(each rotation is right-handed)
+    Vector position;            // it's current position
+    Vector velocity;            // it's current velocity
+    Vector rotation;            // it's current rotation about each axis
+                                //(each rotation is right-handed)
 
     // the pointer to our model
     Model *model;
@@ -56,11 +56,14 @@ public:
     double radius_factor;
     double height_factor;
 
-    Choreographer *choreographer;  // pointer to the class which determines
-                                   // how this node moves
+    Choreographer *choreographer;    // pointer to the class which determines
+                                     // how this node moves
 
     Node();
-    Node(const std::string &n, const std::string &p, const std::string &d, Node_Type_e nt, Model_Type_e mt, int select_name, bool is_permitted = true, bool is_executable = false, double radius_factor = 1.0, double height_factor = 1.0);
+    Node(
+        const std::string &n, const std::string &p, const std::string &d, Node_Type_e nt, Model_Type_e mt, int select_name, bool is_permitted = true,
+        bool is_executable = false, double radius_factor = 1.0, double height_factor = 1.0
+    );
 
     // class destructor
     ~Node();
@@ -75,4 +78,4 @@ public:
     bool choose(int name);
 };
 
-#endif  // NODE_H
+#endif    // NODE_H

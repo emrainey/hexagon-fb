@@ -8,7 +8,7 @@
  * @author Erik Rainey
  ******************************************************************************/
 
-#include "hexagon/Hexagon.hpp"  // class's header file
+#include "hexagon/Hexagon.hpp"    // class's header file
 
 // class constructor
 Choreographer::Choreographer(Node *n, Choreographer_Type_e t) {
@@ -68,4 +68,6 @@ void Choreographer::move(void) {
 }
 
 // Sets the type of Choreographer it will be from now on.
-void Choreographer::setType(Choreographer_Type_e t) { type = t; }
+void Choreographer::setType(Choreographer_Type_e t) {
+    type = t;
+}

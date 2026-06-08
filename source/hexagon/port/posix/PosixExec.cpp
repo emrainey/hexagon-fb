@@ -10,9 +10,9 @@
 
 #include <filesystem>
 
-#include "hexagon/port/posix/PosixExec.hpp"  // class's header file
 #include "hexagon/Debug.hpp"
 #include "hexagon/port/Port.hpp"
+#include "hexagon/port/posix/PosixExec.hpp"    // class's header file
 
 // class constructor
 PosixExec::PosixExec() {

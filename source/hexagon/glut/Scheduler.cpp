@@ -8,9 +8,9 @@
  * @author Erik Rainey
  ******************************************************************************/
 
+#include <time.h>
 #include <chrono>
 #include <thread>
-#include <time.h>
 
 #include "hexagon/Hexagon.hpp"
 

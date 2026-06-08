@@ -83,4 +83,4 @@ private:
     void frameStatistics(void);
 };
 
-#endif  // DISPLAY_H
+#endif    // DISPLAY_H

@@ -45,4 +45,4 @@ void report_error(char const *const name, bool stop, char const *const filename,
 
 #define CHECKERROR(a, b) CheckError(a, b, #a, __FILE__, __LINE__)
 
-#endif  // GLUT_WRAPPER_H_
+#endif    // GLUT_WRAPPER_H_

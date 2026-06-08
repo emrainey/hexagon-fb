@@ -35,4 +35,4 @@ public:
     void timed(int value);
 };
 
-#endif  // SCHEDULER_H
+#endif    // SCHEDULER_H

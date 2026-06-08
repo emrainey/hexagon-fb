@@ -21,7 +21,13 @@ class Color {
     // VARIABLES
     //************
 public:
-    enum EColorIndex { Red = 0, Green, Blue, Alpha, Channels };
+    enum EColorIndex {
+        Red = 0,
+        Green,
+        Blue,
+        Alpha,
+        Channels
+    };
 
 private:
     float colors[Channels];
@@ -60,4 +66,4 @@ private:
     void setColorIndex(int index, float value);
 };
 
-#endif  // _COLOR_H
+#endif    // _COLOR_H

@@ -344,8 +344,7 @@ void toggleControlState(void) {
             snprintf(platform->display.control_message, sizeof(platform->display.control_message), "Mouse Zooming");
             break;
         default:
-            snprintf(platform->display.control_message, sizeof(platform->display.control_message),
-                     "Unknown control state %d", ctrl);
+            snprintf(platform->display.control_message, sizeof(platform->display.control_message), "Unknown control state %d", ctrl);
             break;
     }
 
@@ -356,7 +355,9 @@ void toggleControlState(void) {
     platform->control_state = (Control_State_t)ctrl;
 }
 
-void toggleDisplayText(void) { toggle(platform->display.renderText); }
+void toggleDisplayText(void) {
+    toggle(platform->display.renderText);
+}
 
 void createNewView(void) {
     if (world) {

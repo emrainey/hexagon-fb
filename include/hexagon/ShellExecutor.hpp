@@ -48,4 +48,4 @@ public:
     virtual bool execute() = 0;
 };
 
-#endif  // SHELLEXECUTOR_H
+#endif    // SHELLEXECUTOR_H

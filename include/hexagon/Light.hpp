@@ -15,7 +15,11 @@
 #include "hexagon/Vector.hpp"
 #include "hexagon/glut/Wrapper.hpp"
 
-typedef enum { SIMPLE, SPOT, NUM_LIGHT_TYPES } Light_Type_e;
+typedef enum {
+    SIMPLE,
+    SPOT,
+    NUM_LIGHT_TYPES
+} Light_Type_e;
 
 /**
  * @class Light
@@ -33,7 +37,7 @@ public:
     Vector position;
 
     // if it's a spotlight then this is the direction it's pointing in.
-    Vector direction;  // derived from a camera.to-camera.from subtraction
+    Vector direction;    // derived from a camera.to-camera.from subtraction
 
     // if it's a spot light then this is it's cutoff.
     GLfloat cutoff;
@@ -68,4 +72,4 @@ private:
     GLenum getGLenum(void);
 };
 
-#endif  // LIGHT_H
+#endif    // LIGHT_H

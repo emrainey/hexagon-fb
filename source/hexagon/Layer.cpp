@@ -15,7 +15,7 @@
 #include <unistd.h>
 #endif
 
-#include "hexagon/Hexagon.hpp"  // class's header file
+#include "hexagon/Hexagon.hpp"    // class's header file
 
 // class constructor
 Layer::Layer(int select_name, std::string p) {
@@ -131,7 +131,7 @@ void Layer::addNode(std::string path, std::string name) {
         std::string description("Click this to go back down the stack");
         n = new Node(name, "..", description, DIRECTORY_TYPE, DOWN_ARROW, name_space | 1, true, false);
         n->position = position + *(new Vector(0, 0, 1));
-    } else  // else there are already 1+ objects in the list
+    } else    // else there are already 1+ objects in the list
     {
         std::string description = "Unknown";
         Node_Type_e type = Node_Type_e::DEFAULT;
@@ -191,7 +191,7 @@ void Layer::addNode(std::string path, std::string name) {
         n = new Node(name, path, description, type, model_type, select_name, is_permitted, is_executable, radius_factor, height_factor);
 
         Vector *dp = placeNode(size - 1);
-        n->position = position + *dp;  // place it down
+        n->position = position + *dp;    // place it down
     }
 
     // add the node...

@@ -44,4 +44,4 @@ private:
     std::map<std::string, Key> m_keys;
 };
 
-#endif  // POSIX_REGISTRY_H
+#endif    // POSIX_REGISTRY_H

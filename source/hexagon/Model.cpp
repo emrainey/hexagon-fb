@@ -8,7 +8,7 @@
  * @author Erik Rainey
  ******************************************************************************/
 
-#include "hexagon/Hexagon.hpp"  // class's header file
+#include "hexagon/Hexagon.hpp"    // class's header file
 
 extern Port *platform;
 
@@ -16,13 +16,13 @@ Model::Model() {
     normal = 0;
     selected = 0;
     // Default appearance (Permitted directories purple color scheme)
-    appearance.face_color          = Color(0.7f, 0.1f, 0.7f, 0.3f);
-    appearance.wire_color          = Color(1.0f, 1.0f, 1.0f, 0.7f);
+    appearance.face_color = Color(0.7f, 0.1f, 0.7f, 0.3f);
+    appearance.wire_color = Color(1.0f, 1.0f, 1.0f, 0.7f);
     appearance.selected_face_color = Color(0.8f, 0.1f, 0.0f, 0.3f);
     appearance.selected_wire_color = Color(1.0f, 1.0f, 1.0f, 0.7f);
-    appearance.model_name          = "";
-    radius_factor                  = 1.0;
-    height_factor                  = 1.0;
+    appearance.model_name = "";
+    radius_factor = 1.0;
+    height_factor = 1.0;
 }
 
 Model::Model(Appearance app, double radius_factor, double height_factor) {
@@ -37,13 +37,13 @@ Model::Model(const char *extension) {
     normal = 0;
     selected = 0;
     // Default appearance (Permitted directories purple color scheme)
-    appearance.face_color          = Color(0.7f, 0.1f, 0.7f, 0.3f);
-    appearance.wire_color          = Color(1.0f, 1.0f, 1.0f, 0.7f);
+    appearance.face_color = Color(0.7f, 0.1f, 0.7f, 0.3f);
+    appearance.wire_color = Color(1.0f, 1.0f, 1.0f, 0.7f);
     appearance.selected_face_color = Color(0.8f, 0.1f, 0.0f, 0.3f);
     appearance.selected_wire_color = Color(1.0f, 1.0f, 1.0f, 0.7f);
-    appearance.model_name          = "";
-    radius_factor                  = 1.0;
-    height_factor                  = 1.0;
+    appearance.model_name = "";
+    radius_factor = 1.0;
+    height_factor = 1.0;
     loadModel(extension);
 }
 
@@ -68,7 +68,8 @@ Model::~Model() {
 
 void Model::loadDownArrow() {
     normal = buildDownArrow(0.8 * radius_factor, 0.8 * radius_factor, 0.2 * height_factor, appearance.face_color, appearance.wire_color);
-    selected = buildDownArrow(0.8 * radius_factor, 0.8 * radius_factor, 0.2 * height_factor, appearance.selected_face_color, appearance.selected_wire_color);
+    selected =
+        buildDownArrow(0.8 * radius_factor, 0.8 * radius_factor, 0.2 * height_factor, appearance.selected_face_color, appearance.selected_wire_color);
     info();
 }
 

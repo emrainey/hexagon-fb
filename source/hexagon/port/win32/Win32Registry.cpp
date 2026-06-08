@@ -8,7 +8,7 @@
  * @author Erik Rainey
  ******************************************************************************/
 
-#include "hexagon/Hexagon.hpp"  // class's header file
+#include "hexagon/Hexagon.hpp"    // class's header file
 
 #define ROOT_KEY_LOCATION ("Software\\Toaster Streudel Productions\\Hexagon")
 
@@ -20,12 +20,17 @@ Win32Registry::Win32Registry() {
     DWORD disposition = 0;
     PHKEY proot = &root_key;
 
-    if (RegCreateKeyEx(HKEY_LOCAL_MACHINE, ROOT_KEY_LOCATION, 0, "String",
-                       REG_OPTION_NON_VOLATILE,  // store it persistently!
-                       KEY_ALL_ACCESS,           // R+W
-                       NULL,                     // default Security
-                       proot, &disposition)
-        == ERROR_SUCCESS) {
+    if (RegCreateKeyEx(
+            HKEY_LOCAL_MACHINE,
+            ROOT_KEY_LOCATION,
+            0,
+            "String",
+            REG_OPTION_NON_VOLATILE,    // store it persistently!
+            KEY_ALL_ACCESS,             // R+W
+            NULL,                       // default Security
+            proot,
+            &disposition
+        ) == ERROR_SUCCESS) {
         // success!
         debug.info(Debug::Subsystem::Platform, "Success in opening the Registry!\n");
 

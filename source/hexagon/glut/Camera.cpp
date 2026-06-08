@@ -49,15 +49,15 @@ void Camera::move(void) {
         Vector dv = pan;
         double d = pan.abs();
 
-        if (d < 0.1)  // if we are close then just jump it.
+        if (d < 0.1)    // if we are close then just jump it.
         {
             to = dest;
-        } else if (d < 1.0)  // if the to is "close" to the destination then slow down
+        } else if (d < 1.0)    // if the to is "close" to the destination then slow down
         {
             dv *= 0.1;
             to = dv + to;
-        } else if (d > 1.0)  // if the to is far away from the destination the move
-                             // faster
+        } else if (d > 1.0)    // if the to is far away from the destination the move
+                               // faster
         {
             dv *= 0.3;
             to = dv + to;
@@ -107,8 +107,7 @@ void Camera::selection(int x, int y) {
     if (debug.state == true) {
         debug.info(Debug::Subsystem::Selection, "Altered Clicked at x,y = { %d, %d }\n", x, y);
 
-        debug.info(Debug::Subsystem::Selection, "Viewport = { %d, %d, %d, %d }\n", viewport[0], viewport[1],
-                   viewport[2], viewport[3]);
+        debug.info(Debug::Subsystem::Selection, "Viewport = { %d, %d, %d, %d }\n", viewport[0], viewport[1], viewport[2], viewport[3]);
         debug.flush();
     }
 
@@ -148,24 +147,29 @@ void Camera::init(void) {
 char *Camera::printInfo(void) {
     static char info[160];
     memset(info, 0, sizeof(info));
-    snprintf(info, sizeof(info),
-             "Camera: \n"
-             "From=(%.3lf,%.3lf,%.3lf)\n"
-             //"To=(%.3lf,%.3lf,%.3lf)\n"
-             "Radius=%.3lf\tTheta=%.3lf\tPhi=%.3lf\n",
-             from.x, from.y, from.z,
-             // to.x,to.y,to.z,
-             radius, theta, phi);
+    snprintf(
+        info,
+        sizeof(info),
+        "Camera: \n"
+        "From=(%.3lf,%.3lf,%.3lf)\n"
+        //"To=(%.3lf,%.3lf,%.3lf)\n"
+        "Radius=%.3lf\tTheta=%.3lf\tPhi=%.3lf\n",
+        from.x,
+        from.y,
+        from.z,
+        // to.x,to.y,to.z,
+        radius,
+        theta,
+        phi
+    );
     return info;
 }
 
 // Freezes the camera where is it.
-void Camera::freeze(void) { /* TODO (#1#): Implement Camera::freeze() */
-}
+void Camera::freeze(void) { /* TODO (#1#): Implement Camera::freeze() */ }
 
 // Unfreezes the camera
-void Camera::unfreeze(void) { /* TODO (#1#): Implement Camera::unfreeze() */
-}
+void Camera::unfreeze(void) { /* TODO (#1#): Implement Camera::unfreeze() */ }
 
 // Sets the new distance
 void Camera::setDistance(float d) {
@@ -182,4 +186,6 @@ void Camera::setDistance(float d) {
 }
 
 // Alters the distance of the camera.
-void Camera::alterDistance(float delta) { setDistance(radius + delta); }
+void Camera::alterDistance(float delta) {
+    setDistance(radius + delta);
+}

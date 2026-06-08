@@ -62,11 +62,11 @@ public:
     // Is debug on or off?
     bool state;
 
-    enum/**
- * @class Subsystem
- * @brief Description for class Subsystem.
- */
- class Subsystem : std::uint32_t {
+    enum /**
+          * @class Subsystem
+          * @brief Description for class Subsystem.
+          */
+        class Subsystem : std::uint32_t {
         Error,
         Info,
         Selection,
@@ -115,4 +115,4 @@ protected:
 extern Debug debug;
 #endif
 
-#endif  // DEBUG_H
+#endif    // DEBUG_H

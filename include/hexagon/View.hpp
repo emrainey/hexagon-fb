@@ -66,4 +66,4 @@ public:
     void popLayer(void);
 };
 
-#endif  // VIEW_H
+#endif    // VIEW_H

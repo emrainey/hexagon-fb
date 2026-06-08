@@ -12,17 +12,23 @@
 
 #include "hexagon/Hexagon.hpp"
 
-Debug::Debug() : state{false}, subsystems{} {
+Debug::Debug()
+    : state{false}
+    , subsystems{} {
     info(Debug::Subsystem::Trace, "Debug(%s)\n", (state ? "true" : "false"));
 }
 
 // class constructor
-Debug::Debug(bool s) : state{s}, subsystems{} {
+Debug::Debug(bool s)
+    : state{s}
+    , subsystems{} {
     info(Debug::Subsystem::Trace, "Debug(%s)\n", (state ? "true" : "false"));
 }
 
 // class destructor
-Debug::~Debug() { info(Debug::Subsystem::Trace, "~Debug()\n"); }
+Debug::~Debug() {
+    info(Debug::Subsystem::Trace, "~Debug()\n");
+}
 
 void Debug::info(Subsystem subsystem, char const* const format, ...) {
     if (state == true) {
@@ -49,7 +55,9 @@ void Debug::info(Subsystem subsystem, char const* const format, ...) {
 }
 
 // Wrapper to most flush operations
-void Debug::flush(void) { fflush(stdout); }
+void Debug::flush(void) {
+    fflush(stdout);
+}
 
 void Debug::enable(Subsystem subsystem) {
     subsystems.Set(subsystem);

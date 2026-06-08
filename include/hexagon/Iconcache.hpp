@@ -24,4 +24,4 @@ public:
     ~IconCache();
 };
 
-#endif  // ICONCACHE_H
+#endif    // ICONCACHE_H

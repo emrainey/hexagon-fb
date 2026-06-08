@@ -20,11 +20,14 @@
  */
 class Camera {
 public:
-    enum/**
- * @class Type
- * @brief Description for class Type.
- */
- class Type : uint32_t { Free, Spherical };
+    enum /**
+          * @class Type
+          * @brief Description for class Type.
+          */
+        class Type : uint32_t {
+        Free,
+        Spherical
+    };
 
     // The basic up camera vector;
     Vector up;
@@ -78,4 +81,4 @@ public:
     void alterDistance(float delta);
 };
 
-#endif  // CAMERA_H
+#endif    // CAMERA_H

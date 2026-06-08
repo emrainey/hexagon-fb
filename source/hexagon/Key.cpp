@@ -8,7 +8,7 @@
  * @author Erik Rainey
  ******************************************************************************/
 
-#include "hexagon/Hexagon.hpp"  // class's header file
+#include "hexagon/Hexagon.hpp"    // class's header file
 
 // class constructor
 Key::Key(std::string n, std::string v) {
@@ -21,10 +21,18 @@ Key::~Key() {
     // insert your code here
 }
 
-std::string Key::getName() { return name; }
+std::string Key::getName() {
+    return name;
+}
 
-std::string Key::getValue() { return value; }
+std::string Key::getValue() {
+    return value;
+}
 
-void Key::setName(std::string n) { name = n; }
+void Key::setName(std::string n) {
+    name = n;
+}
 
-void Key::setValue(std::string v) { value = v; }
+void Key::setValue(std::string v) {
+    value = v;
+}

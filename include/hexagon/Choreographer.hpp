@@ -12,7 +12,14 @@
 #ifndef CHOREOGRAPHER_H
 #define CHOREOGRAPHER_H
 
-typedef enum { FROZEN = 0, SPINNER, PROLATION, EXPANDER, CONTRACTOR, NUM_MOVEMENT_TYPES } Choreographer_Type_e;
+typedef enum {
+    FROZEN = 0,
+    SPINNER,
+    PROLATION,
+    EXPANDER,
+    CONTRACTOR,
+    NUM_MOVEMENT_TYPES
+} Choreographer_Type_e;
 
 class Node;
 
@@ -39,4 +46,4 @@ public:
     void setType(Choreographer_Type_e t);
 };
 
-#endif  // CHOREOGRAPHER_H
+#endif    // CHOREOGRAPHER_H

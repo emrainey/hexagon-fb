@@ -8,7 +8,7 @@
  * @author Erik Rainey
  ******************************************************************************/
 
-#include "hexagon/Hexagon.hpp"  // class's header file
+#include "hexagon/Hexagon.hpp"    // class's header file
 
 // class constructor
 Node::Node() {
@@ -28,7 +28,10 @@ Node::Node() {
     model = new Model("", appearance, radius_factor, height_factor);
 }
 
-Node::Node(const std::string &n, const std::string &p, const std::string &d, Node_Type_e nt, Model_Type_e mt, int select_name, bool is_permitted, bool is_executable, double radius_factor, double height_factor) {
+Node::Node(
+    const std::string &n, const std::string &p, const std::string &d, Node_Type_e nt, Model_Type_e mt, int select_name, bool is_permitted,
+    bool is_executable, double radius_factor, double height_factor
+) {
     // set our name, path and description
     name = n;
     path = p;
@@ -79,12 +82,12 @@ Node::Node(const std::string &n, const std::string &p, const std::string &d, Nod
             std::string ext = "";
             if (ext_idx != name.npos) {
                 // get all characters from index to end...
-                ext_idx++;  // don't try to get the actual "."
+                ext_idx++;    // don't try to get the actual "."
                 int len = name.size() - ext_idx;
                 ext = name.substr(ext_idx, len);
             }
 
-            model = new Model(ext.c_str(), appearance, radius_factor, height_factor);  // get the default model type
+            model = new Model(ext.c_str(), appearance, radius_factor, height_factor);    // get the default model type
             choreographer->setType(PROLATION);
             break;
     }

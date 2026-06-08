@@ -1,0 +1,25 @@
+// THIS FILE WILL BE OVERWRITTEN BY DEV-C++!
+// DO NOT EDIT!
+
+#ifndef HEXAGON_CONSOLE_PRIVATE_H
+#define HEXAGON_CONSOLE_PRIVATE_H
+
+#include <cstddef>
+#include <cstdint>
+
+// VERSION DEFINITIONS
+constexpr static char const* const VER_STRING{"@PROJECT_VERSION@"};
+constexpr static size_t VER_MAJOR{@PROJECT_VERSION_MAJOR@};
+constexpr static size_t VER_MINOR{@PROJECT_VERSION_MINOR@};
+constexpr static size_t VER_PATCH{@PROJECT_VERSION_PATCH@};
+constexpr static char const* const COMPANY_NAME{"@PROJECT_AUTHOR@"};
+constexpr static char const* const FILE_VERSION{"@PROJECT_VERSION@"};
+constexpr static char const* const FILE_DESCRIPTION{"@PROJECT_DESCRIPTION@"};
+constexpr static char const* const INTERNAL_NAME{"@PROJECT_NAME@"};
+constexpr static char const* const LEGAL_COPYRIGHT{"@PROJECT_COPYRIGHT@"};
+constexpr static char const* const LEGAL_TRADEMARKS{"@PROJECT_TRADEMARKS@"};
+constexpr static char const* const ORIGINAL_FILENAME{"@PROJECT_FILENAME@"};
+constexpr static char const* const PRODUCT_NAME{"@PROJECT_NAME@"};
+constexpr static char const* const PRODUCT_VERSION{"@PROJECT_VERSION@"};
+
+#endif    // HEXAGON_CONSOLE_PRIVATE_H

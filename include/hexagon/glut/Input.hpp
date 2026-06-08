@@ -35,4 +35,4 @@ public:
     void mouseClick(int button, int state, int x, int y);
 };
 
-#endif  // INPUT_H
+#endif    // INPUT_H

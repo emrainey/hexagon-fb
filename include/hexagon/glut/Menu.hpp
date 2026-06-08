@@ -47,4 +47,4 @@ public:
     bool choose(int x, int y);
 };
 
-#endif  // MENU_H
+#endif    // MENU_H

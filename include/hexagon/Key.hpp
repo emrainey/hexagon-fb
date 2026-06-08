@@ -37,4 +37,4 @@ public:
     void setName(std::string n);
 };
 
-#endif  // KEY_H
+#endif    // KEY_H

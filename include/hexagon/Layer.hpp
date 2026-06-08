@@ -66,4 +66,4 @@ public:
     void move();
 };
 
-#endif  // LAYER_H
+#endif    // LAYER_H

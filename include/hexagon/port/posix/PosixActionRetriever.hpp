@@ -33,4 +33,4 @@ public:
     Menu *getDriveActions();
 };
 
-#endif  // POSIX_AR_H
+#endif    // POSIX_AR_H

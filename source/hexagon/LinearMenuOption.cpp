@@ -15,10 +15,14 @@ LinearMenuOption::LinearMenuOption() {
     // nothing so far...
 }
 
-MenuOption::~MenuOption() { ; }
+MenuOption::~MenuOption() {
+    ;
+}
 
 // class destructor
-LinearMenuOption::~LinearMenuOption() { shell = nullptr; }
+LinearMenuOption::~LinearMenuOption() {
+    shell = nullptr;
+}
 
 /**
  * Determines is a point was selected in the rectangle of the option.
@@ -29,8 +33,7 @@ LinearMenuOption::~LinearMenuOption() { shell = nullptr; }
 bool LinearMenuOption::choose(int index, int offset_x, int offset_y) {
     calcBounds();
 
-    debug.info(Debug::Subsystem::Menu, "[%i] Selection @ {%i,%i}, Rect={%i,%i}->{%i,%i}\n", index, offset_x, offset_y,
-               x1, y1, x2, y2);
+    debug.info(Debug::Subsystem::Menu, "[%i] Selection @ {%i,%i}, Rect={%i,%i}->{%i,%i}\n", index, offset_x, offset_y, x1, y1, x2, y2);
 
     if ((offset_x > x1 && offset_x < x2) && (offset_y > y1 && offset_y < y2)) {
         execute("");
@@ -90,16 +93,24 @@ void LinearMenuOption::setWidth(int width) {
  * Sets the LinearMenuOption's Inset which is the distance from one
  * menu item to it's border.
  */
-void LinearMenuOption::setInset(int i) { inset = i; }
+void LinearMenuOption::setInset(int i) {
+    inset = i;
+}
 
 /**
  * Returns the name of the LinearMenuOption
  */
-std::string LinearMenuOption::getName() { return name; }
+std::string LinearMenuOption::getName() {
+    return name;
+}
 
-void LinearMenuOption::setName(std::string n) { name = n; }
+void LinearMenuOption::setName(std::string n) {
+    name = n;
+}
 
-void LinearMenuOption::setShellExecutor(ShellExecutor *sh) { shell = sh; }
+void LinearMenuOption::setShellExecutor(ShellExecutor *sh) {
+    shell = sh;
+}
 
 void LinearMenuOption::execute(std::string parameters) {
     if (shell != NULL) {
@@ -107,7 +118,9 @@ void LinearMenuOption::execute(std::string parameters) {
     }
 }
 
-void LinearMenuOption::setIndex(int i) { index = i; }
+void LinearMenuOption::setIndex(int i) {
+    index = i;
+}
 
 void LinearMenuOption::calcBounds() {
     // based on index and font height and inset, calculate x1,y1 and x2,y2

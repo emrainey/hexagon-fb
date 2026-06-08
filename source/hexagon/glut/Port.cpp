@@ -35,8 +35,6 @@ Port::Port(int argc, char *argv[]) {
     // initialize the persistent storage to a platform specific version!
     ps = new PORT_SPECIFIC_PERSISTENT_STORAGE();
 
-
-
     // initialize the port specific action retriever
     ar = new PORT_SPECIFIC_ACTION_RETRIEVER();
 
@@ -83,4 +81,6 @@ void Port::run() {
 /*
  * Do any post-instantiation initialization.
  */
-void Port::postInitialize() { display.postInitialize(); }
+void Port::postInitialize() {
+    display.postInitialize();
+}

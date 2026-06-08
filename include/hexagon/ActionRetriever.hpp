@@ -68,4 +68,4 @@ public:
     virtual Menu *getDriveActions() = 0;
 };
 
-#endif  // ACTIONRETRIEVER_H
+#endif    // ACTIONRETRIEVER_H

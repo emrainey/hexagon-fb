@@ -45,11 +45,10 @@
 #endif
 
 typedef enum {
-
     MOUSE_DRAG,
     MOUSE_ZOOM,
-    CONTROL_MOD,  // this must be the last value, or any state beyond will be
-                  // ignored
+    CONTROL_MOD,    // this must be the last value, or any state beyond will be
+                    // ignored
     KEYBOARD_CONTROL
 } Control_State_t;
 
@@ -62,7 +61,7 @@ public:
     // GLUT related objects...
     Input input;
     Scheduler scheduler;
-    Display display;  // this must be initialized before the camera
+    Display display;    // this must be initialized before the camera
     Camera camera;
     Control_State_t control_state;
 
@@ -86,4 +85,4 @@ public:
 
 extern Port *platform;
 
-#endif  // PORT_H
+#endif    // PORT_H

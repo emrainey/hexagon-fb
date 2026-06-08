@@ -36,4 +36,4 @@ public:
     Key *getKey(std::string name);
 };
 
-#endif  // WIN32REGISTRY_H
+#endif    // WIN32REGISTRY_H

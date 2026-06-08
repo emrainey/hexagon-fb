@@ -8,8 +8,9 @@
  * @author Erik Rainey
  ******************************************************************************/
 
-#define EXCLUDE_EXTERNS  // don't pull in the externs for platform and world.
+#define EXCLUDE_EXTERNS    // don't pull in the externs for platform and world.
 #include "hexagon/Hexagon.hpp"
+#include "hexagon/Hexagon_Console_private.hpp"
 
 // The pointer to all the port specific functions and variables
 Port *platform = NULL;
@@ -25,11 +26,6 @@ static int num_views = 1;
 
 // set the default view location
 static std::string *start_view = new std::string(".");
-
-void info(void) {
-    debug.info(Debug::Subsystem::Info, "Hexagon, by Erik Rainey\n");
-    debug.info(Debug::Subsystem::Info, "Copyright 2002 (C) All Rights Reserved (for now...)\n");
-}
 
 void ProcessArgs(int argc, char *argv[]) {
     for (int i = 1; i < argc; i++) {
@@ -60,9 +56,11 @@ void ProcessArgs(int argc, char *argv[]) {
 int main(int argc, char *argv[]) {
     // instantiate a new Debug object
     debug = Debug(true);
-    debug = 0xFFFFFFFF; // Enable all subsystems
-
-    info();
+    // debug = 0xFFFFFFFF;    // Enable all subsystems
+    debug = 0x3; // Just Error, Info
+     
+    debug.info(Debug::Subsystem::Info, "%s (%s) [%s]\n", PRODUCT_NAME, PRODUCT_VERSION, COMPANY_NAME);
+    debug.info(Debug::Subsystem::Info, "%s\n", LEGAL_COPYRIGHT);
 
     // take the args and process them...
     ProcessArgs(argc, argv);

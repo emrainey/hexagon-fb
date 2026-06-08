@@ -8,9 +8,9 @@
  * @author Erik Rainey
  ******************************************************************************/
 
-#include "hexagon/Hexagon.hpp"  // class's header file
+#include "hexagon/Hexagon.hpp"    // class's header file
 
-#define SIDES (6)  // the only place where we should define the number of sides
+#define SIDES (6)                 // the only place where we should define the number of sides
 #define PREV(i) ((i - 1 < 0) ? (SIDES - 1) : (i - 1))
 #define NEXT(i) ((i + 1) % SIDES)
 #define INV(i) ((i + (SIDES / 2)) % SIDES)
@@ -100,7 +100,7 @@ void World::render(bool selection) {
     // then set it's mode to NORMAL
     for (auto lit : view_list) {
         if (lit == focus) {
-            ;  // do nothing, this is to fix the depth problem
+            ;    // do nothing, this is to fix the depth problem
         } else {
             lit->render(selection, NORMAL);
         }
@@ -190,7 +190,7 @@ void World::placeView(View *v, int index) {
         if (unfull->neighbors[i] == NULL) {
             // debug.info("unfull (%p) is not full\n",unfull);
             full = false;
-            next_fill = i;  // this is the next place to fill
+            next_fill = i;    // this is the next place to fill
             break;
         }
     }
@@ -213,7 +213,7 @@ Vector *World::direction(int direction) {
         // turns out this is not a calculable value
         int degrees = 360 / SIDES;
         debug.info(Debug::Subsystem::Internal, "degrees=%lf\n", degrees);
-        double scalar = 1.80278;  // I dunno how to calculate this...
+        double scalar = 1.80278;    // I dunno how to calculate this...
         double x = scalar * COS((direction + 1) * degrees);
         double y = scalar * SIN((direction + 1) * degrees);
         debug.info(Debug::Subsystem::Internal, "x=%lf\n", x);
@@ -224,17 +224,17 @@ Vector *World::direction(int direction) {
         return new Vector(x, y, 0);
     } else {
         switch (direction) {
-            case 0:  // up right
+            case 0:    // up right
                 return new Vector(1.5, 1, 0);
-            case 1:  // up
+            case 1:    // up
                 return new Vector(0, 2, 0);
-            case 2:  // up left
+            case 2:    // up left
                 return new Vector(-1.5, 1, 0);
-            case 3:  // down left
+            case 3:    // down left
                 return new Vector(-1.5, -1, 0);
-            case 4:  // down
+            case 4:    // down
                 return new Vector(0, -2, 0);
-            case 5:  // down right
+            case 5:    // down right
                 return new Vector(1.5, -1, 0);
         }
     }

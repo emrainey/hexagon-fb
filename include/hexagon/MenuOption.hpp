@@ -83,4 +83,4 @@ public:
     virtual void setIndex(int index) = 0;
 };
 
-#endif  // MENUOPTION_H
+#endif    // MENUOPTION_H

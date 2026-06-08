@@ -265,7 +265,7 @@ void Display::drawframe(void) {
 
     // render all the nodes here...
     GL_PUSH_MATRIX();
-    world->render(false);  // not select mode...
+    world->render(false);    // not select mode...
     GL_POP_MATRIX();
 }
 
@@ -302,33 +302,36 @@ void Display::renderScreenText(void) {
     }
     if (renderHelp == true) {
         start_point = height / 8;
-        print2DText(width / 3, start_point,
-                    "Help Menu\n"
-                    "-----------------------------------\n"
-                    "In Keyboard Control Mode:\n"
-                    "(ALT+w) rotate up (ALT+s) rotate down\n"
-                    "(ALT+a) rotate left (ALT+d) rotate right\n"
-                    "\n"
-                    "In Mouse Zoom Mode the up and down motion\n"
-                    "of a mouse drag will zoom in or out\n"
-                    "\n"
-                    "In Mouse Drag Mode you can drag the screen\n"
-                    "around my dragging the mouse\n"
-                    "\n"
-                    "(SPACE) to recenter camera\n"
-                    "(-) zoom out (+) zoom in\n"
-                    "(UP or click the Up arrow) to go up a directory\n"
-                    "(F1) to see the help\n"
-                    "(F2) to enable/disable debug output\n"
-                    "(F3) to disable/enable blending\n"
-                    "(F4) to change the control state\n"
-                    "(F5) to restart at the roots\n"
-                    "(F6) to enable extra text\n"
-                    "(F7) to go fullscreen\n"
-                    "(F8) come back from fullscreen\n"
-                    "(F9) to render the XY plane\n"
-                    "(ESC) to exit\n\n"
-                    "Hit (F1) to make this go away or come back\n");
+        print2DText(
+            width / 3,
+            start_point,
+            "Help Menu\n"
+            "-----------------------------------\n"
+            "In Keyboard Control Mode:\n"
+            "(ALT+w) rotate up (ALT+s) rotate down\n"
+            "(ALT+a) rotate left (ALT+d) rotate right\n"
+            "\n"
+            "In Mouse Zoom Mode the up and down motion\n"
+            "of a mouse drag will zoom in or out\n"
+            "\n"
+            "In Mouse Drag Mode you can drag the screen\n"
+            "around my dragging the mouse\n"
+            "\n"
+            "(SPACE) to recenter camera\n"
+            "(-) zoom out (+) zoom in\n"
+            "(UP or click the Up arrow) to go up a directory\n"
+            "(F1) to see the help\n"
+            "(F2) to enable/disable debug output\n"
+            "(F3) to disable/enable blending\n"
+            "(F4) to change the control state\n"
+            "(F5) to restart at the roots\n"
+            "(F6) to enable extra text\n"
+            "(F7) to go fullscreen\n"
+            "(F8) come back from fullscreen\n"
+            "(F9) to render the XY plane\n"
+            "(ESC) to exit\n\n"
+            "Hit (F1) to make this go away or come back\n"
+        );
     }
 }
 

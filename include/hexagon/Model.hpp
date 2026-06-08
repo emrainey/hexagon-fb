@@ -12,10 +12,14 @@
 #ifndef MODEL_H
 #define MODEL_H
 
-#include "hexagon/glut/Wrapper.hpp"
 #include "hexagon/Appearance.hpp"
+#include "hexagon/glut/Wrapper.hpp"
 
-typedef enum { NORMAL, SELECTED, NUM_SELECT_TYPES } SelectionState;
+typedef enum {
+    NORMAL,
+    SELECTED,
+    NUM_SELECT_TYPES
+} SelectionState;
 
 /**
  * @class Model
@@ -80,4 +84,4 @@ public:
     static void HexWirePoly(double radius, double height);
 };
 
-#endif  // MODEL_H
+#endif    // MODEL_H

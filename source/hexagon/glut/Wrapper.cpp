@@ -110,16 +110,13 @@ GLuint CheckError(GLuint error, bool stop, char const *const name, char const *c
             // don't bother checking anything else.
             return error;
         case GL_INVALID_ENUM:
-            debug.info(Debug::Subsystem::Error, "ERROR: Invalid enumeration %s=0x%08x in %s on line %i\n", name, error,
-                       filename, line);
+            debug.info(Debug::Subsystem::Error, "ERROR: Invalid enumeration %s=0x%08x in %s on line %i\n", name, error, filename, line);
             break;
         case GL_INVALID_VALUE:
-            debug.info(Debug::Subsystem::Error, "ERROR: Invalid value %s=0x%08x in %s on line %i\n", name, error,
-                       filename, line);
+            debug.info(Debug::Subsystem::Error, "ERROR: Invalid value %s=0x%08x in %s on line %i\n", name, error, filename, line);
             break;
         case GL_INVALID_OPERATION:
-            debug.info(Debug::Subsystem::Error, "ERROR: Invalid operation %s=0x%08x in %s on line %i\n", name, error,
-                       filename, line);
+            debug.info(Debug::Subsystem::Error, "ERROR: Invalid operation %s=0x%08x in %s on line %i\n", name, error, filename, line);
             break;
         case GL_STACK_OVERFLOW:
             debug.info(Debug::Subsystem::Error, "ERROR: Stack overflow @%s in %s on line %i!\n", name, filename, line);
@@ -131,8 +128,7 @@ GLuint CheckError(GLuint error, bool stop, char const *const name, char const *c
             debug.info(Debug::Subsystem::Error, "ERROR: Out Of Memory @%s in %s on line %i!\n", name, filename, line);
             break;
         default:
-            debug.info(Debug::Subsystem::Error, "ERROR: Unknown Error %d (0x%08x) @%s in %s on line %i!\n", error,
-                       error, name, filename, line);
+            debug.info(Debug::Subsystem::Error, "ERROR: Unknown Error %d (0x%08x) @%s in %s on line %i!\n", error, error, name, filename, line);
             break;
     }
     if (stop == true) {
