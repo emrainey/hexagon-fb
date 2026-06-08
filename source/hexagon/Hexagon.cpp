@@ -57,9 +57,9 @@ int main(int argc, char *argv[]) {
     // instantiate a new Debug object
     debug = Debug(true);
     // debug = 0xFFFFFFFF;    // Enable all subsystems
-    debug = 0x3; // Just Error, Info
-     
-    debug.info(Debug::Subsystem::Info, "%s (%s) [%s]\n", PRODUCT_NAME, PRODUCT_VERSION, COMPANY_NAME);
+    debug = 0x3;    // Just Error, Info
+
+    debug.info(Debug::Subsystem::Info, "%s (%s) [%s]\n", PRODUCT_NAME, PRODUCT_VERSION, PROJECT_AUTHOR);
     debug.info(Debug::Subsystem::Info, "%s\n", LEGAL_COPYRIGHT);
 
     // take the args and process them...

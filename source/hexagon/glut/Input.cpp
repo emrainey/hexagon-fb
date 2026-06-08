@@ -9,8 +9,9 @@
  ******************************************************************************/
 
 #include "hexagon/Hexagon.hpp"
-#define ESC (27)
-#define ENTER (13)
+
+constexpr static auto ESC{27};
+constexpr static auto ENTER{13};
 
 #define DEBUG_MODIFIER(op, bit)                      \
     {                                                \
@@ -128,16 +129,16 @@ void Input::mouseDrag(int x, int y) {
 
     if (platform->control_state == MOUSE_DRAG) {
         if (dx > 0)
-            c->theta -= dx * (PI / 100);
+            c->theta -= dx * (std::numbers::pi / 100);
         else if (dx < 0)
-            c->theta += -dx * (PI / 100);
+            c->theta += -dx * (std::numbers::pi / 100);
 
         if (dy > 0) {
-            c->phi -= dy * (PI / 200);
-            if (c->phi <= PHI_MIN) c->phi = PHI_MIN;
+            c->phi -= dy * (std::numbers::pi / 200);
+            if (c->phi <= Camera::  PHI_MIN) c->phi = Camera::PHI_MIN;
         } else if (dy < 0) {
-            c->phi += -dy * (PI / 200);
-            if (c->phi >= PHI_MAX) c->phi = PHI_MAX;
+            c->phi += -dy * (std::numbers::pi / 200);
+            if (c->phi >= Camera::PHI_MAX) c->phi = Camera::PHI_MAX;
         }
     } else if (platform->control_state == MOUSE_ZOOM) {
         c->alterDistance(dy);
@@ -151,6 +152,16 @@ void Input::mouseDrag(int x, int y) {
 void Input::mouseMove(int x, int y) {
     lastx = x;
     lasty = y;
+}
+
+// FreeGLUT/OpenGLUT Mouse Wheel Callback
+void Input::mouseWheel(int wheel, int direction, int x, int y) {
+    debug.info(Debug::Subsystem::Info, "+Input::mouseWheel(%i,%i,%i,%i)\n", wheel, direction, x, y);
+    if (wheel == 0) {
+        // This is the scroll wheel.  Use it for zooming!
+        platform->camera.alterDistance(direction * 10);
+    }
+    debug.info(Debug::Subsystem::Info, "-Input::mouseWheel()\n");
 }
 
 // GLUT Keyboard Callback for Normal Keys
@@ -313,13 +324,13 @@ void Input::keyboardSpecial(int key, int x, int y) {
 
         case GLUT_KEY_PAGE_UP:
             platform->camera.radius += 1;
-            if (platform->camera.radius > MAX_ZOOM) platform->camera.radius = MAX_ZOOM;
+            if (platform->camera.radius > Camera::MAX_ZOOM) platform->camera.radius = Camera::MAX_ZOOM;
 
             break;
 
         case GLUT_KEY_PAGE_DOWN:
             platform->camera.radius -= 1;
-            if (platform->camera.radius < MIN_ZOOM) platform->camera.radius = MIN_ZOOM;
+            if (platform->camera.radius < Camera::MIN_ZOOM) platform->camera.radius = Camera::MIN_ZOOM;
             break;
 
         case GLUT_KEY_UP:

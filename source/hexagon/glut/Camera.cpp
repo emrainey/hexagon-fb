@@ -69,8 +69,8 @@ void Camera::move(void) {
             // now we figure out the from vector
             // take the "to" location and add the spherical translated
             // coordinates
-            from.x = to.x + (radius * cos(PI / 2 - phi) * cos(theta));
-            from.y = to.y + (radius * cos(PI / 2 - phi) * sin(theta));
+            from.x = to.x + (radius * cos((std::numbers::pi / 2.0) - phi) * cos(theta));
+            from.y = to.y + (radius * cos((std::numbers::pi / 2.0) - phi) * sin(theta));
             from.z = to.z + (radius * cos(phi));
             break;
         case Camera::Type::Free:
@@ -127,7 +127,7 @@ void Camera::init(void) {
 
     mode = Camera::Type::Spherical;
     radius = 20;
-    theta = 3 * PI / 2;
+    theta = 3 * std::numbers::pi / 2;
     phi = PHI_MIN;
 
     if (platform != NULL)

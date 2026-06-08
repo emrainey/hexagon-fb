@@ -9,24 +9,23 @@
  ******************************************************************************/
 
 #include "hexagon/Hexagon.hpp"
+#include "hexagon/Hexagon_Console_private.hpp"
 
 // class constructor
 Port::Port(int argc, char *argv[]) {
+    static char title[1024];
+
     scheduler.start_time = std::chrono::steady_clock::now();
     debug.info(Debug::Subsystem::Trace, "+Port()\n");
 
-    static char title[1024];
-
-    snprintf(title, sizeof(title), "Hexagon %s %s by Erik Rainey. %s %s", VERSION, BUILD_STRING, __DATE__, __TIME__);
+    snprintf(title, sizeof(title), "%s (%s) by %s. Built at %s %s", PRODUCT_NAME, PRODUCT_VERSION, PROJECT_AUTHOR, __DATE__, __TIME__);
 
     glutInit(&argc, argv);
     // Create an RGA, Alpha Channel, Double Buffered Multisampled, Depth Buffered
     // rendering ... thingy.
     glutInitDisplayMode(GLUT_RGBA | GLUT_DEPTH | GLUT_DOUBLE | GLUT_MULTISAMPLE | GLUT_ALPHA);
-
     glutInitWindowPosition(100, 100);
     glutInitWindowSize(640, 480);
-
     glutCreateWindow(title);
 
     // initialize all the member variables
@@ -44,7 +43,7 @@ Port::Port(int argc, char *argv[]) {
     if (debug.state) {
         Key date_key("Compile Date", __DATE__);
         Key time_key("Compile Time", __TIME__);
-        Key version("Version", VERSION);
+        Key version("Version", PRODUCT_VERSION);
         ps->setKey(date_key);
         ps->setKey(time_key);
         ps->setKey(version);
@@ -72,9 +71,8 @@ Port::~Port() {
 }
 
 void Port::run() {
-    display.fps = 25;
+    display.fps = 60;
     scheduler.start = std::chrono::steady_clock::now();
-
     glutMainLoop();
 }
 

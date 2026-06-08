@@ -13,6 +13,8 @@
 #define CAMERA_H
 
 #include "hexagon/Vector.hpp"
+#include <cstdint>
+#include <numbers>
 
 /**
  * @class Camera
@@ -45,13 +47,13 @@ public:
     float aspect;
     float fov;
 
-#define MIN_ZOOM (10)
-#define MAX_ZOOM (100)
-#define NAMING_DISTANCE (MAX_ZOOM / 2)
+    constexpr static auto MIN_ZOOM{10.0f};
+    constexpr static auto MAX_ZOOM{100.0f};
+    constexpr static auto NAMING_DISTANCE{(MAX_ZOOM / 2.0f)};
     float radius;
     float phi;
-#define PHI_MIN (0.1)
-#define PHI_MAX ((PI / 2) - PHI_MIN)
+    constexpr static auto PHI_MIN{0.1f};
+    constexpr static auto PHI_MAX{(std::numbers::pi / 2.0f) - PHI_MIN};
     float theta;
     float accel;
 

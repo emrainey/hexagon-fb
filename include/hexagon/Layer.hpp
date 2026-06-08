@@ -24,7 +24,8 @@ class Layer {
 public:
     // the template list of Nodes
     std::list<Node *> node_list;
-#define MAX_NODES (0xFFFF)
+
+    constexpr static size_t MAX_NODES{0xFFFF};
 
     // The selected node
     Node *selected;
@@ -38,9 +39,10 @@ public:
     // the location of the layer
     Vector position;
 
-// the selection name space of this layer
-#define LAYER_SPACE_MASK (0xFFFF0000)
-    int name_space;
+    constexpr static uint32_t LAYER_SPACE_MASK{0xFFFF0000};
+
+    // the selection name space of this layer
+    uint32_t name_space;
 
     // class constructor
     Layer(int select_name, std::string path);

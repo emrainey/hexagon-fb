@@ -33,6 +33,8 @@ public:
     void mouseMove(int x, int y);
     // GLUT Mouse Click Callback
     void mouseClick(int button, int state, int x, int y);
-};
+    // FreeGLUT/OpenGLUT Mouse Wheel Callback
+    void mouseWheel(int wheel, int direction, int x, int y);
+};  
 
 #endif    // INPUT_H

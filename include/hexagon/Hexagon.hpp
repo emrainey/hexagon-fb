@@ -25,6 +25,7 @@
 // include some new stuff....
 // #include <stl.h>
 #include <list>
+#include <numbers>
 #include <stack>
 #include <string>
 #include <type_traits>
@@ -33,26 +34,23 @@
 // Some MACROS
 /*****************************************************************************/
 
-#define PI (3.141592653)
-#define TWO_PI (6.283185306)
-#define SIN60 (0.866025403784438646763723170752936)
-#define COS30 (SIN60)
-#define SQRT3 (1.73205080756887729352744634150587)
-#define FPS (30)
-
-#define VERSION ("v1.0.10 alpha")
-#define BUILD_STRING ("in C++")
+namespace std {
+namespace numbers {
+constexpr static auto twopi = std::numbers::pi * 2.0;
+} // namespace numbers
+} // namespace std
 
 /* These macros convert cos and sin to degree inputs not redians. */
 
 constexpr double Rad2Deg(double rad) {
-    return (rad / TWO_PI) * 360.0;
+    return (rad / std::numbers::twopi) * 360.0;
 }
 constexpr double Deg2Rad(double deg) {
-    return (deg / 360.0) * TWO_PI;
+    return (deg / 360.0) * std::numbers::twopi;
 }
-#define COS(n) cos(Deg2Rad(n))
-#define SIN(n) sin(Deg2Rad(n))
+
+constexpr double COS(double n) { return cos(Deg2Rad(n)); }
+constexpr double SIN(double n) { return sin(Deg2Rad(n)); }
 
 constexpr void toggle(bool &a) {
     a = not a;

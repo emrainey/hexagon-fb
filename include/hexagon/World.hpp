@@ -35,7 +35,8 @@ class World {
 public:
     // the list of all views
     std::list<View *> view_list;
-#define MAX_VIEWS (61)
+    /// ???
+    constexpr static size_t MAX_VIEWS{61};
 
     // the root view (the one in the middle)
     View *root;

@@ -10,8 +10,8 @@
 
 #include "hexagon/Hexagon.hpp"
 
-#define INSET (4)
-#define FONT_WIDTH (10)
+constexpr static auto INSET{4};
+constexpr static auto FONT_WIDTH{10};
 
 // class constructor
 Menu::Menu(std::string name) {

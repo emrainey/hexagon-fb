@@ -12,8 +12,6 @@
 #ifndef DISPLAY_H
 #define DISPLAY_H
 
-#define MIN_FRAMES (30)
-
 #include "hexagon/Color.hpp"
 #include "hexagon/Vector.hpp"
 #include "hexagon/glut/Camera.hpp"

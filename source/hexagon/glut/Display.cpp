@@ -277,7 +277,7 @@ void Display::frameStatistics() {
 
     frames++;
     platform->scheduler.finish = std::chrono::steady_clock::now();
-    if (frames >= MIN_FRAMES) {
+    if (frames >= 30) { // @TODO use the desired fps in the display
         auto diff = std::chrono::duration_cast<std::chrono::duration<double>>(platform->scheduler.finish - platform->scheduler.start).count();
         fps = (float)frames / diff;
         platform->scheduler.start = std::chrono::steady_clock::now();

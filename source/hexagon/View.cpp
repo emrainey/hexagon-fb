@@ -119,14 +119,14 @@ bool View::choose(int name) {
     } else if ((VIEW_SPACE_MASK & name) == name_space) {
         if (world->selection.state == Selection::Newer) {
             // If the node belongs to the active top layer, directly process it
-            if ((LAYER_SPACE_MASK & name) == layer_list.back()->name_space) {
+            if ((Layer::LAYER_SPACE_MASK & name) == layer_list.back()->name_space) {
                 return layer_list.back()->choose(name);
             }
             // Otherwise, it belongs to a previous layer. Pop layers until that layer is active.
-            while (layer_list.size() > 1 && (LAYER_SPACE_MASK & name) != layer_list.back()->name_space) {
+            while (layer_list.size() > 1 && (Layer::LAYER_SPACE_MASK & name) != layer_list.back()->name_space) {
                 popLayer();
             }
-            if ((LAYER_SPACE_MASK & name) == layer_list.back()->name_space) {
+            if ((Layer::LAYER_SPACE_MASK & name) == layer_list.back()->name_space) {
                 return layer_list.back()->choose(name);
             }
         } else if (world->selection.state == Selection::ContextMenu) {

@@ -30,7 +30,8 @@ public:
     // the View contains a stack of layers
     // the layer on the back() is the "top" of the stack
     std::list<Layer *> layer_list;
-#define MAX_LAYERS (255)
+
+    constexpr static size_t MAX_LAYERS{255};
 
     // the current top layer
     Layer *top;
@@ -44,9 +45,10 @@ public:
     // a pointer to the model to use for the view
     Model *model;
 
-#define VIEW_SPACE_MASK (0xFF000000)
+    constexpr static uint32_t VIEW_SPACE_MASK{0xFF000000};
+
     // the pre-fix for selection naming for this view.
-    int name_space;
+    uint32_t name_space;
 
     // class constructor
     View(int select_name);

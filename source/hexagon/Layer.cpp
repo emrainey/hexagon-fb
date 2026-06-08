@@ -11,6 +11,7 @@
 #include <cmath>
 #include <filesystem>
 #include <format>
+#include <numbers>
 #ifndef _WIN32
 #include <unistd.h>
 #endif
@@ -213,8 +214,8 @@ Vector *Layer::placeNode(int num_nodes) {
         }
     }
 
-    double x = radius * cos(2 * PI * dt);
-    double y = radius * sin(2 * PI * dt);
+    double x = radius * cos(2 * std::numbers::pi * dt);
+    double y = radius * sin(2 * std::numbers::pi * dt);
     double z = 1;
     return new Vector(x, y, z);
 }

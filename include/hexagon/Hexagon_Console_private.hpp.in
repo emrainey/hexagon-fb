@@ -13,6 +13,7 @@ constexpr static size_t VER_MAJOR{@PROJECT_VERSION_MAJOR@};
 constexpr static size_t VER_MINOR{@PROJECT_VERSION_MINOR@};
 constexpr static size_t VER_PATCH{@PROJECT_VERSION_PATCH@};
 constexpr static char const* const COMPANY_NAME{"@PROJECT_AUTHOR@"};
+constexpr static char const* const PROJECT_AUTHOR{"@PROJECT_AUTHOR@"};
 constexpr static char const* const FILE_VERSION{"@PROJECT_VERSION@"};
 constexpr static char const* const FILE_DESCRIPTION{"@PROJECT_DESCRIPTION@"};
 constexpr static char const* const INTERNAL_NAME{"@PROJECT_NAME@"};

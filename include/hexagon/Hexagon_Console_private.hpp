@@ -13,6 +13,7 @@ constexpr static size_t VER_MAJOR{0};
 constexpr static size_t VER_MINOR{2};
 constexpr static size_t VER_PATCH{1};
 constexpr static char const* const COMPANY_NAME{"Erik Rainey"};
+constexpr static char const* const PROJECT_AUTHOR{"Erik Rainey"};
 constexpr static char const* const FILE_VERSION{"0.2.1"};
 constexpr static char const* const FILE_DESCRIPTION{"3D File Explorer"};
 constexpr static char const* const INTERNAL_NAME{"hexgaon"};

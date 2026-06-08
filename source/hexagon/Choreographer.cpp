@@ -42,7 +42,7 @@ void Choreographer::move(void) {
     } else if (type == PROLATION) {
         auto now = std::chrono::steady_clock::now();
         double elapsed = std::chrono::duration_cast<std::chrono::duration<double>>(now - platform->scheduler.start_time).count();
-        double dt = (elapsed * TWO_PI) / 3.0;
+        double dt = (elapsed * std::numbers::twopi) / 3.0;
         double r = 5;
         double x = r * cos(dt);
         double y = r * sin(dt);

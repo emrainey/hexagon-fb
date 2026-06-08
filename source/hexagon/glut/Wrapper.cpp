@@ -42,6 +42,11 @@ void glut_mouseClick(int button, int state, int x, int y) {
     platform->input.mouseClick(button, state, x, y);
 }
 
+void glut_mouseWheel(int wheel, int direction, int x, int y) {
+    TEST_PLATFORM();
+    platform->input.mouseWheel(wheel, direction, x, y);
+}
+
 void glut_mouseDrag(int x, int y) {
     TEST_PLATFORM();
     platform->input.mouseDrag(x, y);
@@ -81,6 +86,7 @@ void glutWrappers_assignCallbacks(void) {
     // Input Object Callbacks
     glutMouseFunc(glut_mouseClick);
     glutMotionFunc(glut_mouseDrag);
+    // glutMouseWheelFunc(glut_mouseWheel);
     glutPassiveMotionFunc(glut_mouseMove);
     glutKeyboardFunc(glut_keyPressed);
     glutSpecialFunc(glut_keyPressedSpecial);

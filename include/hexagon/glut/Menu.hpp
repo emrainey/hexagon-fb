@@ -33,8 +33,6 @@ public:
     int last_render_x;
     int last_render_y;
 
-#define MENU_WIDTH (100)
-
     // class constructor
     Menu(std::string name);
     // class destructor

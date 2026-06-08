@@ -10,7 +10,8 @@
 
 #include "hexagon/Hexagon.hpp"    // class's header file
 
-#define SIDES (6)                 // the only place where we should define the number of sides
+constexpr static auto SIDES{6};  // the only place where we should define the number of sides
+
 #define PREV(i) ((i - 1 < 0) ? (SIDES - 1) : (i - 1))
 #define NEXT(i) ((i + 1) % SIDES)
 #define INV(i) ((i + (SIDES / 2)) % SIDES)
