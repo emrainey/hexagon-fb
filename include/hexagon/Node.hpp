@@ -53,11 +53,14 @@ public:
     // the visual appearance configuration
     Appearance appearance;
 
+    double radius_factor;
+    double height_factor;
+
     Choreographer *choreographer;  // pointer to the class which determines
                                    // how this node moves
 
     Node();
-    Node(const std::string &n, const std::string &p, const std::string &d, Node_Type_e nt, Model_Type_e mt, int select_name, bool is_permitted = true, bool is_executable = false);
+    Node(const std::string &n, const std::string &p, const std::string &d, Node_Type_e nt, Model_Type_e mt, int select_name, bool is_permitted = true, bool is_executable = false, double radius_factor = 1.0, double height_factor = 1.0);
 
     // class destructor
     ~Node();

@@ -2,7 +2,7 @@
 
 ## History
 
-This is copy half of a port of a project I was playing around with in 2003. I wanted to learn more about GLUT and OpenGL in general.
+This is a port of a project I was playing around with in 2003. I wanted to learn more about GLUT and OpenGL in general.
 
 ## High Level Notion
 

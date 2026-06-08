@@ -21,12 +21,14 @@ Node::Node() {
     is_permitted = true;
     is_executable = false;
     appearance = AppearanceLookup::getAppearance(node_type, is_executable, is_permitted);
+    radius_factor = 1.0;
+    height_factor = 1.0;
 
     // the default model;
-    model = new Model("", appearance);
+    model = new Model("", appearance, radius_factor, height_factor);
 }
 
-Node::Node(const std::string &n, const std::string &p, const std::string &d, Node_Type_e nt, Model_Type_e mt, int select_name, bool is_permitted, bool is_executable) {
+Node::Node(const std::string &n, const std::string &p, const std::string &d, Node_Type_e nt, Model_Type_e mt, int select_name, bool is_permitted, bool is_executable, double radius_factor, double height_factor) {
     // set our name, path and description
     name = n;
     path = p;
@@ -35,6 +37,8 @@ Node::Node(const std::string &n, const std::string &p, const std::string &d, Nod
     model_type = mt;
     this->is_permitted = is_permitted;
     this->is_executable = is_executable;
+    this->radius_factor = radius_factor;
+    this->height_factor = height_factor;
 
     appearance = AppearanceLookup::getAppearance(node_type, is_executable, is_permitted);
 
@@ -44,29 +48,29 @@ Node::Node(const std::string &n, const std::string &p, const std::string &d, Nod
     // initialize our model
     switch (mt) {
         case DOWN_ARROW:
-            model = new Model(appearance);
+            model = new Model(appearance, radius_factor, height_factor);
             model->loadDownArrow();
             break;
 
         case REMOVABLE_DRIVE:
             // get the model for it
-            model = new Model("removeable_drive", appearance);
+            model = new Model("removeable_drive", appearance, radius_factor, height_factor);
             break;
         case REMOTE_DRIVE:
             // get the model for it
-            model = new Model("remote_drive", appearance);
+            model = new Model("remote_drive", appearance, radius_factor, height_factor);
             break;
         case FIXED_DRIVE:
             // get the model for it
-            model = new Model("fixed_drive", appearance);
+            model = new Model("fixed_drive", appearance, radius_factor, height_factor);
             break;
         case RAMDISK_DRIVE:
             // get the model for it
-            model = new Model("ramdisk_drive", appearance);
+            model = new Model("ramdisk_drive", appearance, radius_factor, height_factor);
             break;
         case CDROM_DRIVE:
             // get the model for it
-            model = new Model("cdrom_drive", appearance);
+            model = new Model("cdrom_drive", appearance, radius_factor, height_factor);
             break;
         case USER_DEFINED:
             // where do we load the model from???
@@ -80,7 +84,7 @@ Node::Node(const std::string &n, const std::string &p, const std::string &d, Nod
                 ext = name.substr(ext_idx, len);
             }
 
-            model = new Model(ext.c_str(), appearance);  // get the default model type
+            model = new Model(ext.c_str(), appearance, radius_factor, height_factor);  // get the default model type
             choreographer->setType(PROLATION);
             break;
     }

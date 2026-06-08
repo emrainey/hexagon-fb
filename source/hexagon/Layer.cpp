@@ -8,6 +8,7 @@
  * @author Erik Rainey
  ******************************************************************************/
 
+#include <cmath>
 #include <filesystem>
 #include <format>
 #ifndef _WIN32
@@ -137,6 +138,8 @@ void Layer::addNode(std::string path, std::string name) {
         Model_Type_e model_type = Model_Type_e::USER_DEFINED;
         bool is_permitted = true;
         bool is_executable = false;
+        double radius_factor = 1.0;
+        double height_factor = 1.0;
 
         try {
             std::filesystem::path fullpath = std::filesystem::path(path) / name;
@@ -154,6 +157,7 @@ void Layer::addNode(std::string path, std::string name) {
                 description = (sz < 1024) ? std::format("{} bytes", sz) : std::format("{} kb", sz / 1024);
                 type = FILE_ON_DISK_TYPE;
                 model_type = USER_DEFINED;
+                height_factor = 1.0 + std::log10(static_cast<double>(sz) + 1.0) * 0.5;
 #ifndef _WIN32
                 if (access(fullpath.string().c_str(), R_OK) != 0) {
                     is_permitted = false;
@@ -184,7 +188,7 @@ void Layer::addNode(std::string path, std::string name) {
         int select_name = name_space | (size + 1);
 
         // declare a new node...
-        n = new Node(name, path, description, type, model_type, select_name, is_permitted, is_executable);
+        n = new Node(name, path, description, type, model_type, select_name, is_permitted, is_executable, radius_factor, height_factor);
 
         Vector *dp = placeNode(size - 1);
         n->position = position + *dp;  // place it down

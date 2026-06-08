@@ -36,11 +36,14 @@ public:
     // the visual appearance configuration
     Appearance appearance;
 
+    double radius_factor;
+    double height_factor;
+
     // class constructors
     Model();
-    Model(Appearance appearance);
+    Model(Appearance appearance, double radius_factor = 1.0, double height_factor = 1.0);
     Model(const char *extension);
-    Model(const char *extension, Appearance appearance);
+    Model(const char *extension, Appearance appearance, double radius_factor = 1.0, double height_factor = 1.0);
 
     // class destructor
     ~Model();

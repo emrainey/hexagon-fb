@@ -21,12 +21,16 @@ Model::Model() {
     appearance.selected_face_color = Color(0.8f, 0.1f, 0.0f, 0.3f);
     appearance.selected_wire_color = Color(1.0f, 1.0f, 1.0f, 0.7f);
     appearance.model_name          = "";
+    radius_factor                  = 1.0;
+    height_factor                  = 1.0;
 }
 
-Model::Model(Appearance app) {
+Model::Model(Appearance app, double radius_factor, double height_factor) {
     normal = 0;
     selected = 0;
     appearance = app;
+    this->radius_factor = radius_factor;
+    this->height_factor = height_factor;
 }
 
 Model::Model(const char *extension) {
@@ -38,13 +42,17 @@ Model::Model(const char *extension) {
     appearance.selected_face_color = Color(0.8f, 0.1f, 0.0f, 0.3f);
     appearance.selected_wire_color = Color(1.0f, 1.0f, 1.0f, 0.7f);
     appearance.model_name          = "";
+    radius_factor                  = 1.0;
+    height_factor                  = 1.0;
     loadModel(extension);
 }
 
-Model::Model(const char *extension, Appearance app) {
+Model::Model(const char *extension, Appearance app, double radius_factor, double height_factor) {
     normal = 0;
     selected = 0;
     appearance = app;
+    this->radius_factor = radius_factor;
+    this->height_factor = height_factor;
     loadModel(extension);
 }
 
@@ -59,8 +67,8 @@ Model::~Model() {
 }
 
 void Model::loadDownArrow() {
-    normal = buildDownArrow(0.8, 0.8, 0.2, appearance.face_color, appearance.wire_color);
-    selected = buildDownArrow(0.8, 0.8, 0.2, appearance.selected_face_color, appearance.selected_wire_color);
+    normal = buildDownArrow(0.8 * radius_factor, 0.8 * radius_factor, 0.2 * height_factor, appearance.face_color, appearance.wire_color);
+    selected = buildDownArrow(0.8 * radius_factor, 0.8 * radius_factor, 0.2 * height_factor, appearance.selected_face_color, appearance.selected_wire_color);
     info();
 }
 
@@ -80,15 +88,15 @@ void Model::loadModel(const char *extension) {
     // } else {
     // couldn't find it?
     // just load the hexagon call item for now...
-    normal = buildHexagon(0.8, 0.2, appearance.face_color, appearance.wire_color);
-    selected = buildHexagon(0.8, 0.2, appearance.selected_face_color, appearance.selected_wire_color);
+    normal = buildHexagon(0.8 * radius_factor, 0.2 * height_factor, appearance.face_color, appearance.wire_color);
+    selected = buildHexagon(0.8 * radius_factor, 0.2 * height_factor, appearance.selected_face_color, appearance.selected_wire_color);
     // }
     info();
 }
 
 void Model::loadPoly() {
-    normal = buildPoly(0.8, 0, appearance.face_color, appearance.wire_color);
-    selected = buildPoly(0.8, 0, appearance.selected_face_color, appearance.selected_wire_color);
+    normal = buildPoly(0.8 * radius_factor, 0 * height_factor, appearance.face_color, appearance.wire_color);
+    selected = buildPoly(0.8 * radius_factor, 0 * height_factor, appearance.selected_face_color, appearance.selected_wire_color);
     info();
 }
 
