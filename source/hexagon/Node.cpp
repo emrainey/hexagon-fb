@@ -122,7 +122,7 @@ void Node::render(bool selection, SelectionState mode) {
 // Renders the descriptive text of the object.
 void Node::renderDescription(bool extra) {
     if (platform->display.renderFullName == true) {
-        Vector text = position + Vector(0, 0, 1);
+        Vector text = position;
         if (extra == true) {
             platform->display.print3DText(text, "%s\n%s", name.c_str(), description.c_str());
         } else {

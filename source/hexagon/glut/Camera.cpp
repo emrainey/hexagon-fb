@@ -187,5 +187,9 @@ void Camera::setDistance(float d) {
 
 // Alters the distance of the camera.
 void Camera::alterDistance(float delta) {
-    setDistance(radius + delta);
+    float factor = radius / 50.0f;
+    if (factor < 0.1f) {
+        factor = 0.1f;
+    }
+    setDistance(radius + delta * factor);
 }
