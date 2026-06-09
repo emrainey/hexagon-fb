@@ -43,7 +43,8 @@ Node::Node(
     this->radius_factor = radius_factor;
     this->height_factor = height_factor;
 
-    appearance = AppearanceLookup::getAppearance(node_type, is_executable, is_permitted);
+    bool is_hidden = (name.size() > 0 && name[0] == '.' && name != "." && name != "..");
+    appearance = AppearanceLookup::getAppearance(node_type, is_executable, is_permitted, is_hidden);
 
     // pass our choreographer our reference so he can fuck with us...
     choreographer = new Choreographer(this);
@@ -53,6 +54,11 @@ Node::Node(
         case DOWN_ARROW:
             model = new Model(appearance, radius_factor, height_factor);
             model->loadDownArrow();
+            break;
+
+        case FOLDER:
+            // get the model for it
+            model = new Model("folder", appearance, radius_factor, height_factor);
             break;
 
         case REMOVABLE_DRIVE:

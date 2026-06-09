@@ -60,9 +60,10 @@ public:
      * @param node_type The type of node (file, directory, etc.)
      * @param is_executable True if the node is an executable file
      * @param is_permitted True if the user has access permissions
+     * @param is_hidden True if the node is pre-pended with a period
      * @return The Appearance structure containing the correct colors and model name
      */
-    static Appearance getAppearance(Node_Type_e node_type, bool is_executable, bool is_permitted);
+    static Appearance getAppearance(Node_Type_e node_type, bool is_executable, bool is_permitted, bool is_hidden = false);
 };
 
 #endif    // APPEARANCE_HPP

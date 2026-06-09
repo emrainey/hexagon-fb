@@ -75,23 +75,20 @@ void Model::loadDownArrow() {
 
 // Loads a model from the filesystem
 void Model::loadModel(const char *extension) {
-    // L3DS loader;
-    // loader.LoadFile(fullpath);
-    // int mesh_count = loader.GetMeshCount();
-    // if (mesh_count != 0) {
-    //     debug.info(Debug::Subsystem::Models, "There are %d meshes in the 3ds file\n", mesh_count);
-    //     for (int i = 0; i < mesh_count; i++) {
-    //         debug.info(Debug::Subsystem::Models, "Mesh %d has %d vertices and %d triangles\n", i,
-    //                    loader.GetMesh(i).GetVertexCount(), loader.GetMesh(i).GetTriangleCount());
-    //     }
-    //     normal = buildMesh(loader, 0.7, 0.1, 0.7, 0.3);
-    //     selected = buildMesh(loader, 1.0, 1.0, 1.0, 0.7);
-    // } else {
-    // couldn't find it?
-    // just load the hexagon call item for now...
-    normal = buildHexagon(0.8 * radius_factor, 0.2 * height_factor, appearance.face_color, appearance.wire_color);
-    selected = buildHexagon(0.8 * radius_factor, 0.2 * height_factor, appearance.selected_face_color, appearance.selected_wire_color);
-    // }
+    std::string ext(extension);
+    // If extension/keyword matches directory-related model types, build hexagon
+    if (ext == "folder" || ext == "removeable_drive" || ext == "remote_drive" ||
+        ext == "fixed_drive" || ext == "ramdisk_drive" || ext == "cdrom_drive") {
+        normal = buildHexagon(0.8 * radius_factor, 0.2 * height_factor, appearance.face_color, appearance.wire_color);
+        selected = buildHexagon(0.8 * radius_factor, 0.2 * height_factor, appearance.selected_face_color, appearance.selected_wire_color);
+    } else {
+        // Files are represented by Cubes!
+        double w = 0.8 * radius_factor;
+        double d = 0.8 * radius_factor;
+        double h = 0.2 * height_factor;
+        normal = buildCube(w, d, h, appearance.face_color, appearance.wire_color);
+        selected = buildCube(w, d, h, appearance.selected_face_color, appearance.selected_wire_color);
+    }
     info();
 }
 
@@ -533,5 +530,99 @@ void Model::HexWirePoly(double radius, double height) {
     glVertex3d(radius * COS(300), radius * SIN(300), height);
     glVertex3d(radius * COS(300), radius * SIN(300), height);
     glVertex3d(radius * COS(0), radius * SIN(0), height);
+    glEnd();
+}
+
+GLuint Model::buildCube(double width, double depth, double height, Color face, Color wire) {
+    GLuint shape = glGenLists(1);
+    if (shape == 0) {
+        REPORT_ERROR(glGenLists, false);
+    }
+    glNewList(shape, GL_COMPILE);
+    renderCube(width, depth, height, face, wire);
+    glEndList();
+
+    REPORT_ERROR(buildCube, false);
+    return shape;
+}
+
+void Model::renderCube(double width, double depth, double height, Color face, Color wire) {
+    glColor4f(face.getRedFloat(), face.getGreenFloat(), face.getBlueFloat(), face.getAlphaFloat());
+    solidCube(width, depth, height);
+    glColor4f(wire.getRedFloat(), wire.getGreenFloat(), wire.getBlueFloat(), wire.getAlphaFloat());
+    wireCube(width, depth, height);
+}
+
+void Model::solidCube(double w, double d, double h) {
+    double hw = w / 2.0;
+    double hd = d / 2.0;
+
+    glBegin(GL_QUADS);
+    // Top face (Z = h)
+    glNormal3d(0.0, 0.0, 1.0);
+    glVertex3d(-hw, -hd, h);
+    glVertex3d( hw, -hd, h);
+    glVertex3d( hw,  hd, h);
+    glVertex3d(-hw,  hd, h);
+
+    // Bottom face (Z = 0)
+    glNormal3d(0.0, 0.0, -1.0);
+    glVertex3d(-hw,  hd, 0.0);
+    glVertex3d( hw,  hd, 0.0);
+    glVertex3d( hw, -hd, 0.0);
+    glVertex3d(-hw, -hd, 0.0);
+
+    // Front face (Y = -hd)
+    glNormal3d(0.0, -1.0, 0.0);
+    glVertex3d(-hw, -hd, 0.0);
+    glVertex3d( hw, -hd, 0.0);
+    glVertex3d( hw, -hd, h);
+    glVertex3d(-hw, -hd, h);
+
+    // Back face (Y = hd)
+    glNormal3d(0.0, 1.0, 0.0);
+    glVertex3d( hw,  hd, 0.0);
+    glVertex3d(-hw,  hd, 0.0);
+    glVertex3d(-hw,  hd, h);
+    glVertex3d( hw,  hd, h);
+
+    // Left face (X = -hw)
+    glNormal3d(-1.0, 0.0, 0.0);
+    glVertex3d(-hw,  hd, 0.0);
+    glVertex3d(-hw, -hd, 0.0);
+    glVertex3d(-hw, -hd, h);
+    glVertex3d(-hw,  hd, h);
+
+    // Right face (X = hw)
+    glNormal3d(1.0, 0.0, 0.0);
+    glVertex3d( hw, -hd, 0.0);
+    glVertex3d( hw,  hd, 0.0);
+    glVertex3d( hw,  hd, h);
+    glVertex3d( hw, -hd, h);
+    glEnd();
+}
+
+void Model::wireCube(double w, double d, double h) {
+    double hw = w / 2.0;
+    double hd = d / 2.0;
+
+    glBegin(GL_LINES);
+    // Top face edges
+    glVertex3d(-hw, -hd, h); glVertex3d( hw, -hd, h);
+    glVertex3d( hw, -hd, h); glVertex3d( hw,  hd, h);
+    glVertex3d( hw,  hd, h); glVertex3d(-hw,  hd, h);
+    glVertex3d(-hw,  hd, h); glVertex3d(-hw, -hd, h);
+
+    // Bottom face edges
+    glVertex3d(-hw, -hd, 0.0); glVertex3d( hw, -hd, 0.0);
+    glVertex3d( hw, -hd, 0.0); glVertex3d( hw,  hd, 0.0);
+    glVertex3d( hw,  hd, 0.0); glVertex3d(-hw,  hd, 0.0);
+    glVertex3d(-hw,  hd, 0.0); glVertex3d(-hw, -hd, 0.0);
+
+    // Vertical columns
+    glVertex3d(-hw, -hd, 0.0); glVertex3d(-hw, -hd, h);
+    glVertex3d( hw, -hd, 0.0); glVertex3d( hw, -hd, h);
+    glVertex3d( hw,  hd, 0.0); glVertex3d( hw,  hd, h);
+    glVertex3d(-hw,  hd, 0.0); glVertex3d(-hw,  hd, h);
     glEnd();
 }
