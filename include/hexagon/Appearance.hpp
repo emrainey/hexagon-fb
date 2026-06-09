@@ -34,6 +34,7 @@ typedef enum {
     RAMDISK_DRIVE,
     CDROM_DRIVE,
     DOWN_ARROW,
+    GEAR,
     NUM_MODEL_TYPES
 } Model_Type_e;
 

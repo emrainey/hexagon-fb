@@ -72,11 +72,13 @@ public:
     static GLuint buildDownArrow(double length, double width, double height, Color face, Color wire);
     static GLuint buildPoly(double radius, double height, Color face, Color wire);
     static GLuint buildCube(double width, double depth, double height, Color face, Color wire);
+    static GLuint buildGear(double radius, double height, int teeth, Color face, Color wire);
 
     static void renderHexagon(double radius, double height, Color face, Color wire);
     static void renderDownArrow(double length, double width, double height, Color face, Color wire);
     static void renderPoly(double radius, double height, Color face, Color wire);
     static void renderCube(double width, double depth, double height, Color face, Color wire);
+    static void renderGear(double radius, double height, int teeth, Color face, Color wire);
 
     static void wireHexagon(double radius, double height);
     static void solidHexagon(double radius, double height);
@@ -86,6 +88,8 @@ public:
     static void HexWirePoly(double radius, double height);
     static void wireCube(double width, double depth, double height);
     static void solidCube(double width, double depth, double height);
+    static void wireGear(double radius, double height, int teeth);
+    static void solidGear(double radius, double height, int teeth);
 };
 
 #endif    // MODEL_H

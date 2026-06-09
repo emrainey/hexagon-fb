@@ -9,6 +9,8 @@
  ******************************************************************************/
 
 #include "hexagon/Hexagon.hpp"    // class's header file
+#include <vector>
+#include <cmath>
 
 extern Port *platform;
 
@@ -76,9 +78,15 @@ void Model::loadDownArrow() {
 // Loads a model from the filesystem
 void Model::loadModel(const char *extension) {
     std::string ext(extension);
-    // If extension/keyword matches directory-related model types, build hexagon
-    if (ext == "folder" || ext == "removeable_drive" || ext == "remote_drive" ||
-        ext == "fixed_drive" || ext == "ramdisk_drive" || ext == "cdrom_drive") {
+    if (ext.rfind("gear_", 0) == 0) {
+        int teeth = 5;
+        try {
+            teeth = std::stoi(ext.substr(5));
+        } catch (...) {}
+        normal = buildGear(0.8 * radius_factor, 0.2 * height_factor, teeth, appearance.face_color, appearance.wire_color);
+        selected = buildGear(0.8 * radius_factor, 0.2 * height_factor, teeth, appearance.selected_face_color, appearance.selected_wire_color);
+    } else if (ext == "folder" || ext == "removeable_drive" || ext == "remote_drive" ||
+               ext == "fixed_drive" || ext == "ramdisk_drive" || ext == "cdrom_drive") {
         normal = buildHexagon(0.8 * radius_factor, 0.2 * height_factor, appearance.face_color, appearance.wire_color);
         selected = buildHexagon(0.8 * radius_factor, 0.2 * height_factor, appearance.selected_face_color, appearance.selected_wire_color);
     } else {
@@ -624,5 +632,192 @@ void Model::wireCube(double w, double d, double h) {
     glVertex3d( hw, -hd, 0.0); glVertex3d( hw, -hd, h);
     glVertex3d( hw,  hd, 0.0); glVertex3d( hw,  hd, h);
     glVertex3d(-hw,  hd, 0.0); glVertex3d(-hw,  hd, h);
+    glEnd();
+}
+
+GLuint Model::buildGear(double radius, double height, int teeth, Color face, Color wire) {
+    GLuint shape = glGenLists(1);
+    if (shape == 0) {
+        REPORT_ERROR(glGenLists, false);
+    }
+    glNewList(shape, GL_COMPILE);
+    renderGear(radius, height, teeth, face, wire);
+    glEndList();
+
+    REPORT_ERROR(buildGear, false);
+    return shape;
+}
+
+void Model::renderGear(double radius, double height, int teeth, Color face, Color wire) {
+    glColor4f(face.getRedFloat(), face.getGreenFloat(), face.getBlueFloat(), face.getAlphaFloat());
+    solidGear(radius, height, teeth);
+    glColor4f(wire.getRedFloat(), wire.getGreenFloat(), wire.getBlueFloat(), wire.getAlphaFloat());
+    wireGear(radius, height, teeth);
+}
+
+void Model::solidGear(double radius, double height, int teeth) {
+    if (teeth < 3) teeth = 3;
+    int N = 5 * teeth;
+    std::vector<double> x_out(N);
+    std::vector<double> y_out(N);
+    std::vector<double> x_in(N);
+    std::vector<double> y_in(N);
+
+    double r_outer = radius;
+    double r_inner = radius * 0.75;
+    double r_hole = radius * 0.3;
+    double dt = std::numbers::twopi / teeth;
+
+    for (int j = 0; j < N; ++j) {
+        int tooth_index = j / 5;
+        int step = j % 5;
+        double fract = 0.0;
+        double r = r_inner;
+        switch (step) {
+            case 0: fract = 0.0;  r = r_inner; break;
+            case 1: fract = 0.25; r = r_inner; break;
+            case 2: fract = 0.35; r = r_outer; break;
+            case 3: fract = 0.65; r = r_outer; break;
+            case 4: fract = 0.75; r = r_inner; break;
+        }
+        double angle = (tooth_index + fract) * dt;
+        x_out[j] = r * cos(angle);
+        y_out[j] = r * sin(angle);
+        x_in[j] = r_hole * cos(angle);
+        y_in[j] = r_hole * sin(angle);
+    }
+
+    // 1. Top face (Z = height)
+    glBegin(GL_QUAD_STRIP);
+    glNormal3d(0.0, 0.0, 1.0);
+    for (int j = 0; j <= N; ++j) {
+        int idx = j % N;
+        glVertex3d(x_in[idx], y_in[idx], height);
+        glVertex3d(x_out[idx], y_out[idx], height);
+    }
+    glEnd();
+
+    // 2. Bottom face (Z = 0)
+    glBegin(GL_QUAD_STRIP);
+    glNormal3d(0.0, 0.0, -1.0);
+    for (int j = 0; j <= N; ++j) {
+        int idx = j % N;
+        glVertex3d(x_out[idx], y_out[idx], 0.0);
+        glVertex3d(x_in[idx], y_in[idx], 0.0);
+    }
+    glEnd();
+
+    // 3. Outer teeth walls
+    glBegin(GL_QUADS);
+    for (int j = 0; j < N; ++j) {
+        int next = (j + 1) % N;
+        double dx = x_out[next] - x_out[j];
+        double dy = y_out[next] - y_out[j];
+        double len = sqrt(dx*dx + dy*dy);
+        double nx = 0.0;
+        double ny = 0.0;
+        if (len > 1e-7) {
+            nx = dy / len;
+            ny = -dx / len;
+        }
+        glNormal3d(nx, ny, 0.0);
+        glVertex3d(x_out[j], y_out[j], height);
+        glVertex3d(x_out[j], y_out[j], 0.0);
+        glVertex3d(x_out[next], y_out[next], 0.0);
+        glVertex3d(x_out[next], y_out[next], height);
+    }
+    glEnd();
+
+    // 4. Inner hole wall
+    glBegin(GL_QUADS);
+    for (int j = 0; j < N; ++j) {
+        int next = (j + 1) % N;
+        double dx = x_in[next] - x_in[j];
+        double dy = y_in[next] - y_in[j];
+        double len = sqrt(dx*dx + dy*dy);
+        double nx = 0.0;
+        double ny = 0.0;
+        if (len > 1e-7) {
+            nx = -dy / len;
+            ny = dx / len;
+        }
+        glNormal3d(nx, ny, 0.0);
+        glVertex3d(x_in[j], y_in[j], height);
+        glVertex3d(x_in[next], y_in[next], height);
+        glVertex3d(x_in[next], y_in[next], 0.0);
+        glVertex3d(x_in[j], y_in[j], 0.0);
+    }
+    glEnd();
+}
+
+void Model::wireGear(double radius, double height, int teeth) {
+    if (teeth < 3) teeth = 3;
+    int N = 5 * teeth;
+    std::vector<double> x_out(N);
+    std::vector<double> y_out(N);
+    std::vector<double> x_in(N);
+    std::vector<double> y_in(N);
+
+    double r_outer = radius;
+    double r_inner = radius * 0.75;
+    double r_hole = radius * 0.3;
+    double dt = std::numbers::twopi / teeth;
+
+    for (int j = 0; j < N; ++j) {
+        int tooth_index = j / 5;
+        int step = j % 5;
+        double fract = 0.0;
+        double r = r_inner;
+        switch (step) {
+            case 0: fract = 0.0;  r = r_inner; break;
+            case 1: fract = 0.25; r = r_inner; break;
+            case 2: fract = 0.35; r = r_outer; break;
+            case 3: fract = 0.65; r = r_outer; break;
+            case 4: fract = 0.75; r = r_inner; break;
+        }
+        double angle = (tooth_index + fract) * dt;
+        x_out[j] = r * cos(angle);
+        y_out[j] = r * sin(angle);
+        x_in[j] = r_hole * cos(angle);
+        y_in[j] = r_hole * sin(angle);
+    }
+
+    // Draw top outer loop
+    glBegin(GL_LINE_LOOP);
+    for (int j = 0; j < N; ++j) {
+        glVertex3d(x_out[j], y_out[j], height);
+    }
+    glEnd();
+
+    // Draw bottom outer loop
+    glBegin(GL_LINE_LOOP);
+    for (int j = 0; j < N; ++j) {
+        glVertex3d(x_out[j], y_out[j], 0.0);
+    }
+    glEnd();
+
+    // Draw top inner loop
+    glBegin(GL_LINE_LOOP);
+    for (int j = 0; j < N; ++j) {
+        glVertex3d(x_in[j], y_in[j], height);
+    }
+    glEnd();
+
+    // Draw bottom inner loop
+    glBegin(GL_LINE_LOOP);
+    for (int j = 0; j < N; ++j) {
+        glVertex3d(x_in[j], y_in[j], 0.0);
+    }
+    glEnd();
+
+    // Draw vertical lines for teeth and hole
+    glBegin(GL_LINES);
+    for (int j = 0; j < N; ++j) {
+        glVertex3d(x_out[j], y_out[j], height);
+        glVertex3d(x_out[j], y_out[j], 0.0);
+
+        glVertex3d(x_in[j], y_in[j], height);
+        glVertex3d(x_in[j], y_in[j], 0.0);
+    }
     glEnd();
 }

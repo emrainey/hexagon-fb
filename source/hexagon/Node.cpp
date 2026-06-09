@@ -9,6 +9,7 @@
  ******************************************************************************/
 
 #include "hexagon/Hexagon.hpp"    // class's header file
+#include <filesystem>
 
 // class constructor
 Node::Node() {
@@ -81,6 +82,23 @@ Node::Node(
             // get the model for it
             model = new Model("cdrom_drive", appearance, radius_factor, height_factor);
             break;
+        case GEAR: {
+            std::filesystem::path fullpath = std::filesystem::path(path) / name;
+            uintmax_t sz = 0;
+            try {
+                sz = std::filesystem::file_size(fullpath);
+            } catch (...) {}
+            int teeth = 5;
+            if (sz < 50000) teeth = 5;
+            else if (sz < 250000) teeth = 6;
+            else if (sz < 1000000) teeth = 7;
+            else if (sz < 5000000) teeth = 8;
+            else teeth = 9;
+            std::string gear_ext = "gear_" + std::to_string(teeth);
+            model = new Model(gear_ext.c_str(), appearance, radius_factor, height_factor);
+            choreographer->setType(SPINNER);
+            break;
+        }
         case USER_DEFINED:
             // where do we load the model from???
         default:

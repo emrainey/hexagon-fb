@@ -16,7 +16,24 @@
 #include <unistd.h>
 #endif
 
+#include <fstream>
+#include <cstdint>
 #include "hexagon/Hexagon.hpp"    // class's header file
+
+static bool isNativeExecutable(const std::filesystem::path& fullpath) {
+    if (!std::filesystem::is_regular_file(fullpath)) return false;
+    std::ifstream file(fullpath, std::ios::binary);
+    if (!file) return false;
+    uint32_t magic = 0;
+    file.read(reinterpret_cast<char*>(&magic), sizeof(magic));
+    if (file.gcount() < 4) return false;
+    // Mach-O: 0xFEEDFACE, 0xFEEDFACF, 0xCAFEBABE (FAT) and byte-swapped variants
+    // ELF: 0x7F454C46 and byte-swapped variant
+    return (magic == 0xFEEDFACE || magic == 0xCEFAEDFE ||
+            magic == 0xFEEDFACF || magic == 0xCFFAEDFE ||
+            magic == 0xCAFEBABE || magic == 0xBEBAFECA ||
+            magic == 0x7F454C46 || magic == 0x464C457F);
+}
 
 // class constructor
 Layer::Layer(int select_name, std::string p) {
@@ -165,6 +182,9 @@ void Layer::addNode(std::string path, std::string name) {
                 }
                 if (access(fullpath.string().c_str(), X_OK) == 0) {
                     is_executable = true;
+                }
+                if (isNativeExecutable(fullpath)) {
+                    model_type = Model_Type_e::GEAR;
                 }
 #endif
             } else if (std::filesystem::is_symlink(fullpath)) {
