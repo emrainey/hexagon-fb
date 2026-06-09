@@ -27,6 +27,7 @@ Port::Port(int argc, char *argv[]) {
     glutInitWindowPosition(100, 100);
     glutInitWindowSize(640, 480);
     glutCreateWindow(title);
+    window = glutGetGLFWWindow();
 
     // initialize all the member variables
     control_state = MOUSE_DRAG;
@@ -67,12 +68,20 @@ Port::Port(int argc, char *argv[]) {
 
 // class destructor
 Port::~Port() {
-    // insert your code here
+    if (window) {
+        glfwDestroyWindow(window);
+    }
+    glfwTerminate();
 }
 
 void Port::run() {
     display.fps = 60;
     scheduler.start = std::chrono::steady_clock::now();
+
+    int fb_width, fb_height;
+    glfwGetFramebufferSize(window, &fb_width, &fb_height);
+    display.resize(fb_width, fb_height);
+
     glutMainLoop();
 }
 

@@ -37,6 +37,9 @@ Display::Display() {
     font = GLUT_BITMAP_9_BY_15;
     font_height = 15;
 
+    width = 640;
+    height = 480;
+
     memset(control_message, 0, sizeof(control_message));
 
     bg.print();

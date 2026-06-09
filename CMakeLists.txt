@@ -15,8 +15,6 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 find_package(GLEW REQUIRED)
 find_package(GLFW3 REQUIRED)
 find_package(OpenGL REQUIRED)
-find_package(GLUT REQUIRED)
-# find_package(tinygltf REQUIRED)
 
 # message(STATUS "OPENGL_INCLUDE_DIR: ${OPENGL_INCLUDE_DIR}")
 # message(STATUS "OPENGL_LIBRARIES: ${OPENGL_LIBRARIES}")
@@ -76,4 +74,4 @@ target_include_directories(hexagon
         ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 target_compile_definitions(hexagon PRIVATE GL_SILENCE_DEPRECATION)
-target_link_libraries(hexagon PRIVATE OpenGL::GL OpenGL::GLU GLUT::GLUT)
+target_link_libraries(hexagon PRIVATE OpenGL::GL OpenGL::GLU glfw)

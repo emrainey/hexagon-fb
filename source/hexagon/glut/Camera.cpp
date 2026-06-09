@@ -130,10 +130,10 @@ void Camera::init(void) {
     theta = 3 * std::numbers::pi / 2;
     phi = PHI_MIN;
 
-    if (platform != NULL)
-        aspect = platform->display.width / platform->display.height;
+    if (platform != NULL && platform->display.height > 0)
+        aspect = (double)platform->display.width / platform->display.height;
     else
-        aspect = 0;
+        aspect = 1.333333f;
 
     fov = 40;
     from.zeroize();

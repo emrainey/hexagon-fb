@@ -14,7 +14,15 @@
 
 // #warning Included Port
 
-#include <glut.h>
+#ifdef __APPLE__
+#include <OpenGL/gl.h>
+#include <OpenGL/glu.h>
+#else
+#include <GL/gl.h>
+#include <GL/glu.h>
+#endif
+#include <GLFW/glfw3.h>
+#include "hexagon/glut/glut_emulation.hpp"
 
 #include "hexagon/glut/Camera.hpp"
 #include "hexagon/glut/Display.hpp"
@@ -64,6 +72,7 @@ public:
     Display display;    // this must be initialized before the camera
     Camera camera;
     Control_State_t control_state;
+    GLFWwindow *window;
 
     // platform specific implementations of interfaces...
     PersistentStorage *ps;
