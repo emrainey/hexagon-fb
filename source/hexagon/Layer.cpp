@@ -102,8 +102,19 @@ bool Layer::choose(int name) {
                 } else {
                     debug.info(Debug::Subsystem::Internal, "This node is a file!\n");
                     if (world->selection.state == Selection::Newer) {
-                        platform->shell->initialize("open", path, selected->name);
-                        platform->shell->execute();
+                        if (!selected->is_executable) {
+                            std::printf("Opening file %s via default handler\n", selected->name.c_str());
+                            std::fflush(stdout);
+                            snprintf(platform->display.control_message, sizeof(platform->display.control_message), "Opening: %s", selected->name.c_str());
+                            platform->shell->initialize("open", path, selected->name);
+                            if (!platform->shell->execute()) {
+                                std::printf("Failed to open file %s\n", selected->name.c_str());
+                                std::fflush(stdout);
+                                snprintf(platform->display.control_message, sizeof(platform->display.control_message), "Failed to open: %s", selected->name.c_str());
+                            }
+                        } else {
+                            debug.info(Debug::Subsystem::Internal, "Executable file selected, ignoring click for now.\n");
+                        }
                     } else if (world->selection.state == Selection::ContextMenu) {
                         // create a context menu and display it...
                         debug.info(Debug::Subsystem::Menu, "Layer::choose() Menu on file!\n");

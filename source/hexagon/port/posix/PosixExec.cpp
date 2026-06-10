@@ -9,6 +9,7 @@
  ******************************************************************************/
 
 #include <filesystem>
+#include <cstdlib>
 
 #include "hexagon/Debug.hpp"
 #include "hexagon/port/Port.hpp"
@@ -35,11 +36,16 @@ bool PosixExec::execute() {
         return true;
     }
 
+    std::filesystem::path fullpath = std::filesystem::path(path) / file;
     if (debug.state) {
-        std::filesystem::path fullpath = std::filesystem::path(path) / file;
         debug.info(Debug::Subsystem::Platform, "Attempting to %s %s\n", command.c_str(), fullpath.string().c_str());
     }
 
-    // FIXME exec the command
-    return false;
+    std::string cmd = command + " \"" + fullpath.string() + "\"";
+    int ret = std::system(cmd.c_str());
+    if (ret != 0) {
+        debug.info(Debug::Subsystem::Error, "Command '%s' failed with return code %d\n", cmd.c_str(), ret);
+        return false;
+    }
+    return true;
 }
