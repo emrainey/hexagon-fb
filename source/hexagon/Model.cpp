@@ -18,9 +18,9 @@ Model::Model() {
     normal = 0;
     selected = 0;
     // Default appearance (Permitted directories purple color scheme)
-    appearance.face_color = Color(0.7f, 0.1f, 0.7f, 0.3f);
+    appearance.face_color = Color(0.7f, 0.1f, 0.7f, 0.8f);
     appearance.wire_color = Color(1.0f, 1.0f, 1.0f, 0.7f);
-    appearance.selected_face_color = Color(0.8f, 0.1f, 0.0f, 0.3f);
+    appearance.selected_face_color = Color(0.8f, 0.1f, 0.0f, 0.8f);
     appearance.selected_wire_color = Color(1.0f, 1.0f, 1.0f, 0.7f);
     appearance.model_name = "";
     radius_factor = 1.0;
@@ -39,9 +39,9 @@ Model::Model(const char *extension) {
     normal = 0;
     selected = 0;
     // Default appearance (Permitted directories purple color scheme)
-    appearance.face_color = Color(0.7f, 0.1f, 0.7f, 0.3f);
+    appearance.face_color = Color(0.7f, 0.1f, 0.7f, 0.8f);
     appearance.wire_color = Color(1.0f, 1.0f, 1.0f, 0.7f);
-    appearance.selected_face_color = Color(0.8f, 0.1f, 0.0f, 0.3f);
+    appearance.selected_face_color = Color(0.8f, 0.1f, 0.0f, 0.8f);
     appearance.selected_wire_color = Color(1.0f, 1.0f, 1.0f, 0.7f);
     appearance.model_name = "";
     radius_factor = 1.0;

@@ -268,7 +268,9 @@ void Display::drawframe(void) {
 
     // render all the nodes here...
     GL_PUSH_MATRIX();
+    glDepthMask(GL_FALSE);
     world->render(false);    // not select mode...
+    glDepthMask(GL_TRUE);
     GL_POP_MATRIX();
 }
 
