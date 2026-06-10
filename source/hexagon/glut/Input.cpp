@@ -156,12 +156,12 @@ void Input::mouseMove(int x, int y) {
 
 // FreeGLUT/OpenGLUT Mouse Wheel Callback
 void Input::mouseWheel(int wheel, int direction, int x, int y) {
-    debug.info(Debug::Subsystem::Info, "+Input::mouseWheel(%i,%i,%i,%i)\n", wheel, direction, x, y);
+    debug.info(Debug::Subsystem::Trace, "+Input::mouseWheel(%i,%i,%i,%i)\n", wheel, direction, x, y);
     if (wheel == 0) {
         // This is the scroll wheel.  Use it for zooming!
         platform->camera.alterDistance(direction * 10);
     }
-    debug.info(Debug::Subsystem::Info, "-Input::mouseWheel()\n");
+    debug.info(Debug::Subsystem::Trace, "-Input::mouseWheel()\n");
 }
 
 // GLUT Keyboard Callback for Normal Keys
