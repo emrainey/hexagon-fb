@@ -39,11 +39,13 @@ Color::~Color() {
     debug.info(Debug::Subsystem::Trace, "-Color::Color()\n");
 }
 
+float const *Color::getFloatArray() const { return colors; }
+
 void Color::print() {
     debug.info(Debug::Subsystem::Info, "Color={%0.2lf,%0.2lf,%0.2lf,%0.2lf}\n", colors[Red], colors[Green], colors[Blue], colors[Alpha]);
 }
 
-void Color::blendWith(Color *other) {
+void Color::blendWith(Color const *other) {
     if (other == NULL) return;
 
     float c1red = colors[Red];
@@ -74,7 +76,7 @@ void Color::perturb(int seed) {
     print();
 }
 
-float Color::operator[](int index) {
+float Color::operator[](int index) const {
     if (index < 0)
         index = 0;
     else if (index >= Channels)

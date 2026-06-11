@@ -42,12 +42,12 @@ Display::Display() {
 
     memset(control_message, 0, sizeof(control_message));
 
-    bg.print();
+    // bg.print();
 
-    fg.setRedFloat(1.0);
-    fg.setGreenFloat(1.0);
-    fg.setBlueFloat(1.0);
-    fg.print();
+    fg.setRedFloat(1.0f);
+    fg.setGreenFloat(1.0f);
+    fg.setBlueFloat(1.0f);
+    // fg.print();
 
     debug.info(Debug::Subsystem::Trace, "-Display()\n");
 }

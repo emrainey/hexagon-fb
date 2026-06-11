@@ -32,9 +32,9 @@ Appearance AppearanceLookup::getAppearance(Node_Type_e node_type, bool is_execut
     }
     // 3. Executable file
     else if (is_executable) {
-        app.face_color = Color(0.6f, 0.5f, 0.0f, 0.8f);             // Dark Yellow
+        app.face_color = Color(0.0f, 0.2f, 0.6f, 0.8f);             // Deep Royal Blue
         app.wire_color = Color(1.0f, 1.0f, 1.0f, 0.7f);             // White
-        app.selected_face_color = Color(0.8f, 0.7f, 0.0f, 0.9f);    // Bright Yellow
+        app.selected_face_color = Color(0.1f, 0.4f, 0.8f, 0.9f);    // Bright Royal Blue
         app.selected_wire_color = Color(1.0f, 1.0f, 1.0f, 0.7f);    // White
         app.model_name = "executable";
     }

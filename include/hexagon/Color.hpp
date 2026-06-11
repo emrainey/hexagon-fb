@@ -37,18 +37,18 @@ private:
     //*********
 public:
     Color();
-    Color(float r, float g, float b, float a);
-    Color(int seed);
+    explicit Color(float r, float g, float b, float a);
+    explicit Color(int seed);
     ~Color();
 
-    inline unsigned char getRedByte() { return ((unsigned char)colors[Red] * 255); }
-    inline unsigned char getGreenByte() { return ((unsigned char)colors[Green] * 255); }
-    inline unsigned char getBlueByte() { return ((unsigned char)colors[Blue] * 255); }
-    inline unsigned char getAlphaByte() { return ((unsigned char)colors[Alpha] * 255); }
-    inline float getRedFloat() { return colors[Red]; }
-    inline float getGreenFloat() { return colors[Green]; }
-    inline float getBlueFloat() { return colors[Blue]; }
-    inline float getAlphaFloat() { return colors[Alpha]; }
+    [[nodiscard]] inline unsigned char getRedByte() const { return ((unsigned char)colors[Red] * 255); }
+    [[nodiscard]] inline unsigned char getGreenByte() const { return ((unsigned char)colors[Green] * 255); }
+    [[nodiscard]] inline unsigned char getBlueByte() const { return ((unsigned char)colors[Blue] * 255); }
+    [[nodiscard]] inline unsigned char getAlphaByte() const { return ((unsigned char)colors[Alpha] * 255); }
+    [[nodiscard]] inline float getRedFloat() const { return colors[Red]; }
+    [[nodiscard]] inline float getGreenFloat() const { return colors[Green]; }
+    [[nodiscard]] inline float getBlueFloat() const { return colors[Blue]; }
+    [[nodiscard]] inline float getAlphaFloat() const { return colors[Alpha]; }
 
     void setRedFloat(float value);
     void setGreenFloat(float value);
@@ -56,10 +56,10 @@ public:
     void setAlphaFloat(float value);
 
     void print();
-    inline float *getFloatArray() { return colors; }
-    float operator[](int index);
+    [[nodiscard]] float const *getFloatArray() const;
+    [[nodiscard]] float operator[](int index) const;
 
-    void blendWith(Color *other);
+    void blendWith(Color const *other);
     void perturb(int seed);
 
 private:
