@@ -44,6 +44,7 @@ public:
     // color of the background
     Color bg;
     Color fg;
+    Color target_bg;
 
     // the message to print out about our control state
     char control_message[80];

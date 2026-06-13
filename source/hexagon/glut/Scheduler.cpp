@@ -11,6 +11,8 @@
 #include <time.h>
 #include <chrono>
 #include <thread>
+#include <cmath>
+#include <cstdlib>
 
 #include "hexagon/Hexagon.hpp"
 
@@ -47,9 +49,33 @@ void Scheduler::timed(int value) {
     // move all the objects
     world->focus->top->move();
 
-    // come up with new color to blend to
-    if ((++counter) % 20 == 0) {
-        // platform->display.bg.perturb(rand());
+    // Smoothly interpolate background color towards target_bg
+    // Timer fires every 5ms; t = 0.002f interpolates over several seconds
+    float t = 0.002f;
+    float r = platform->display.bg.getRedFloat();
+    float g = platform->display.bg.getGreenFloat();
+    float b = platform->display.bg.getBlueFloat();
+
+    float tr = platform->display.target_bg.getRedFloat();
+    float tg = platform->display.target_bg.getGreenFloat();
+    float tb = platform->display.target_bg.getBlueFloat();
+
+    r += (tr - r) * t;
+    g += (tg - g) * t;
+    b += (tb - b) * t;
+
+    platform->display.bg.setRedFloat(r);
+    platform->display.bg.setGreenFloat(g);
+    platform->display.bg.setBlueFloat(b);
+
+    // If close to target color, select a new random dark target color
+    float diff = std::abs(r - tr) + std::abs(g - tg) + std::abs(b - tb);
+    if (diff < 0.02f) {
+        // Keep target components between 0.01 and 0.15 for high contrast dark bg
+        float new_r = 0.01f + (float)(std::rand() % 100) / 100.0f * 0.14f;
+        float new_g = 0.01f + (float)(std::rand() % 100) / 100.0f * 0.14f;
+        float new_b = 0.01f + (float)(std::rand() % 100) / 100.0f * 0.14f;
+        platform->display.target_bg = Color(new_r, new_g, new_b, 1.0f);
     }
 
     // debug.info(Debug::Subsystem::Trace,"-Scheduler::timer()\n");

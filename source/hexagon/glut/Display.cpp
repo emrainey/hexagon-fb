@@ -42,7 +42,8 @@ Display::Display() {
 
     memset(control_message, 0, sizeof(control_message));
 
-    // bg.print();
+    bg = Color(0.02f, 0.02f, 0.05f, 1.0f);
+    target_bg = Color(0.05f, 0.02f, 0.08f, 1.0f);
 
     fg.setRedFloat(1.0f);
     fg.setGreenFloat(1.0f);

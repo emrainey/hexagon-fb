@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.22.0)
-project(hexgaon VERSION 0.2.1
+project(hexgaon VERSION 0.2.2
     LANGUAGES CXX
     DESCRIPTION "3D File Explorer"
     HOMEPAGE_URL "https://github.com/emrainey/hexagon-fb"
@@ -15,15 +15,6 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 find_package(GLEW REQUIRED)
 find_package(GLFW3 REQUIRED)
 find_package(OpenGL REQUIRED)
-
-# message(STATUS "OPENGL_INCLUDE_DIR: ${OPENGL_INCLUDE_DIR}")
-# message(STATUS "OPENGL_LIBRARIES: ${OPENGL_LIBRARIES}")
-
-# I'm putting weird old libraries in my ~/.local to prevent system issues.
-message(STATUS "LOCAL_INCLUDE: $ENV{LOCAL_INCLUDE}")
-message(STATUS "LOCAL_LIB: $ENV{LOCAL_LIB}")
-include_directories($ENV{LOCAL_INCLUDE})
-link_directories($ENV{LOCAL_LIB})
 
 configure_file(
     ${CMAKE_CURRENT_SOURCE_DIR}/include/hexagon/Hexagon_Console_private.hpp.in
@@ -53,10 +44,6 @@ target_sources(hexagon
         ${CMAKE_CURRENT_SOURCE_DIR}/source/hexagon/Vector.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/hexagon/View.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/hexagon/World.cpp
-        # $<$<CXX_COMPILER_ID:MSVC>:${CMAKE_CURRENT_SOURCE_DIR}/source/hexagon/port/win32/Win32SR.cpp>
-        # $<$<CXX_COMPILER_ID:MSVC>:${CMAKE_CURRENT_SOURCE_DIR}/source/hexagon/port/win32/Win32Exec.cpp>
-        # $<$<CXX_COMPILER_ID:MSVC>:${CMAKE_CURRENT_SOURCE_DIR}/source/hexagon/port/win32/Win32FS.cpp>
-        # $<$<CXX_COMPILER_ID:MSVC>:${CMAKE_CURRENT_SOURCE_DIR}/source/hexagon/port/win32/Win32Registry.cpp>
         ${CMAKE_CURRENT_SOURCE_DIR}/source/hexagon/port/posix/PosixActionRetriever.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/hexagon/port/posix/PosixExec.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/source/hexagon/port/posix/PosixRegistry.cpp
