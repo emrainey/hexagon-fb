@@ -16,6 +16,8 @@
 
 #include "hexagon/ShellExecutor.hpp"
 
+namespace hexagon {
+
 /**
  * Posix Implementation of the ShellExecutor
  */
@@ -38,5 +40,8 @@ public:
      */
     bool execute();
 };
+
+
+} // namespace hexagon
 
 #endif    // POSIX_EXEC_H

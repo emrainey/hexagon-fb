@@ -18,6 +18,8 @@
 #include "hexagon/MenuOption.hpp"
 #include "hexagon/ShellExecutor.hpp"
 
+namespace hexagon {
+
 /**
  * A linearly laid-out menu option.
  */
@@ -112,5 +114,8 @@ public:
      */
     void setIndex(int index);
 };
+
+
+} // namespace hexagon
 
 #endif    // LINEARMENUOPTION_H

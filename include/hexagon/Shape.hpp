@@ -3,6 +3,8 @@
 #ifndef SHAPE_H
 #define SHAPE_H
 
+namespace hexagon {
+
 /**
  * @class Shape
  * @brief Creates default shapes for the view.
@@ -14,5 +16,8 @@ public:
     // class destructor
     ~Shape();
 };
+
+
+} // namespace hexagon
 
 #endif    // SHAPE_H

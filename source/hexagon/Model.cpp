@@ -12,6 +12,8 @@
 #include <vector>
 #include <cmath>
 
+namespace hexagon {
+
 extern Port *platform;
 
 Model::Model() {
@@ -821,3 +823,5 @@ void Model::wireGear(double radius, double height, int teeth) {
     }
     glEnd();
 }
+
+} // namespace hexagon

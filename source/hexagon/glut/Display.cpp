@@ -12,6 +12,8 @@
 
 #include "hexagon/Hexagon.hpp"
 
+namespace hexagon {
+
 static Color mat_ambient(0, 0, 0, 1);
 static Color mat_specular(1.0, 1.0, 1.0, 0.15);
 static GLfloat mat_shiny = 100.0;
@@ -374,3 +376,5 @@ void Display::renderXYGrid(int xbound, int ybound) {
 void Display::postInitialize() {
     // nothing to do at the moment...
 }
+
+} // namespace hexagon

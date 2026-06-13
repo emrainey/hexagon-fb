@@ -15,6 +15,8 @@
 #include <list>
 #include <string>
 
+namespace hexagon {
+
 #define BANG_COMMAND_TEXT_TOGGLE ("!text")
 #define BANG_COMMAND_ADD_VIEW ("!view")
 #define BANG_COMMAND_MOUSE_CTRL ("!mousectrl")
@@ -47,5 +49,8 @@ public:
      */
     virtual bool execute() = 0;
 };
+
+
+} // namespace hexagon
 
 #endif    // SHELLEXECUTOR_H

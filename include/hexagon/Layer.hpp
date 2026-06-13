@@ -16,6 +16,8 @@
 #include "hexagon/Node.hpp"
 #include "hexagon/Vector.hpp"
 
+namespace hexagon {
+
 /**
  * @class Layer
  * @brief This contains the node list for display.
@@ -67,5 +69,8 @@ public:
     // Moves the nodes in the current layer...
     void move();
 };
+
+
+} // namespace hexagon
 
 #endif    // LAYER_H

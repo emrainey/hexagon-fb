@@ -16,6 +16,8 @@
 
 #include "hexagon/glut/Menu.hpp"
 
+namespace hexagon {
+
 /**
  * An ActionRetriever implements the ability to retrieve file specific action
  * menus for any file system item, including Hexagon specific items. The
@@ -67,5 +69,8 @@ public:
      */
     virtual Menu *getDriveActions() = 0;
 };
+
+
+} // namespace hexagon
 
 #endif    // ACTIONRETRIEVER_H

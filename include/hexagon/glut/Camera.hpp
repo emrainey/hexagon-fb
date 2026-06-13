@@ -16,6 +16,8 @@
 #include <cstdint>
 #include <numbers>
 
+namespace hexagon {
+
 /**
  * @class Camera
  * @brief 3D camera view and navigation controller.
@@ -82,5 +84,8 @@ public:
     // Alters the distance of the camera.
     void alterDistance(float delta);
 };
+
+
+} // namespace hexagon
 
 #endif    // CAMERA_H

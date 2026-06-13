@@ -11,6 +11,8 @@
 
 #ifndef GLUT_WRAPPER_H_
 #define GLUT_WRAPPER_H_
+
+namespace hexagon {
 /*****************************************************************************/
 // Some Typedefs
 /*****************************************************************************/
@@ -44,5 +46,8 @@ void report_error(char const *const name, bool stop, char const *const filename,
 #define REPORT_ERROR(name, stop) report_error(#name, stop, __FILE__, __LINE__)
 
 #define CHECKERROR(a, b) CheckError(a, b, #a, __FILE__, __LINE__)
+
+
+} // namespace hexagon
 
 #endif    // GLUT_WRAPPER_H_

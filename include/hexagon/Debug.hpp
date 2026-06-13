@@ -15,6 +15,8 @@
 #include <cstdint>
 #include <type_traits>
 
+namespace hexagon {
+
 template <typename Enum>
 constexpr typename std::underlying_type<Enum>::type to_underlying(Enum e) noexcept {
     return static_cast<typename std::underlying_type<Enum>::type>(e);
@@ -114,5 +116,8 @@ protected:
 #ifndef EXCLUDE_EXTERNS
 extern Debug debug;
 #endif
+
+
+} // namespace hexagon
 
 #endif    // DEBUG_H

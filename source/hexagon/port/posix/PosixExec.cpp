@@ -15,6 +15,8 @@
 #include "hexagon/port/Port.hpp"
 #include "hexagon/port/posix/PosixExec.hpp"    // class's header file
 
+namespace hexagon {
+
 // class constructor
 PosixExec::PosixExec() {
     // insert your code here
@@ -49,3 +51,5 @@ bool PosixExec::execute() {
     }
     return true;
 }
+
+} // namespace hexagon

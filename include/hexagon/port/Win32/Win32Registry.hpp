@@ -12,6 +12,8 @@
 #ifndef WIN32REGISTRY_H
 #define WIN32REGISTRY_H
 
+namespace hexagon {
+
 /**
  * This object represents the basic attributes that a persistent database of
  * information about the project has. If a particular port wants to use a
@@ -35,5 +37,8 @@ public:
      */
     Key *getKey(std::string name);
 };
+
+
+} // namespace hexagon
 
 #endif    // WIN32REGISTRY_H

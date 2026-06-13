@@ -10,6 +10,8 @@
 
 #include "hexagon/Hexagon.hpp"
 
+namespace hexagon {
+
 // define a pointer to the Port object
 extern Port *platform;
 
@@ -193,3 +195,5 @@ void Camera::alterDistance(float delta) {
     }
     setDistance(radius + delta * factor);
 }
+
+} // namespace hexagon

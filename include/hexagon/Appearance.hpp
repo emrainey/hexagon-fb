@@ -15,6 +15,8 @@
 #include <string>
 #include "hexagon/Color.hpp"
 
+namespace hexagon {
+
 typedef enum {
     DEFAULT = 0,
     FILE_ON_DISK_TYPE,
@@ -66,5 +68,8 @@ public:
      */
     static Appearance getAppearance(Node_Type_e node_type, bool is_executable, bool is_permitted, bool is_hidden = false);
 };
+
+
+} // namespace hexagon
 
 #endif    // APPEARANCE_HPP

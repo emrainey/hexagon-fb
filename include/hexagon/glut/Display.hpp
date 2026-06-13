@@ -16,6 +16,8 @@
 #include "hexagon/Vector.hpp"
 #include "hexagon/glut/Camera.hpp"
 
+namespace hexagon {
+
 /**
  * @class Display
  * @brief OpenGL and GLUT display and screen text renderer.
@@ -81,5 +83,8 @@ private:
     void renderXYGrid(int xbound, int ybound);
     void frameStatistics(void);
 };
+
+
+} // namespace hexagon
 
 #endif    // DISPLAY_H

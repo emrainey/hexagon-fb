@@ -10,6 +10,8 @@
 
 #include "hexagon/Hexagon.hpp"    // class's header file
 
+namespace hexagon {
+
 constexpr static auto SIDES{6};  // the only place where we should define the number of sides
 
 #define PREV(i) ((i - 1 < 0) ? (SIDES - 1) : (i - 1))
@@ -354,3 +356,5 @@ void World::addSpotLight() {
     // add the element
     addLight(l);
 }
+
+} // namespace hexagon

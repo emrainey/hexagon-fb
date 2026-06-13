@@ -14,6 +14,8 @@
 
 #include <chrono>
 
+namespace hexagon {
+
 /**
  * @class Scheduler
  * @brief Timer and idle frame rate scheduler.
@@ -34,5 +36,8 @@ public:
     // GLUT Callback for the Timer
     void timed(int value);
 };
+
+
+} // namespace hexagon
 
 #endif    // SCHEDULER_H

@@ -17,6 +17,8 @@
 
 #include "hexagon/PersistentStorage.hpp"
 
+namespace hexagon {
+
 /**
  * This object represents the basic attributes that a persistent database of
  * information about the project has. If a particular port wants to use a
@@ -43,5 +45,8 @@ public:
 private:
     std::map<std::string, Key> m_keys;
 };
+
+
+} // namespace hexagon
 
 #endif    // POSIX_REGISTRY_H

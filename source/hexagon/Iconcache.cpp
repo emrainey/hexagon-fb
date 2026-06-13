@@ -10,6 +10,8 @@
 
 #include "hexagon/Hexagon.hpp"    // class's header file
 
+namespace hexagon {
+
 // class constructor
 IconCache::IconCache() {
     // insert your code here
@@ -19,3 +21,5 @@ IconCache::IconCache() {
 IconCache::~IconCache() {
     // insert your code here
 }
+
+} // namespace hexagon

@@ -12,6 +12,8 @@
 #ifndef CHOREOGRAPHER_H
 #define CHOREOGRAPHER_H
 
+namespace hexagon {
+
 typedef enum {
     FROZEN = 0,
     SPINNER,
@@ -45,5 +47,8 @@ public:
     // Sets the type of Choreographer it will be from now on.
     void setType(Choreographer_Type_e t);
 };
+
+
+} // namespace hexagon
 
 #endif    // CHOREOGRAPHER_H

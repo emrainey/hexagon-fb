@@ -16,6 +16,8 @@
 
 #include "hexagon/Hexagon.hpp"
 
+namespace hexagon {
+
 // define a pointer the Port object
 extern Port *platform;
 
@@ -95,3 +97,5 @@ void Scheduler::idle(void) {
 
     glutPostRedisplay();
 }
+
+} // namespace hexagon

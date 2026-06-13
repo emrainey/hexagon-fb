@@ -10,6 +10,8 @@
 
 #include "hexagon/Hexagon.hpp"
 
+namespace hexagon {
+
 constexpr static auto ESC{27};
 constexpr static auto ENTER{13};
 
@@ -375,3 +377,5 @@ void createNewView(void) {
         world->addView();
     }
 }
+
+} // namespace hexagon

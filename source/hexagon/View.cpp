@@ -10,6 +10,8 @@
 
 #include "hexagon/Hexagon.hpp"
 
+namespace hexagon {
+
 // class constructor
 View::View(int select_name) {
     name = "Default View";
@@ -141,3 +143,5 @@ bool View::choose(int name) {
     }
     return false;
 }
+
+} // namespace hexagon

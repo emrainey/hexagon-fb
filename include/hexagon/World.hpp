@@ -14,6 +14,8 @@
 
 #include <string>
 
+namespace hexagon {
+
 enum class Selection : uint8_t {
     Old = 0,
     Newer,
@@ -103,5 +105,8 @@ private:
     // based on a direction, returns a Vector
     Vector *direction(int direction);
 };
+
+
+} // namespace hexagon
 
 #endif    // WORLD_H

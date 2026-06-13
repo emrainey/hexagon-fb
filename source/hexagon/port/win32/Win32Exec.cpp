@@ -12,6 +12,8 @@
 
 #include "hexagon/Hexagon.hpp"    // class's header file
 
+namespace hexagon {
+
 // class constructor
 Win32Exec::Win32Exec() {
     // insert your code here
@@ -62,3 +64,5 @@ bool Win32Exec::execute() {
         debug.info(Debug::Subsystem::Platform, "Please wait while \"%s\" is %s in \"%s\".\n", file.c_str(), command.c_str(), path.c_str());
     }
 }
+
+} // namespace hexagon

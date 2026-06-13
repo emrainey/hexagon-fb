@@ -10,6 +10,8 @@
 
 #include "hexagon/Hexagon.hpp"    // class's header file
 
+namespace hexagon {
+
 #define ROOT_KEY_LOCATION ("Software\\Toaster Streudel Productions\\Hexagon")
 
 static HKEY root_key = NULL;
@@ -91,3 +93,5 @@ void Win32Registry::setKey(Key k) {
         debug.info(Debug::Subsystem::Platform, "RegSetValueEx() Succeeded!\n");
     }
 }
+
+} // namespace hexagon

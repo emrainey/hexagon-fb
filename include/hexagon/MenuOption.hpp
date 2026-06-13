@@ -14,6 +14,8 @@
 
 #include "hexagon/ShellExecutor.hpp"
 
+namespace hexagon {
+
 /**
  * @class MenuOption
  * @brief A single menu option
@@ -82,5 +84,8 @@ public:
      */
     virtual void setIndex(int index) = 0;
 };
+
+
+} // namespace hexagon
 
 #endif    // MENUOPTION_H

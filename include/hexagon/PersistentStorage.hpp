@@ -16,6 +16,8 @@
 
 #include "hexagon/Key.hpp"
 
+namespace hexagon {
+
 /**
  * This object represents the basic attributes that a persistent database of
  * information about the project has. If a particular port wants to use a
@@ -35,5 +37,8 @@ public:
      */
     virtual Key *getKey(std::string name) = 0;
 };
+
+
+} // namespace hexagon
 
 #endif    // PERSISTENTSTORAGE_H

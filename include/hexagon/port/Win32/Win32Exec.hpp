@@ -12,6 +12,8 @@
 #ifndef WIN32EXEC_H
 #define WIN32EXEC_H
 
+namespace hexagon {
+
 /**
  * Win32 Implementation of the ShellExecutor
  */
@@ -34,5 +36,8 @@ public:
      */
     bool execute();
 };
+
+
+} // namespace hexagon
 
 #endif    // WIN32EXEC_H

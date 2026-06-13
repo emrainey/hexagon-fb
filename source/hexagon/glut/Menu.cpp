@@ -10,6 +10,8 @@
 
 #include "hexagon/Hexagon.hpp"
 
+namespace hexagon {
+
 constexpr static auto INSET{4};
 constexpr static auto FONT_WIDTH{10};
 
@@ -102,3 +104,5 @@ bool Menu::choose(int x, int y) {
     }
     return true;
 }
+
+} // namespace hexagon

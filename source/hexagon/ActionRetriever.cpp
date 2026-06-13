@@ -10,6 +10,8 @@
 
 #include "hexagon/Hexagon.hpp"
 
+namespace hexagon {
+
 ActionRetriever::ActionRetriever() {
     // do nothing
 }
@@ -63,3 +65,5 @@ Menu *ActionRetriever::bangCommand(std::string fileType) {
     }
     return nullptr;
 }
+
+} // namespace hexagon

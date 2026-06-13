@@ -12,6 +12,8 @@
 #ifndef INPUT_H
 #define INPUT_H
 
+namespace hexagon {
+
 /**
  * @class Input
  * @brief GLUT mouse and keyboard input callback handler.
@@ -36,5 +38,8 @@ public:
     // FreeGLUT/OpenGLUT Mouse Wheel Callback
     void mouseWheel(int wheel, int direction, int x, int y);
 };  
+
+
+} // namespace hexagon
 
 #endif    // INPUT_H

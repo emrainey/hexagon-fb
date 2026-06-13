@@ -18,6 +18,8 @@
 #include "hexagon/Choreographer.hpp"
 #include "hexagon/Vector.hpp"
 
+namespace hexagon {
+
 /**
  * @class Node
  * @brief The basic object of the hexagon view system.
@@ -77,5 +79,8 @@ public:
     // Finds the OpenGL Selection object
     bool choose(int name);
 };
+
+
+} // namespace hexagon
 
 #endif    // NODE_H

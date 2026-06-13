@@ -11,6 +11,8 @@
 #include "hexagon/Hexagon.hpp"    // class's header file
 #include <filesystem>
 
+namespace hexagon {
+
 // class constructor
 Node::Node() {
     // el Defaultos
@@ -156,3 +158,5 @@ bool Node::choose(int name) {
     }
     return false;
 }
+
+} // namespace hexagon

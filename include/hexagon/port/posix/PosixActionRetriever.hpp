@@ -16,6 +16,8 @@
 
 #include "hexagon/ActionRetriever.hpp"
 
+namespace hexagon {
+
 /**
  * This class implements the ActionRetriever Object for Posix.
  */
@@ -32,5 +34,8 @@ public:
     // see interface declaration
     Menu *getDriveActions();
 };
+
+
+} // namespace hexagon
 
 #endif    // POSIX_AR_H

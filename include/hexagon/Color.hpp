@@ -12,6 +12,8 @@
 #ifndef _COLOR_H_
 #define _COLOR_H_
 
+namespace hexagon {
+
 /**
  * @class Color
  * @brief Represents an RGBA color.
@@ -65,5 +67,8 @@ public:
 private:
     void setColorIndex(int index, float value);
 };
+
+
+} // namespace hexagon
 
 #endif    // _COLOR_H

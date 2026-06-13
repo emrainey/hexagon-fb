@@ -14,6 +14,8 @@
 
 #include "hexagon/MenuOption.hpp"
 
+namespace hexagon {
+
 typedef void (*Void_Function_t)(void);
 
 /**
@@ -44,5 +46,8 @@ public:
     // Finds the option selected.
     bool choose(int x, int y);
 };
+
+
+} // namespace hexagon
 
 #endif    // MENU_H

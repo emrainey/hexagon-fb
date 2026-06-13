@@ -12,6 +12,8 @@
 
 #include "hexagon/Hexagon.hpp"
 
+namespace hexagon {
+
 Debug::Debug()
     : state{false}
     , subsystems{} {
@@ -69,3 +71,5 @@ void Debug::disable(Subsystem subsystem) {
     subsystems.Clear(subsystem);
     info(Debug::Subsystem::Info, "Disabling Subsystem");
 }
+
+} // namespace hexagon

@@ -15,6 +15,8 @@
 #include "hexagon/Appearance.hpp"
 #include "hexagon/glut/Wrapper.hpp"
 
+namespace hexagon {
+
 typedef enum {
     NORMAL,
     SELECTED,
@@ -91,5 +93,8 @@ public:
     static void wireGear(double radius, double height, int teeth);
     static void solidGear(double radius, double height, int teeth);
 };
+
+
+} // namespace hexagon
 
 #endif    // MODEL_H

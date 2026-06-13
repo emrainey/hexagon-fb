@@ -12,6 +12,8 @@
 #ifndef ICONCACHE_H
 #define ICONCACHE_H
 
+namespace hexagon {
+
 /*
  * The Icon Cache is the first object to ask for a new, unknown icon
  * when a new file extension is found.
@@ -23,5 +25,8 @@ public:
     // class destructor
     ~IconCache();
 };
+
+
+} // namespace hexagon
 
 #endif    // ICONCACHE_H

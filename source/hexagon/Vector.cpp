@@ -14,6 +14,8 @@
 #include <cstdio>
 #include <string>
 
+namespace hexagon {
+
 // class constructor
 Vector::Vector() {
     zeroize();
@@ -177,3 +179,5 @@ char* Vector::print(void) {
     snprintf(msg, sizeof(msg), "(%.3lf,%.3lf,%.3lf)", x, y, z);
     return msg;
 }
+
+} // namespace hexagon

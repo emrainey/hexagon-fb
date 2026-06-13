@@ -10,6 +10,8 @@
 
 #include "hexagon/Hexagon.hpp"
 
+namespace hexagon {
+
 // class constructor
 LinearMenuOption::LinearMenuOption() {
     // nothing so far...
@@ -131,3 +133,5 @@ void LinearMenuOption::calcBounds() {
     // x2 is set by setWidth();
     y2 = (index + 1) * item_height;
 }
+
+} // namespace hexagon

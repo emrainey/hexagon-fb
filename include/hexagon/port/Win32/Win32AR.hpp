@@ -12,6 +12,8 @@
 #ifndef WIN32AR_H
 #define WIN32AR_H
 
+namespace hexagon {
+
 /**
  * This class implements the ActionRetriever Object for Win32.
  */
@@ -28,5 +30,8 @@ public:
     // see interface declaration
     Menu *getDriveActions();
 };
+
+
+} // namespace hexagon
 
 #endif    // WIN32AR_H

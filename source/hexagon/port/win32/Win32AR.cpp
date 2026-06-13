@@ -10,6 +10,8 @@
 
 #include "hexagon/Hexagon.hpp"    // class's header file
 
+namespace hexagon {
+
 // class constructor
 Win32AR::Win32AR() {
     // insert your code here
@@ -43,3 +45,5 @@ Menu *Win32AR::getDriveActions() {
 
     return m;
 }
+
+} // namespace hexagon

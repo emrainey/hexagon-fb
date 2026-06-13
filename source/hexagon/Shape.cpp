@@ -2,6 +2,8 @@
 
 #include "hexagon/Shape.hpp"    // class's header file
 
+namespace hexagon {
+
 // class constructor
 Shape::Shape(int type) {
     // insert your code here
@@ -11,3 +13,5 @@ Shape::Shape(int type) {
 Shape::~Shape() {
     // insert your code here
 }
+
+} // namespace hexagon

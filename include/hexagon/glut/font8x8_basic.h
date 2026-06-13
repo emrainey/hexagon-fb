@@ -6,6 +6,8 @@
 #ifndef FONT8X8_BASIC_H
 #define FONT8X8_BASIC_H
 
+namespace hexagon {
+
 const unsigned char font8x8_basic[128][8] = {
     // Control Characters (ASCII 0 to 31) - Blank
     { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00},   // U+0000 (nul)
@@ -141,5 +143,8 @@ const unsigned char font8x8_basic[128][8] = {
     // Char 127 (del) - Blank
     { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}
 };
+
+
+} // namespace hexagon
 
 #endif // FONT8X8_BASIC_H

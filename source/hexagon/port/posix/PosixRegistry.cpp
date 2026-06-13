@@ -1,6 +1,8 @@
 
 #include "hexagon/port/posix/PosixRegistry.hpp"
 
+namespace hexagon {
+
 PosixRegistry::PosixRegistry() {
     // Set a default IconDirectory key so it is not nullptr
     setKey(Key("IconDirectory", "."));
@@ -17,3 +19,5 @@ Key *PosixRegistry::getKey(std::string name) {
     }
     return nullptr;
 }
+
+} // namespace hexagon

@@ -20,6 +20,8 @@
 #include <cstdint>
 #include "hexagon/Hexagon.hpp"    // class's header file
 
+namespace hexagon {
+
 static bool isNativeExecutable(const std::filesystem::path& fullpath) {
     if (!std::filesystem::is_regular_file(fullpath)) return false;
     std::ifstream file(fullpath, std::ios::binary);
@@ -257,3 +259,5 @@ void Layer::move() {
         lit->choreographer->move();
     }
 }
+
+} // namespace hexagon

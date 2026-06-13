@@ -10,6 +10,8 @@
 
 #include "hexagon/Hexagon.hpp"    // class's header file
 
+namespace hexagon {
+
 // class constructor
 Key::Key(std::string n, std::string v) {
     name = n;
@@ -36,3 +38,5 @@ void Key::setName(std::string n) {
 void Key::setValue(std::string v) {
     value = v;
 }
+
+} // namespace hexagon

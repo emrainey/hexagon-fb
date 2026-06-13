@@ -18,6 +18,8 @@
 #include "hexagon/Model.hpp"
 #include "hexagon/Vector.hpp"
 
+namespace hexagon {
+
 /**
  * @class View
  * @brief Represents a single view containing stacked directory layers.
@@ -67,5 +69,8 @@ public:
     // Removes the top level layer
     void popLayer(void);
 };
+
+
+} // namespace hexagon
 
 #endif    // VIEW_H

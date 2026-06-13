@@ -15,6 +15,8 @@
 #include "hexagon/Vector.hpp"
 #include "hexagon/glut/Wrapper.hpp"
 
+namespace hexagon {
+
 typedef enum {
     SIMPLE,
     SPOT,
@@ -71,5 +73,8 @@ public:
 private:
     GLenum getGLenum(void);
 };
+
+
+} // namespace hexagon
 
 #endif    // LIGHT_H

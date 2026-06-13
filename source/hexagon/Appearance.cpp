@@ -11,6 +11,8 @@
 
 #include "hexagon/Appearance.hpp"
 
+namespace hexagon {
+
 Appearance AppearanceLookup::getAppearance(Node_Type_e node_type, bool is_executable, bool is_permitted, bool is_hidden) {
     Appearance app;
 
@@ -72,3 +74,5 @@ Appearance AppearanceLookup::getAppearance(Node_Type_e node_type, bool is_execut
 
     return app;
 }
+
+} // namespace hexagon

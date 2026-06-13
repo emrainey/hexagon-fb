@@ -10,6 +10,8 @@
 
 #include "hexagon/Hexagon.hpp"    // class's header file
 
+namespace hexagon {
+
 // class constructor
 Choreographer::Choreographer(Node *n, Choreographer_Type_e t) {
     node = n;
@@ -71,3 +73,5 @@ void Choreographer::move(void) {
 void Choreographer::setType(Choreographer_Type_e t) {
     type = t;
 }
+
+} // namespace hexagon

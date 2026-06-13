@@ -11,6 +11,8 @@
 #include "hexagon/Hexagon.hpp"
 #include "hexagon/Hexagon_Console_private.hpp"
 
+namespace hexagon {
+
 // class constructor
 Port::Port(int argc, char *argv[]) {
     static char title[1024];
@@ -91,3 +93,5 @@ void Port::run() {
 void Port::postInitialize() {
     display.postInitialize();
 }
+
+} // namespace hexagon

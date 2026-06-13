@@ -10,6 +10,8 @@
 
 #include "hexagon/Hexagon.hpp"
 
+namespace hexagon {
+
 ShellExecutor::ShellExecutor() {
     // do nothing
 }
@@ -39,3 +41,5 @@ bool ShellExecutor::bangCommand(std::string command) {
     }
     return false;
 }
+
+} // namespace hexagon

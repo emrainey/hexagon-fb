@@ -12,6 +12,10 @@
 #ifndef GLUT_EMULATION_HPP
 #define GLUT_EMULATION_HPP
 
+struct GLFWwindow;
+
+namespace hexagon {
+
 // GLUT constants
 #define GLUT_RGBA            0x0000
 #define GLUT_RGB             0x0000
@@ -75,8 +79,7 @@ void glutSetCursor(int cursor);
 void glutBitmapCharacter(void *font, int character);
 int glutGetModifiers(void);
 
-struct GLFWwindow;
-GLFWwindow* glutGetGLFWWindow(void);
+::GLFWwindow* glutGetGLFWWindow(void);
 
 // Callback registration
 void glutMouseFunc(void (*func)(int button, int state, int x, int y));
@@ -88,5 +91,8 @@ void glutReshapeFunc(void (*func)(int width, int height));
 void glutDisplayFunc(void (*func)(void));
 void glutTimerFunc(unsigned int millis, void (*func)(int value), int value);
 void glutIdleFunc(void (*func)(void));
+
+
+} // namespace hexagon
 
 #endif // GLUT_EMULATION_HPP

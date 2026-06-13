@@ -12,6 +12,7 @@
 #include "hexagon/Hexagon.hpp"
 #include "hexagon/Hexagon_Console_private.hpp"
 
+namespace hexagon {
 // The pointer to all the port specific functions and variables
 Port *platform = NULL;
 
@@ -20,6 +21,7 @@ World *world = NULL;
 
 // The pointer the debug object
 Debug debug;
+}
 
 // set the default number of views
 static int num_views = 1;
@@ -28,6 +30,7 @@ static int num_views = 1;
 static std::string *start_view = new std::string(".");
 
 void ProcessArgs(int argc, char *argv[]) {
+    using namespace hexagon;
     for (int i = 1; i < argc; i++) {
         if (argv[i][0] == '/' || argv[i][0] == '-') {
             switch (argv[i][1]) {
@@ -54,6 +57,7 @@ void ProcessArgs(int argc, char *argv[]) {
 }
 
 int main(int argc, char *argv[]) {
+    using namespace hexagon;
     // instantiate a new Debug object
     debug = Debug(true);
     // debug = 0xFFFFFFFF;    // Enable all subsystems

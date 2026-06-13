@@ -10,6 +10,8 @@
 
 #include "hexagon/Hexagon.hpp"
 
+namespace hexagon {
+
 Color::Color() {
     memset((char *)colors, 0, sizeof(colors));
 }
@@ -107,3 +109,5 @@ void Color::setColorIndex(int index, float value) {
         value = 1.0;
     colors[index] = value;
 }
+
+} // namespace hexagon

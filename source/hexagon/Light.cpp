@@ -10,6 +10,8 @@
 
 #include "hexagon/Hexagon.hpp"    // project's header file
 
+namespace hexagon {
+
 // class constructor
 Light::Light(Vector p, Light_Type_e t, int total_num_lights) {
     number = total_num_lights;
@@ -101,3 +103,5 @@ void Light::setDirection(Vector d) {
     dir[3] = 1;
     glLightfv(getGLenum(), GL_SPOT_DIRECTION, dir);
 }
+
+} // namespace hexagon

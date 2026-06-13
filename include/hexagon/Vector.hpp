@@ -12,6 +12,8 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 
+namespace hexagon {
+
 /**
  * The generic, everyone-has-one, Vector math class.
  * This one is taken from the "Physics for Game Developers" by David M. Bourg.
@@ -63,5 +65,8 @@ Vector operator+(Vector u, Vector v);    // vec addition
 Vector operator-(Vector u, Vector v);    // vec subtraction
 float operator*(Vector u, Vector v);     // dot product
 Vector operator^(Vector u, Vector v);    // cros product
+
+
+} // namespace hexagon
 
 #endif                                   // VECTOR_H

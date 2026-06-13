@@ -10,6 +10,8 @@
 
 #include "hexagon/Hexagon.hpp"    // class's header file
 
+namespace hexagon {
+
 // class constructor
 PosixActionRetriever::PosixActionRetriever() {
     // insert your code here
@@ -43,3 +45,5 @@ Menu *PosixActionRetriever::getDriveActions() {
 
     return m;
 }
+
+} // namespace hexagon

@@ -12,6 +12,8 @@
 #ifndef KEY_H
 #define KEY_H
 
+namespace hexagon {
+
 /**
  * This is the object to use with persistent storage. Anything that
  * can be stored is stored as a key. The format of the storage is left
@@ -36,5 +38,8 @@ public:
     // sets the name of the key
     void setName(std::string n);
 };
+
+
+} // namespace hexagon
 
 #endif    // KEY_H

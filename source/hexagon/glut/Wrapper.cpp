@@ -16,6 +16,8 @@
 #include "hexagon/glut/font8x8_basic.h"
 #include <chrono>
 
+namespace hexagon {
+
 extern Port *platform;
 extern Debug debug;
 
@@ -446,3 +448,5 @@ void report_error(char const *const name, bool stop, char const *const filename,
 /*****************************************************************************/
 /* END                                                                       */
 /*****************************************************************************/
+
+} // namespace hexagon

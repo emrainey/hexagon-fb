@@ -47,6 +47,8 @@
 #include <hexagon/port/posix/PosixExec.hpp>
 #include <hexagon/port/posix/PosixRegistry.hpp>
 
+namespace hexagon {
+
 #define PORT_SPECIFIC_PERSISTENT_STORAGE PosixRegistry
 #define PORT_SPECIFIC_ACTION_RETRIEVER PosixActionRetriever
 #define PORT_SPECIFIC_SHELL_EXECUTOR PosixExec
@@ -93,5 +95,8 @@ public:
 };
 
 extern Port *platform;
+
+
+} // namespace hexagon
 
 #endif    // PORT_H
