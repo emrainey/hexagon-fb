@@ -29,47 +29,47 @@ typedef enum {
  */
 class Model {
 public:
-    // the normal and selected Call List items
+    /// the normal and selected Call List items
     GLuint normal;
     GLuint selected;
 
-    // this is the GL Name of the model used during rendering and selection
+    /// this is the GL Name of the model used during rendering and selection
     GLuint select_name;
 
-    // a bool to keep around to determine if the model has been selected.
+    /// a bool to keep around to determine if the model has been selected.
     bool IsSelected;
 
-    // the visual appearance configuration
+    /// the visual appearance configuration
     Appearance appearance;
 
     double radius_factor;
     double height_factor;
 
-    // class constructors
+    /// class constructors
     Model();
     Model(Appearance appearance, double radius_factor = 1.0, double height_factor = 1.0);
     Model(const char *extension);
     Model(const char *extension, Appearance appearance, double radius_factor = 1.0, double height_factor = 1.0);
 
-    // class destructor
+    /// class destructor
     ~Model();
 
-    // Loads a model from the filesystem
+    /// Loads a model from the filesystem
     void loadModel(const char *extension);
 
-    // loads the Up Arrow Object
+    /// loads the Up Arrow Object
     void loadDownArrow();
 
-    // loads a hexagonal polygon with wire outline
+    /// loads a hexagonal polygon with wire outline
     void loadPoly();
 
-    // a little debug
+    /// a little debug
     void info();
 
-    // Renders the model based on it's mode
+    /// Renders the model based on it's mode
     void render(bool selection, SelectionState mode);
 
-    // Dynamic color parameterized shape builders
+    /// Dynamic color parameterized shape builders
     static GLuint buildHexagon(double radius, double height, Color face, Color wire);
     static GLuint buildDownArrow(double length, double width, double height, Color face, Color wire);
     static GLuint buildPoly(double radius, double height, Color face, Color wire);

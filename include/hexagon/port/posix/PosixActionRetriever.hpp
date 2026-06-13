@@ -23,15 +23,15 @@ namespace hexagon {
  */
 class PosixActionRetriever : public ActionRetriever {
 public:
-    // class constructor
+    /// class constructor
     PosixActionRetriever();
-    // class destructor
+    /// class destructor
     ~PosixActionRetriever();
-    // see interface declaration
+    /// see interface declaration
     Menu *getActions(std::string fileType);
-    // see interface declaration
+    /// see interface declaration
     Menu *getDirectoryActions();
-    // see interface declaration
+    /// see interface declaration
     Menu *getDriveActions();
 };
 

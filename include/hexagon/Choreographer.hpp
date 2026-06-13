@@ -31,20 +31,20 @@ class Node;
  */
 class Choreographer {
 public:
-    // this will define which choregrapher it will use...
+    /// this will define which choregrapher it will use...
     Choreographer_Type_e type;
 
-    // This is the node we are moving...
+    /// This is the node we are moving...
     Node *node;
 
-    // class constructor
+    /// class constructor
     Choreographer(Node *n, Choreographer_Type_e type);
     Choreographer(Node *n);
-    // class destructor
+    /// class destructor
     ~Choreographer();
-    // Generic Move Interface
+    /// Generic Move Interface
     void move(void);
-    // Sets the type of Choreographer it will be from now on.
+    /// Sets the type of Choreographer it will be from now on.
     void setType(Choreographer_Type_e t);
 };
 

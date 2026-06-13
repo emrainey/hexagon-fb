@@ -14,22 +14,22 @@
 
 namespace hexagon {
 /*****************************************************************************/
-// Some Typedefs
+/// Some Typedefs
 /*****************************************************************************/
 
-// we need to get rid of these...
+/// we need to get rid of these...
 typedef unsigned int GLenum;
 typedef unsigned int GLuint;
 typedef float GLfloat;
 
 /*****************************************************************************/
-// Some prototypes
+/// Some prototypes
 /*****************************************************************************/
 void glLocalPushMatrix(char const *const filename, int const line);
 void glLocalPopMatrix(char const *const filename, int const line);
 void glutWrappers_assignCallbacks(void);
 GLuint CheckError(GLuint error, bool stop, char const *const name, char const *const filename, int const line);
-// No description
+/// No description
 void toggleDisplayText(void);
 void toggleControlState(void);
 void createNewView(void);
@@ -37,7 +37,7 @@ void createNewView(void);
 void report_error(char const *const name, bool stop, char const *const filename, int const line);
 
 /*****************************************************************************/
-// Some FUNCTION MACROS
+/// Some FUNCTION MACROS
 /*****************************************************************************/
 
 #define GL_PUSH_MATRIX() glLocalPushMatrix(__FILE__, __LINE__)

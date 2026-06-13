@@ -24,49 +24,49 @@ namespace hexagon {
  */
 class Layer {
 public:
-    // the template list of Nodes
+    /// the template list of Nodes
     std::list<Node *> node_list;
 
     constexpr static size_t MAX_NODES{0xFFFF};
 
-    // The selected node
+    /// The selected node
     Node *selected;
 
-    // usually set to the current directory of the subview
+    /// usually set to the current directory of the subview
     std::string path;
 
-    // A model of the current layer
+    /// A model of the current layer
     Model *model;
 
-    // the location of the layer
+    /// the location of the layer
     Vector position;
 
     constexpr static uint32_t LAYER_SPACE_MASK{0xFFFF0000};
 
-    // the selection name space of this layer
+    /// the selection name space of this layer
     uint32_t name_space;
 
-    // class constructor
+    /// class constructor
     Layer(int select_name, std::string path);
 
-    // class destructor
+    /// class destructor
     ~Layer();
 
-    // renders the layer
+    /// renders the layer
     void render(bool selection, SelectionState mode);
 
-    // finds the OpenGL selection item
+    /// finds the OpenGL selection item
     bool choose(int name);
 
-    // creates the default node list
+    /// creates the default node list
     void initNodes(void);
 
-    // adds a node to the list
+    /// adds a node to the list
     void addNode(std::string path, std::string name);
 
-    // computes the node's new position
+    /// computes the node's new position
     Vector *placeNode(int num_nodes);
-    // Moves the nodes in the current layer...
+    /// Moves the nodes in the current layer...
     void move();
 };
 

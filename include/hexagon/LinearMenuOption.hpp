@@ -50,9 +50,9 @@ private:
     void calcBounds();
 
 public:
-    // class constructor
+    /// class constructor
     LinearMenuOption();
-    // class destructor
+    /// class destructor
     ~LinearMenuOption();
 
     /**

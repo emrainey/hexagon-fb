@@ -35,74 +35,74 @@ typedef struct {
  */
 class World {
 public:
-    // the list of all views
+    /// the list of all views
     std::list<View *> view_list;
     /// ???
     constexpr static size_t MAX_VIEWS{61};
 
-    // the root view (the one in the middle)
+    /// the root view (the one in the middle)
     View *root;
 
-    // the view currently selected
+    /// the view currently selected
     View *focus;
 
-    // the view with empty slots to be filled
+    /// the view with empty slots to be filled
     View *unfull;
 
-    // The last view added
+    /// The last view added
     View *last;
 
-    // the next index on unfull to fill
+    /// the next index on unfull to fill
     int next_fill;
 
-    // the number of total views
+    /// the number of total views
     int num_total_views;
 
-    // the point where the selection occured!
+    /// the point where the selection occured!
     Selection_Point_t selection;
 
-    // the list of lights in the world.
+    /// the list of lights in the world.
     std::list<Light *> lights;
 
-    // Our default menu...
+    /// Our default menu...
     Menu *menu;
 
-    // class constructor
+    /// class constructor
     World(int n, std::string *start_view);
 
-    // class destructor
+    /// class destructor
     ~World();
 
-    // Renders the world!
+    /// Renders the world!
     void render(bool selection);
 
-    // allows the selection routines to notify the object who is selected
-    // that he is so.
+    /// allows the selection routines to notify the object who is selected
+    /// that he is so.
     void choose(int name);
 
-    // add a new view to the world
+    /// add a new view to the world
     void addView(void);
 
-    // determines the next direction to go for the next unfull.
+    /// determines the next direction to go for the next unfull.
     int getNextPosition(int view_num);
 
-    // adds a light to the view with default parameters
+    /// adds a light to the view with default parameters
     void addLight(Vector p);
 
-    // adds a preconfigured Light
+    /// adds a preconfigured Light
     void addLight(Light *l);
 
-    // Turns on or off lights.
+    /// Turns on or off lights.
     void shine(bool on);
 
-    // Creates a spot light based on the camera's view
+    /// Creates a spot light based on the camera's view
     void addSpotLight();
 
 private:
-    // adds the view to the world at the right coordinates
+    /// adds the view to the world at the right coordinates
     void placeView(View *v, int index);
 
-    // based on a direction, returns a Vector
+    /// based on a direction, returns a Vector
     Vector *direction(int direction);
 };
 

@@ -19,15 +19,15 @@ namespace hexagon {
  */
 class Win32AR : public ActionRetriever {
 public:
-    // class constructor
+    /// class constructor
     Win32AR();
-    // class destructor
+    /// class destructor
     ~Win32AR();
-    // see interface declaration
+    /// see interface declaration
     Menu *getActions(std::string fileType);
-    // see interface declaration
+    /// see interface declaration
     Menu *getDirectoryActions();
-    // see interface declaration
+    /// see interface declaration
     Menu *getDriveActions();
 };
 

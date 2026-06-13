@@ -23,9 +23,9 @@ namespace hexagon {
  */
 class PosixExec : public ShellExecutor {
 public:
-    // class constructor
+    /// class constructor
     PosixExec();
-    // class destructor
+    /// class destructor
     ~PosixExec();
 
     /**

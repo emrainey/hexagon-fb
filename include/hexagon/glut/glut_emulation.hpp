@@ -16,7 +16,7 @@ struct GLFWwindow;
 
 namespace hexagon {
 
-// GLUT constants
+/// GLUT constants
 #define GLUT_RGBA            0x0000
 #define GLUT_RGB             0x0000
 #define GLUT_INDEX           0x0001
@@ -28,21 +28,21 @@ namespace hexagon {
 #define GLUT_STENCIL         0x0020
 #define GLUT_MULTISAMPLE     0x0080
 
-// Mouse buttons
+/// Mouse buttons
 #define GLUT_LEFT_BUTTON     0
 #define GLUT_MIDDLE_BUTTON   1
 #define GLUT_RIGHT_BUTTON    2
 
-// Mouse button state
+/// Mouse button state
 #define GLUT_DOWN            0
 #define GLUT_UP              1
 
-// Key modifiers
+/// Key modifiers
 #define GLUT_ACTIVE_SHIFT    1
 #define GLUT_ACTIVE_CTRL     2
 #define GLUT_ACTIVE_ALT      4
 
-// Special keys
+/// Special keys
 #define GLUT_KEY_F1          1
 #define GLUT_KEY_F2          2
 #define GLUT_KEY_F3          3
@@ -57,13 +57,13 @@ namespace hexagon {
 #define GLUT_KEY_PAGE_UP     104
 #define GLUT_KEY_PAGE_DOWN   105
 
-// Cursor representation
+/// Cursor representation
 #define GLUT_CURSOR_INHERIT  1
 
-// Bitmap Font representation
+/// Bitmap Font representation
 #define GLUT_BITMAP_9_BY_15  ((void*)1)
 
-// GLUT function declarations
+/// GLUT function declarations
 void glutInit(int *argcp, char **argv);
 void glutInitDisplayMode(unsigned int mode);
 void glutInitWindowPosition(int x, int y);
@@ -81,7 +81,7 @@ int glutGetModifiers(void);
 
 ::GLFWwindow* glutGetGLFWWindow(void);
 
-// Callback registration
+/// Callback registration
 void glutMouseFunc(void (*func)(int button, int state, int x, int y));
 void glutMotionFunc(void (*func)(int x, int y));
 void glutPassiveMotionFunc(void (*func)(int x, int y));

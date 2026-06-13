@@ -27,13 +27,13 @@ public:
     std::chrono::steady_clock::time_point finish;
     std::chrono::steady_clock::time_point start_time;
 
-    // class constructor
+    /// class constructor
     Scheduler();
-    // class destructor
+    /// class destructor
     ~Scheduler();
-    // GLUT Default Idler Callback
+    /// GLUT Default Idler Callback
     void idle(void);
-    // GLUT Callback for the Timer
+    /// GLUT Callback for the Timer
     void timed(int value);
 };
 

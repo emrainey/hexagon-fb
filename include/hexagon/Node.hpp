@@ -26,40 +26,40 @@ namespace hexagon {
  */
 class Node {
 public:
-    Node_Type_e node_type;      // what type of node is it? A file
-    Model_Type_e model_type;    // what type of model should use?
+    Node_Type_e node_type;      ///< what type of node is it? A file
+    Model_Type_e model_type;    ///< what type of model should use?
 
-    Vector position;            // it's current position
-    Vector velocity;            // it's current velocity
-    Vector rotation;            // it's current rotation about each axis
-                                //(each rotation is right-handed)
+    Vector position;            ///< it's current position
+    Vector velocity;            ///< it's current velocity
+    Vector rotation;            ///< it's current rotation about each axis
+                                ///(each rotation is right-handed)
 
-    // the pointer to our model
+    /// the pointer to our model
     Model *model;
 
-    // the name of the node
+    /// the name of the node
     std::string name;
 
-    // a brief description
+    /// a brief description
     std::string description;
 
-    // the file directory path
+    /// the file directory path
     std::string path;
 
-    // permission check for directories
+    /// permission check for directories
     bool is_permitted;
 
-    // executable check for files
+    /// executable check for files
     bool is_executable;
 
-    // the visual appearance configuration
+    /// the visual appearance configuration
     Appearance appearance;
 
     double radius_factor;
     double height_factor;
 
-    Choreographer *choreographer;    // pointer to the class which determines
-                                     // how this node moves
+    Choreographer *choreographer;    ///< pointer to the class which determines
+                                     /// how this node moves
 
     Node();
     Node(
@@ -67,16 +67,16 @@ public:
         bool is_executable = false, double radius_factor = 1.0, double height_factor = 1.0
     );
 
-    // class destructor
+    /// class destructor
     ~Node();
 
-    // Renders the node via either it's selected or unselected model.
+    /// Renders the node via either it's selected or unselected model.
     void render(bool selection, SelectionState mode);
 
-    // Renders the descriptive text of the object.
+    /// Renders the descriptive text of the object.
     void renderDescription(bool extra);
 
-    // Finds the OpenGL Selection object
+    /// Finds the OpenGL Selection object
     bool choose(int name);
 };
 

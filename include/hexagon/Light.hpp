@@ -29,33 +29,33 @@ typedef enum {
  */
 class Light {
 public:
-    // the total number of lights
+    /// the total number of lights
     static int total_num_lights;
 
-    // our enumerated number
+    /// our enumerated number
     int number;
 
-    // simple light info
+    /// simple light info
     Vector position;
 
-    // if it's a spotlight then this is the direction it's pointing in.
-    Vector direction;    // derived from a camera.to-camera.from subtraction
+    /// if it's a spotlight then this is the direction it's pointing in.
+    Vector direction;    ///< derived from a camera.to-camera.from subtraction
 
-    // if it's a spot light then this is it's cutoff.
+    /// if it's a spot light then this is it's cutoff.
     GLfloat cutoff;
 
-    // the lights type
+    /// the lights type
     Light_Type_e type;
 
-    // light color attributes
+    /// light color attributes
     GLfloat ambient[4];
     GLfloat diffuse[4];
     GLfloat specular[4];
 
-    // class constructor
+    /// class constructor
     Light(Vector p, Light_Type_e type, int total_num_lights);
 
-    // class destructor
+    /// class destructor
     ~Light();
 
     /*
@@ -63,11 +63,11 @@ public:
      * Regardless, it's position is set if it has moved.
      */
     void shine(bool on);
-    // Sets the lights ambient, diffuse, and specular colors
+    /// Sets the lights ambient, diffuse, and specular colors
     void setColorAttributes(GLfloat *a, GLfloat *d, GLfloat *s);
-    // Sets the direction of the spot light
+    /// Sets the direction of the spot light
     void setDirection(Vector d);
-    // Specifies the cutoff
+    /// Specifies the cutoff
     void setCutoff(int c);
 
 private:

@@ -21,21 +21,21 @@ namespace hexagon {
 class Input {
 public:
     int lastx, lasty;
-    // class constructor
+    /// class constructor
     Input();
-    // class destructor
+    /// class destructor
     ~Input();
-    // GLUT Mouse Drag Callback
+    /// GLUT Mouse Drag Callback
     void mouseDrag(int x, int y);
-    // GLUT Keyboard Callback for Special Keys
+    /// GLUT Keyboard Callback for Special Keys
     void keyboardSpecial(int key, int x, int y);
-    // GLUT Keyboard Callback for Normal Keys
+    /// GLUT Keyboard Callback for Normal Keys
     void keyboardNormal(unsigned char key, int x, int y);
-    // GLUT Mouse Movement Callback
+    /// GLUT Mouse Movement Callback
     void mouseMove(int x, int y);
-    // GLUT Mouse Click Callback
+    /// GLUT Mouse Click Callback
     void mouseClick(int button, int state, int x, int y);
-    // FreeGLUT/OpenGLUT Mouse Wheel Callback
+    /// FreeGLUT/OpenGLUT Mouse Wheel Callback
     void mouseWheel(int wheel, int direction, int x, int y);
 };  
 

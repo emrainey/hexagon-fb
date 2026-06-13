@@ -19,9 +19,9 @@ namespace hexagon {
  */
 class Win32Exec : public ShellExecutor {
 public:
-    // class constructor
+    /// class constructor
     Win32Exec();
-    // class destructor
+    /// class destructor
     ~Win32Exec();
 
     /**

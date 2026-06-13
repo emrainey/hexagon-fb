@@ -28,11 +28,11 @@ namespace hexagon {
  */
 class ActionRetriever {
 public:
-// file system specific stuff...
+/// file system specific stuff...
 #define ACTION_DIRECTORY ("!directory")
 #define ACTION_DRIVE ("!drive")
 
-// Hexagon specific stuff
+/// Hexagon specific stuff
 #define ACTION_LAYER ("!layer")
 #define ACTION_UP ("!up")
 #define ACTION_VIEW ("!view")

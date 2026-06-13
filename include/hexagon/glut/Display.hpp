@@ -24,52 +24,52 @@ namespace hexagon {
  */
 class Display {
 public:
-    // we need a refence to the camera object
+    /// we need a refence to the camera object
     Camera *camera;
     int width;
     int height;
     float fps;
     int frames;
 
-    // Are we blending or not?
+    /// Are we blending or not?
     bool blending;
 
-    // Are we rendering the grid or not?
+    /// Are we rendering the grid or not?
     bool renderGrid;
     bool renderText;
     bool renderHelp;
     bool renderFullName;
 
-    // location of text
+    /// location of text
     Vector text;
 
-    // color of the background
+    /// color of the background
     Color bg;
     Color fg;
     Color target_bg;
 
-    // the message to print out about our control state
+    /// the message to print out about our control state
     char control_message[80];
 
-    // our default GL font
+    /// our default GL font
     void *font;
     int font_height;
 
-    // class constructor
+    /// class constructor
     Display();
-    // class destructor
+    /// class destructor
     ~Display();
-    // Enable or Disable special parts of the OpenGL pipeline.
+    /// Enable or Disable special parts of the OpenGL pipeline.
     void initOpenGL();
-    // GLUT Callback to Resize the Display
+    /// GLUT Callback to Resize the Display
     void resize(int width, int height);
-    // GLUT Callback to Draw the Display
+    /// GLUT Callback to Draw the Display
     void draw(void);
-    // GL call to render the scene in terms for a selection computation
+    /// GL call to render the scene in terms for a selection computation
     int drawSelection(int x, int y);
-    // used to print text on a screen overlay in 2D space
+    /// used to print text on a screen overlay in 2D space
     int print2DText(int x, int y, char const *const, ...);
-    // used to print text in 3D Space
+    /// used to print text in 3D Space
     void print3DText(Vector text, char const *const, ...);
     /**
      * Do any post-instatiation initialization.

@@ -26,47 +26,47 @@ namespace hexagon {
  */
 class View {
 public:
-    // our neighbors
+    /// our neighbors
     View *neighbors[6];
 
-    // the View contains a stack of layers
-    // the layer on the back() is the "top" of the stack
+    /// the View contains a stack of layers
+    /// the layer on the back() is the "top" of the stack
     std::list<Layer *> layer_list;
 
     constexpr static size_t MAX_LAYERS{255};
 
-    // the current top layer
+    /// the current top layer
     Layer *top;
 
-    // this is the name of the layer
+    /// this is the name of the layer
     std::string name;
 
-    // the rendering position of the view
+    /// the rendering position of the view
     Vector position;
 
-    // a pointer to the model to use for the view
+    /// a pointer to the model to use for the view
     Model *model;
 
     constexpr static uint32_t VIEW_SPACE_MASK{0xFF000000};
 
-    // the pre-fix for selection naming for this view.
+    /// the pre-fix for selection naming for this view.
     uint32_t name_space;
 
-    // class constructor
+    /// class constructor
     View(int select_name);
     View(int select_name, std::string name);
     void init(int select_name);
 
-    // class destructor
+    /// class destructor
     ~View();
 
-    // Renders the view
+    /// Renders the view
     void render(bool selection, SelectionState mode);
-    // Allows the selection engine to select something.
+    /// Allows the selection engine to select something.
     bool choose(int name);
-    // Adds a layer to the view
+    /// Adds a layer to the view
     void pushLayer(std::string path);
-    // Removes the top level layer
+    /// Removes the top level layer
     void popLayer(void);
 };
 

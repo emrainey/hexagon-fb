@@ -61,14 +61,14 @@ protected:
  */
 class Debug {
 public:
-    // Is debug on or off?
+    /// Is debug on or off?
     bool state;
 
-    enum /**
-          * @class Subsystem
-          * @brief Description for class Subsystem.
-          */
-        class Subsystem : std::uint32_t {
+    /**
+     * @class Subsystem
+     * @brief Description for class Subsystem.
+     */
+    enum class Subsystem : std::uint32_t {
         Error,
         Info,
         Selection,
@@ -81,17 +81,17 @@ public:
     };
     using MaskType = std::uint32_t;
 
-    // class constructor
+    /// class constructor
     Debug();
     Debug(bool state);
 
-    // class destructor
+    /// class destructor
     ~Debug();
 
-    // typical info popup call
+    /// typical info popup call
     void info(Subsystem subsystem, char const* const format, ...);
 
-    // Wrapper to most flush operations
+    /// Wrapper to most flush operations
     void flush(void);
 
     /**
@@ -109,7 +109,7 @@ public:
     void operator|=(Subsystem const& sub) { subsystems |= sub; }
 
 protected:
-    // which Subsystem are enabled?
+    /// which Subsystem are enabled?
     Mask<Subsystem, MaskType> subsystems;
 };
 

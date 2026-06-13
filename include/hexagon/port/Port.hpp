@@ -30,7 +30,7 @@
 #include "hexagon/glut/Menu.hpp"
 #include "hexagon/glut/Scheduler.hpp"
 
-// port specific stuff...
+/// port specific stuff...
 #ifdef __WIN32__
 #include <windows.h>
 #include <winreg.h>
@@ -57,8 +57,8 @@ namespace hexagon {
 typedef enum {
     MOUSE_DRAG,
     MOUSE_ZOOM,
-    CONTROL_MOD,    // this must be the last value, or any state beyond will be
-                    // ignored
+    CONTROL_MOD,    ///< this must be the last value, or any state beyond will be
+                    /// ignored
     KEYBOARD_CONTROL
 } Control_State_t;
 
@@ -68,25 +68,25 @@ typedef enum {
  */
 class Port {
 public:
-    // GLUT related objects...
+    /// GLUT related objects...
     Input input;
     Scheduler scheduler;
-    Display display;    // this must be initialized before the camera
+    Display display;    ///< this must be initialized before the camera
     Camera camera;
     Control_State_t control_state;
     GLFWwindow *window;
 
-    // platform specific implementations of interfaces...
+    /// platform specific implementations of interfaces...
     PersistentStorage *ps;
     ActionRetriever *ar;
     ShellExecutor *shell;
 
-    // class constructor
+    /// class constructor
     Port(int argc, char *argv[]);
-    // class destructor
+    /// class destructor
     ~Port();
 
-    // the function to get the party started!
+    /// the function to get the party started!
     void run();
     /**
      * Do any post-instantiation initialization.

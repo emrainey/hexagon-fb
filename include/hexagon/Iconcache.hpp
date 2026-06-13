@@ -20,9 +20,9 @@ namespace hexagon {
  */
 class IconCache {
 public:
-    // class constructor
+    /// class constructor
     IconCache();
-    // class destructor
+    /// class destructor
     ~IconCache();
 };
 

@@ -19,9 +19,9 @@ namespace hexagon {
  * @brief Represents an RGBA color.
  */
 class Color {
-    //************
-    // VARIABLES
-    //************
+    ///************
+    /// VARIABLES
+    ///************
 public:
     enum EColorIndex {
         Red = 0,
@@ -34,9 +34,9 @@ public:
 private:
     float colors[Channels];
 
-    //*********
-    // METHODS
-    //*********
+    ///*********
+    /// METHODS
+    ///*********
 public:
     Color();
     explicit Color(float r, float g, float b, float a);

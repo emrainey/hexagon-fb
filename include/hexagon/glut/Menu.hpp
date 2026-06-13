@@ -24,10 +24,10 @@ typedef void (*Void_Function_t)(void);
  */
 class Menu {
 public:
-    // the list of menu options
+    /// the list of menu options
     std::list<MenuOption *> menu_options;
 
-    // the initial selection offset
+    /// the initial selection offset
     int num_options;
     int next_y;
     int max_width;
@@ -35,15 +35,15 @@ public:
     int last_render_x;
     int last_render_y;
 
-    // class constructor
+    /// class constructor
     Menu(std::string name);
-    // class destructor
+    /// class destructor
     ~Menu();
-    // No description
+    /// No description
     void addOption(std::string name, int letter, ShellExecutor *shell);
-    // No description
+    /// No description
     void render(int x, int y);
-    // Finds the option selected.
+    /// Finds the option selected.
     bool choose(int x, int y);
 };
 

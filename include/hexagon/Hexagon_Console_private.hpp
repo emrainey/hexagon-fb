@@ -1,5 +1,5 @@
-// THIS FILE WILL BE OVERWRITTEN BY DEV-C++!
-// DO NOT EDIT!
+/// THIS FILE WILL BE OVERWRITTEN BY DEV-C++!
+/// DO NOT EDIT!
 
 #ifndef HEXAGON_CONSOLE_PRIVATE_H
 #define HEXAGON_CONSOLE_PRIVATE_H
@@ -7,7 +7,7 @@
 #include <cstddef>
 #include <cstdint>
 
-// VERSION DEFINITIONS
+/// VERSION DEFINITIONS
 constexpr static char const* const VER_STRING{"0.2.2"};
 constexpr static size_t VER_MAJOR{0};
 constexpr static size_t VER_MINOR{2};

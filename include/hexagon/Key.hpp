@@ -25,17 +25,17 @@ private:
     std::string value;
 
 public:
-    // class constructor
+    /// class constructor
     Key(std::string n, std::string v);
-    // class destructor
+    /// class destructor
     ~Key();
-    // gets the value of the key
+    /// gets the value of the key
     std::string getValue();
-    // gets the name of the key
+    /// gets the name of the key
     std::string getName();
-    // sets the value of the key
+    /// sets the value of the key
     void setValue(std::string v);
-    // sets the name of the key
+    /// sets the name of the key
     void setName(std::string n);
 };
 

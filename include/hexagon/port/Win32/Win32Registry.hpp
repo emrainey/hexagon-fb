@@ -22,9 +22,9 @@ namespace hexagon {
  */
 class Win32Registry : public PersistentStorage {
 public:
-    // class constructor
+    /// class constructor
     Win32Registry();
-    // class destructor
+    /// class destructor
     ~Win32Registry();
     /**
      * Adds the supplied parameter to PersistentStorage. If there is

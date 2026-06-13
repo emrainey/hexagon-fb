@@ -27,9 +27,9 @@ namespace hexagon {
  */
 class PosixRegistry : public PersistentStorage {
 public:
-    // class constructor
+    /// class constructor
     PosixRegistry();
-    // class destructor
+    /// class destructor
     ~PosixRegistry() = default;
     /**
      * Adds the supplied parameter to PersistentStorage. If there is
